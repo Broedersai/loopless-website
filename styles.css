@@ -347,6 +347,14 @@ a:hover {
     overflow-x: auto;
     padding-bottom: var(--space-4);
     position: relative;
+
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+.process-timeline::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Opera */
 }
 
 /* Subtle connecting line */
