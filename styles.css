@@ -375,11 +375,12 @@ a:hover {
 
 .process-step-h {
     flex: 1;
-    min-width: 220px;
+    min-width: 180px;
+    max-width: 220px;
     background: var(--white);
     border: 2px solid var(--gray-100);
     border-radius: var(--radius-xl);
-    padding: var(--space-8) var(--space-6) var(--space-6);
+    padding: var(--space-6) var(--space-5) var(--space-5);
     position: relative;
     z-index: 1;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
