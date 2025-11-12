@@ -1,5 +1,5 @@
 // ===================================
-// FlowResult - Smooth Interactions
+// ResultFlow - Smooth Interactions
 // ===================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -70,13 +70,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Get form data
             const formData = {
                 name: document.getElementById('name').value.trim(),
+                function: document.getElementById('function').value.trim(),
+                company: document.getElementById('company').value.trim(),
                 email: document.getElementById('email').value.trim(),
-                company: document.getElementById('company')?.value.trim() || '',
+                phone: document.getElementById('phone').value.trim(),
+                industry: document.getElementById('industry').value.trim(),
                 message: document.getElementById('message').value.trim()
             };
 
             // Basic validation
-            if (!formData.name || !formData.email || !formData.message) {
+            if (!formData.name || !formData.function || !formData.company ||
+                !formData.email || !formData.phone || !formData.industry || !formData.message) {
                 showFormFeedback('error', 'Vul alle verplichte velden in.');
                 return;
             }
@@ -85,6 +89,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(formData.email)) {
                 showFormFeedback('error', 'Voer een geldig e-mailadres in.');
+                return;
+            }
+
+            // Phone validation (basic Dutch mobile format)
+            const phoneRegex = /^(\+31|0)[0-9]{9}$/;
+            const cleanPhone = formData.phone.replace(/[\s-]/g, '');
+            if (!phoneRegex.test(cleanPhone)) {
+                showFormFeedback('error', 'Voer een geldig Nederlands telefoonnummer in.');
                 return;
             }
 
@@ -215,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===================================
 
     console.log(
-        '%cFlowResult 🚀',
+        '%cResultFlow 🚀',
         'font-size: 18px; font-weight: bold; color: #3C7CFB;'
     );
     console.log(
@@ -223,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'font-size: 12px; color: #6B7280;'
     );
     console.log(
-        '%cNeem contact op: contact@flowresult.nl',
+        '%cNeem contact op: contact@resultflow.nl',
         'font-size: 12px; color: #6B7280;'
     );
 

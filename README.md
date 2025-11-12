@@ -1,10 +1,10 @@
-# FlowResult Website
+# ResultFlow Website
 
-Moderne one-pager website voor FlowResult - Persoonlijke outreach die écht werkt.
+Moderne one-pager website voor ResultFlow - Persoonlijke outreach die écht werkt.
 
-## Over FlowResult
+## Over ResultFlow
 
-FlowResult helpt bedrijven om sneller en persoonlijker in contact te komen met hun ideale klanten door gepersonaliseerde outreachcampagnes via e-mail en LinkedIn.
+ResultFlow helpt bedrijven om sneller en persoonlijker in contact te komen met hun ideale klanten door gepersonaliseerde outreachcampagnes via e-mail en LinkedIn.
 
 ## Technologie
 
@@ -42,10 +42,10 @@ Deze website kan gehost worden op:
 
 ## Contact
 
-Website: [FlowResult](https://flowresult.nl)
-Email: contact@flowresult.nl
+Website: [ResultFlow](https://resultflow.nl)
+Email: contact@resultflow.nl
 LinkedIn: [Wessel Broeders](https://linkedin.com/in/wesselbroeders)
 
 ---
 
-© 2025 FlowResult - Persoonlijke outreach door Wessel Broeders
+© 2025 ResultFlow - Persoonlijke outreach door Wessel Broeders
