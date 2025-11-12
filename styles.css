@@ -11,12 +11,21 @@
 }
 
 :root {
-    /* Brand Color */
+    /* Brand Colors */
     --primary: #3C7CFB;
     --primary-light: #6B9BFC;
     --primary-dark: #2E5FCC;
 
-    /* Neutrals - Light Palette */
+    /* Secondary - Warm Accent */
+    --secondary: #FF6B35;
+    --secondary-light: #FF8C5A;
+    --secondary-dark: #E85A2B;
+
+    /* Tertiary - Purple Accent */
+    --tertiary: #8B5CF6;
+    --tertiary-light: #A78BFA;
+
+    /* Neutrals - Enhanced Palette */
     --white: #FFFFFF;
     --gray-50: #F8F9FB;
     --gray-100: #F0F2F5;
@@ -28,6 +37,7 @@
     --gray-700: #374151;
     --gray-800: #1F2937;
     --gray-900: #111827;
+    --black: #0A0B0D;
 
     /* Typography */
     --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -52,11 +62,17 @@
     --radius-lg: 0.75rem;
     --radius-xl: 1rem;
 
-    /* Shadows - Soft */
+    /* Shadows - Enhanced Depth */
     --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.10);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.20);
+
+    /* Colored Shadows */
+    --shadow-primary: 0 8px 24px rgba(60, 124, 251, 0.25);
+    --shadow-secondary: 0 8px 24px rgba(255, 107, 53, 0.25);
+    --shadow-tertiary: 0 8px 24px rgba(139, 92, 246, 0.25);
 
     /* Transitions */
     --transition: 0.2s ease;
@@ -154,16 +170,18 @@ a:hover {
 
 .nav-cta {
     padding: var(--space-3) var(--space-5);
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
     color: var(--white);
     border-radius: var(--radius-lg);
     font-weight: 500;
     font-size: 0.9375rem;
     transition: all var(--transition);
+    box-shadow: var(--shadow-secondary);
+    text-decoration: none;
 }
 
 .nav-cta:hover {
-    background: var(--primary-dark);
+    background: linear-gradient(135deg, var(--secondary-dark) 0%, #D44E23 100%);
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
     color: var(--white);
@@ -175,13 +193,44 @@ a:hover {
 
 .hero-light {
     padding: calc(var(--space-24) + var(--space-16)) 0 var(--space-24);
-    background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
+    background: linear-gradient(135deg,
+        #F0F4FF 0%,
+        #FFF5F2 50%,
+        #FAF5FF 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-light::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(60, 124, 251, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero-light::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
 }
 
 .hero-content {
     max-width: 800px;
     text-align: center;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-heading {
@@ -190,9 +239,13 @@ a:hover {
 }
 
 .highlight {
-    color: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     position: relative;
     display: inline-block;
+    font-weight: 700;
 }
 
 .hero-text {
@@ -232,14 +285,15 @@ a:hover {
 }
 
 .btn-primary {
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
     color: var(--white);
+    box-shadow: var(--shadow-primary);
 }
 
 .btn-primary:hover {
-    background: var(--primary-dark);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #7C3AED 100%);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
     color: var(--white);
 }
 
@@ -301,22 +355,53 @@ a:hover {
 
 .service-card-clean {
     background: var(--white);
-    border: 1px solid var(--gray-200);
+    border: 2px solid var(--gray-100);
     border-radius: var(--radius-xl);
     padding: var(--space-8);
-    transition: all var(--transition);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card-clean::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--tertiary) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-card-clean:hover::before {
+    opacity: 1;
 }
 
 .service-card-clean:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
     border-color: var(--primary-light);
 }
 
 .service-icon {
-    color: var(--primary);
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: var(--space-5);
-    display: block;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(60, 124, 251, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.service-card-clean:hover .service-icon {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+    color: var(--white);
+    transform: scale(1.1) rotate(5deg);
 }
 
 .service-card-clean h3 {
@@ -395,7 +480,7 @@ a:hover {
 .step-number {
     width: 56px;
     height: 56px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
     color: var(--white);
     border-radius: 50%;
     display: flex;
@@ -404,12 +489,18 @@ a:hover {
     font-weight: 700;
     font-size: 1.5rem;
     margin: 0 auto var(--space-5);
-    box-shadow: 0 4px 12px rgba(60, 124, 251, 0.25);
-    transition: transform 0.3s ease;
+    box-shadow: var(--shadow-secondary);
+    transition: all 0.3s ease;
+}
+
+.process-step-h:nth-child(odd) .step-number {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+    box-shadow: var(--shadow-primary);
 }
 
 .process-step-h:hover .step-number {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.15) rotate(10deg);
+    box-shadow: var(--shadow-lg);
 }
 
 .process-step-h h4 {
@@ -477,8 +568,8 @@ a:hover {
     flex-shrink: 0;
     width: 48px;
     height: 48px;
-    background: rgba(60, 124, 251, 0.8);
-    color: var(--white);
+    background: linear-gradient(135deg, rgba(60, 124, 251, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+    color: var(--primary);
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
@@ -487,8 +578,10 @@ a:hover {
 }
 
 .benefit-item:hover .benefit-check {
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+    color: var(--white);
     transform: rotate(360deg);
+    box-shadow: var(--shadow-primary);
 }
 
 .benefit-content h4 {
@@ -545,19 +638,23 @@ a:hover {
 }
 
 .collab-card.featured {
-    border-color: var(--primary);
+    border-width: 3px;
+    border-image: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--tertiary) 100%) 1;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
 }
 
 .badge {
     position: absolute;
     top: -12px;
     right: var(--space-6);
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
     color: var(--white);
-    padding: var(--space-1) var(--space-4);
+    padding: var(--space-2) var(--space-5);
     border-radius: var(--radius-lg);
     font-size: 0.8125rem;
     font-weight: 600;
+    box-shadow: var(--shadow-secondary);
 }
 
 .collab-icon {
