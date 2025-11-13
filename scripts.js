@@ -74,13 +74,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 company: document.getElementById('company').value.trim(),
                 email: document.getElementById('email').value.trim(),
                 phone: document.getElementById('phone').value.trim(),
-                industry: document.getElementById('industry').value.trim(),
                 message: document.getElementById('message').value.trim()
             };
 
             // Basic validation
             if (!formData.name || !formData.function || !formData.company ||
-                !formData.email || !formData.phone || !formData.industry || !formData.message) {
+                !formData.email || !formData.phone || !formData.message) {
                 showFormFeedback('error', 'Vul alle verplichte velden in.');
                 return;
             }
@@ -189,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentScroll = window.pageYOffset;
 
         if (currentScroll > 50) {
-            nav.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.08)';
+            nav.style.boxShadow = '0 4px 24px rgba(60, 124, 251, 0.25), 0 8px 16px rgba(255, 107, 53, 0.2)';
             nav.style.background = 'rgba(255, 255, 255, 0.98)';
         } else {
             nav.style.boxShadow = 'none';
