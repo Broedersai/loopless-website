@@ -826,89 +826,20 @@ a:hover {
     margin-bottom: var(--space-12);
 }
 
-.contact-form {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius-xl);
-    padding: var(--space-10);
-    margin-bottom: var(--space-8);
-    box-shadow: var(--shadow-sm);
+.contact-cta-center {
+    text-align: center;
+    margin-bottom: var(--space-12);
 }
 
-.form-group {
-    margin-bottom: var(--space-6);
+.btn-large {
+    font-size: 1.125rem;
+    padding: var(--space-5) var(--space-10);
 }
 
-.form-group label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--gray-700);
-    margin-bottom: var(--space-2);
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: var(--space-4);
-    border: 1px solid var(--gray-300);
-    border-radius: var(--radius-md);
-    font-size: 1rem;
-    font-family: inherit;
-    color: var(--gray-900);
-    background: var(--white);
-    transition: all var(--transition);
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08), 0 0 0 1px rgba(13, 148, 136, 0.1);
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-.form-feedback {
-    padding: var(--space-4);
-    border-radius: var(--radius-md);
-    margin-top: var(--space-6);
+.contact-subtext {
+    margin-top: var(--space-4);
     font-size: 0.9375rem;
-}
-
-.form-feedback.success {
-    background: #D1FAE5;
-    color: #065F46;
-    border: 1px solid #10B981;
-}
-
-.form-feedback.error {
-    background: #FEE2E2;
-    color: #991B1B;
-    border: 1px solid #EF4444;
-}
-
-.form-microcopy {
-    display: flex;
-    gap: var(--space-6);
-    justify-content: center;
-    margin-top: var(--space-5);
-    flex-wrap: wrap;
-}
-
-.microcopy-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: 0.875rem;
     color: var(--gray-600);
-}
-
-.microcopy-item svg {
-    color: var(--secondary);
-    flex-shrink: 0;
 }
 
 .contact-alternative {
