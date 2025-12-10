@@ -16,10 +16,10 @@
     --primary-light: #3B82F6;
     --primary-dark: #1D4ED8;
 
-    /* Secondary - Warm Amber Accent */
-    --secondary: #D97706;
-    --secondary-light: #F59E0B;
-    --secondary-dark: #B45309;
+    /* Secondary - Teal Accent */
+    --secondary: #0D9488;
+    --secondary-light: #14B8A6;
+    --secondary-dark: #0F766E;
 
     /* Tertiary - Deep Slate */
     --tertiary: #475569;
@@ -244,14 +244,14 @@ a:hover {
     font-weight: 600;
     font-size: 0.9375rem;
     transition: all var(--transition);
-    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.2);
+    box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2);
     text-decoration: none;
 }
 
 .nav-cta:hover {
     background: var(--secondary-dark);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
     color: var(--white);
 }
 
@@ -294,7 +294,7 @@ a:hover {
     left: -10%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(217, 119, 6, 0.03) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(13, 148, 136, 0.03) 0%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
 }
@@ -560,7 +560,7 @@ a:hover {
     font-weight: 700;
     font-size: 1.5rem;
     margin: 0 auto var(--space-5);
-    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
     transition: all 0.3s ease;
 }
 
@@ -726,7 +726,7 @@ a:hover {
     border-radius: var(--radius-lg);
     font-size: 0.8125rem;
     font-weight: 700;
-    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
 }
 
 .collab-icon {
