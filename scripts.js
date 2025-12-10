@@ -188,11 +188,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentScroll = window.pageYOffset;
 
         if (currentScroll > 50) {
-            nav.style.boxShadow = '0 4px 24px rgba(60, 124, 251, 0.25), 0 8px 16px rgba(255, 107, 53, 0.2)';
-            nav.style.background = 'rgba(255, 255, 255, 0.98)';
+            nav.style.boxShadow = '0 2px 12px rgba(15, 23, 42, 0.08)';
+            nav.style.background = 'rgba(250, 250, 248, 0.98)';
         } else {
             nav.style.boxShadow = 'none';
-            nav.style.background = 'rgba(255, 255, 255, 0.95)';
+            nav.style.background = 'rgba(250, 250, 248, 0.95)';
         }
 
         lastScroll = currentScroll;
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
         underline.style.left = '0';
         underline.style.right = '0';
         underline.style.height = '8px';
-        underline.style.background = 'rgba(60, 124, 251, 0.2)';
+        underline.style.background = 'rgba(37, 99, 235, 0.15)';
         underline.style.borderRadius = '4px';
         underline.style.zIndex = '-1';
 
