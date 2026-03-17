@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Diensten",
+  description:
+    "Van lead qualification tot procesautomatisering — ontdek hoe Loopless jouw team tijd bespaart met AI-oplossingen op maat.",
+};
 import { Target, FileText, BarChart3, Cog } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { SectionWithParticles } from "@/components/section-with-particles";
@@ -9,7 +16,7 @@ const diensten = [
     icon: <Target className="h-6 w-6 text-[#4F8EF7]" />,
     title: "Lead Qualification Automatisering",
     description:
-      "Systemen die automatisch leads zoeken, screenen en klaarzetten voor je team. Je team logt 's ochtends in en heeft direct een lijst klaarstaan.",
+      "Elke ochtend een lijst met relevante leads klaar — zonder dat je team er iets voor hoeft te doen. Zoeken, screenen en klaarzetten gebeurt volledig automatisch.",
     voorWie: "Recruiters, salesteams, B2B bedrijven",
     oplevert: [
       "Uren bespaard op handmatig zoekwerk",
@@ -31,14 +38,14 @@ const diensten = [
   },
   {
     icon: <BarChart3 className="h-6 w-6 text-[#4F8EF7]" />,
-    title: "AI Marketing Rapportage",
+    title: "Slimme AI-assistenten voor je bedrijfsdata",
     description:
-      "Geautomatiseerde maandelijkse marketingrapporten. Data ophalen uit GA4, Meta Ads en Google Ads, analyseren via AI, branded PDF genereren.",
-    voorWie: "Marketingbureaus, marketing managers",
+      "Een AI-assistent die je bedrijfsdocumenten, handleidingen en data kent. Stel een vraag en krijg direct het juiste antwoord — zonder zelf te zoeken.",
+    voorWie: "Bedrijven met veel interne documenten, kennisbanken of klantdata",
     oplevert: [
-      "Van 40 uur naar 2 uur per maand",
-      "Altijd consistente rapporten",
-      "Goedkeurstap behouden",
+      "Direct antwoord in plaats van lang zoeken",
+      "Altijd actuele en betrouwbare informatie",
+      "Minder afhankelijk van die ene collega die alles weet",
     ],
   },
   {
@@ -46,10 +53,10 @@ const diensten = [
     title: "Procesautomatisering op maat",
     description:
       "Voor elk repetitief, handmatig proces. We beginnen bij het probleem, niet bij de technologie.",
-    voorWie: "Elk MKB-bedrijf met handmatige bottlenecks",
+    voorWie: "Elk MKB-bedrijf met taken die te veel tijd kosten",
     oplevert: [
-      "Maatwerk oplossing",
-      "Schaalbaar en betrouwbaar",
+      "Oplossing die past bij jouw werkwijze",
+      "Groeit mee met je bedrijf",
       "Minder fouten, meer output",
     ],
   },

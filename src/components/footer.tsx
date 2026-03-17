@@ -55,7 +55,14 @@ export function Footer() {
                   </a>
                 </li>
                 <li>
-                  <span className="text-sm text-[#6B6B8A]">loopless.nl</span>
+                  <a
+                    href="https://www.linkedin.com/in/wessel-broeders-250767221/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-[#6B6B8A] transition-colors hover:text-[#4F8EF7]"
+                  >
+                    LinkedIn
+                  </a>
                 </li>
               </ul>
             </div>
@@ -65,7 +72,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="border-t border-[#1E1E35] pt-6">
           <p className="text-center text-xs text-[#6B6B8A]">
-            &copy; 2025 Loopless — Broeders Digital | KVK: [nummer]
+            &copy; {new Date().getFullYear()} Loopless — Broeders Digital | KVK: 42004729
           </p>
         </div>
       </div>

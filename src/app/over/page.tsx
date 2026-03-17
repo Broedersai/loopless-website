@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Over mij",
+  description:
+    "Maak kennis met Wessel Broeders — oprichter van Loopless. Bedrijfskunde-achtergrond, passie voor AI en procesautomatisering.",
+};
 import Image from "next/image";
 import { SectionWithParticles } from "@/components/section-with-particles";
 import { NoisePatternCard, NoisePatternCardBody } from "@/components/ui/card-with-noise-patter";
@@ -37,14 +44,23 @@ export default function OverPage() {
                 Wessel Broeders
               </h2>
               <p className="mb-4 text-lg text-[#E8E8F0]">
-                Laatste jaar Bedrijfskunde student aan Avans Breda. Naast mijn
-                studie help ik bedrijven om hun processen te automatiseren.
+                Oprichter van Loopless en laatste jaar Bedrijfskunde student aan
+                Avans Breda. Ik help MKB-bedrijven om tijd terug te winnen door
+                processen slim te automatiseren.
               </p>
-              <p className="text-[#6B6B8A]">
-                Ik combineer een bedrijfskundige blik met praktische
-                AI-implementatie. Ik begin altijd bij het probleem, nooit bij de
-                technologie.
+              <p className="mb-4 text-[#6B6B8A]">
+                Mijn aanpak is altijd hetzelfde: eerst begrijpen waar jouw team
+                tijd verliest, dan pas bouwen. Geen onnodige technologie, alleen
+                oplossingen die direct resultaat opleveren.
               </p>
+              <a
+                href="https://www.linkedin.com/in/wessel-broeders-250767221/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-[#4F8EF7] transition-colors hover:text-[#3A75D8]"
+              >
+                Bekijk mijn LinkedIn →
+              </a>
             </div>
           </div>
         </div>

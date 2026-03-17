@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { HeroSection } from "@/components/hero-section";
 import { SectionWithParticles } from "@/components/section-with-particles";
@@ -74,7 +75,7 @@ export default function Home() {
           <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
             <ServiceCard icon={<Target className="h-5 w-5" />} title="Lead Qualification" description="Automatisch leads zoeken, screenen en klaarzetten voor je team." />
             <ServiceCard icon={<FileText className="h-5 w-5" />} title="Offerte-automatisering" description="Concept-voorstellen genereren op basis van eerdere offertes en productinfo." />
-            <ServiceCard icon={<BarChart3 className="h-5 w-5" />} title="AI Marketing Rapportage" description="Geautomatiseerde marketingrapporten vanuit al je dataplatformen." />
+            <ServiceCard icon={<BarChart3 className="h-5 w-5" />} title="Slimme AI-assistenten" description="Een AI-assistent die je bedrijfsdata kent en direct antwoord geeft." />
             <ServiceCard icon={<Cog className="h-5 w-5" />} title="Procesautomatisering" description="Maatwerk automatisering voor elk repetitief, handmatig proces." />
           </ul>
         </div>
@@ -95,7 +96,7 @@ export default function Home() {
                   <span className="rounded-full border border-[#4F8EF7]/20 bg-[#4F8EF7]/10 px-4 py-1 text-xs font-medium text-[#4F8EF7]">Recruitment</span>
                 </div>
                 <h3 className="mb-4 text-2xl font-bold text-white">Van uren zoekwerk naar gekwalificeerde leads elke ochtend</h3>
-                <p className="mb-6 text-[#6B6B8A]">Lead qualification systeem dat automatisch kandidaten zoekt, screent en klaarzet.</p>
+                <p className="mb-6 text-[#6B6B8A]">Elke ochtend een lijst met relevante kandidaten klaar — zonder dat het team er iets voor hoeft te doen.</p>
                 <div className="mb-6 flex flex-col gap-2">
                   {["Uren per week bespaard", "24/7 automatisch actief", "Team focust op klantcontact"].map((s) => (
                     <div key={s} className="flex items-center gap-2 text-[#E8E8F0]">
@@ -106,6 +107,26 @@ export default function Home() {
                 <Link href="/cases" className="inline-flex items-center gap-1 text-sm font-medium text-[#4F8EF7] transition-all hover:gap-2">Bekijk de case →</Link>
               </NoisePatternCardBody>
             </NoisePatternCard>
+          </div>
+        </div>
+      </section>
+
+      {/* Klanten */}
+      <section className="py-16">
+        <div className="mx-auto max-w-[1200px] px-6 text-center">
+          <p className="mb-8 text-sm font-semibold uppercase tracking-widest text-[#6B6B8A]">
+            Werkt samen met
+          </p>
+          <div className="flex items-center justify-center gap-12">
+            <a href="https://vuljevacature.nl" target="_blank" rel="noopener noreferrer" className="opacity-60 transition-opacity hover:opacity-100">
+              <Image
+                src="/clients/vuljevacature.png"
+                alt="vuljevacature.nl"
+                width={160}
+                height={40}
+                className="h-10 w-auto"
+              />
+            </a>
           </div>
         </div>
       </section>

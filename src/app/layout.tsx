@@ -10,11 +10,31 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Loopless — Minder handen. Betere resultaten.",
+  title: {
+    default: "Loopless — Minder handen. Betere resultaten.",
+    template: "%s | Loopless",
+  },
   description:
     "Loopless automatiseert repetitieve processen voor het MKB met AI. Geen overbodige stappen, alleen processen die werken.",
   keywords: "AI automatisering, MKB, procesoptimalisatie, Loopless",
   authors: [{ name: "Wessel Broeders" }],
+  icons: {
+    icon: "/logo-icon-final.png",
+    apple: "/logo-icon-final.png",
+  },
+  openGraph: {
+    type: "website",
+    locale: "nl_NL",
+    siteName: "Loopless",
+    title: "Loopless — Minder handen. Betere resultaten.",
+    description:
+      "Loopless automatiseert repetitieve processen voor het MKB met AI. Geen overbodige stappen, alleen processen die werken.",
+    images: [{ url: "/logo.png", width: 1200, height: 630, alt: "Loopless" }],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

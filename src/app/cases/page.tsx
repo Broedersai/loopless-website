@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Cases",
+  description:
+    "Bekijk hoe Loopless bedrijven helpt met AI-automatisering. Concrete resultaten en tijdsbesparing voor het MKB.",
+};
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { SectionWithParticles } from "@/components/section-with-particles";
 import { ShinyButton } from "@/components/ui/shiny-button";
@@ -55,9 +62,9 @@ export default function CasesPage() {
                   De oplossing
                 </h4>
                 <p className="text-[#E8E8F0]">
-                  Een lead qualification systeem dat automatisch kandidaten
-                  zoekt, screent op relevantie en klaarzet voor het team. Elke
-                  ochtend een lijst met gekwalificeerde leads.
+                  Elke ochtend staat er een lijst met relevante kandidaten
+                  klaar voor het team — volledig automatisch. Zoeken, screenen
+                  en klaarzetten hoeft niemand meer zelf te doen.
                 </p>
               </div>
 
@@ -93,16 +100,6 @@ export default function CasesPage() {
         </div>
       </section>
 
-      {/* Placeholder */}
-      <section className="pb-24">
-        <div className="mx-auto max-w-[800px] px-6">
-          <div className="rounded-xl border border-dashed border-[#1E1E35] p-12 text-center">
-            <p className="text-lg text-[#6B6B8A]">
-              Meer cases komen binnenkort.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* CTA */}
       <SectionWithParticles className="py-24 md:py-32" particleCount={300} speed={0.4} trailOpacity={0.06}>
