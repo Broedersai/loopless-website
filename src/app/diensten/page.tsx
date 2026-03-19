@@ -15,51 +15,45 @@ import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/animat
 const diensten = [
   {
     icon: <Target className="h-6 w-6 text-[#4F8EF7]" />,
-    title: "Lead Qualification Automatisering",
-    description:
-      "Elke ochtend een lijst met relevante leads klaar — zonder dat je team er iets voor hoeft te doen. Zoeken, screenen en klaarzetten gebeurt volledig automatisch.",
-    voorWie: "Recruiters, salesteams, B2B bedrijven",
-    oplevert: [
-      "Uren bespaard op handmatig zoekwerk",
-      "Meer gekwalificeerde leads",
-      "24/7 actief, ook buiten kantooruren",
+    title: "Lead qualification automatisering",
+    subtitle: "Elke ochtend een lijst met gekwalificeerde leads — zonder dat je team er iets voor hoeft te doen.",
+    paragraphs: [
+      "Recruiters en salesteams verliezen dagelijks uren aan handmatig zoeken, checken en invoeren. Dat stopt.",
+      "Het systeem zoekt, screent en kwalificeert leads op basis van jouw criteria. 24/7, op de achtergrond.",
     ],
+    highlight: "Bewezen resultaat: vuljevacature.nl logt 's ochtends in en heeft direct een lijst klaarstaan. Geen handmatig zoekwerk meer.",
+    voorWie: "Recruitmentbureaus, salesteams, B2B bedrijven",
   },
   {
     icon: <FileText className="h-6 w-6 text-[#4F8EF7]" />,
     title: "Offerte- en RFP-automatisering",
-    description:
-      "Automatisch concept-voorstellen genereren op basis van eerdere offertes en productinformatie. Van dagen werk naar uren.",
-    voorWie: "Bedrijven met veel offertewerk",
-    oplevert: [
-      "Sneller reageren op aanvragen",
-      "Consistentere voorstellen",
-      "Meer tijd voor strategie",
+    subtitle: "Te traag met je voorstel is een gemiste deal.",
+    paragraphs: [
+      "Offertes opstellen kost tijd die je niet hebt. Steeds opnieuw dezelfde informatie opzoeken, kopiëren en consistent krijgen.",
+      "Wij bouwen een systeem dat automatisch een concept genereert op basis van jouw eerdere offertes en productinformatie. Jij controleert en verstuurt.",
+      "Van dagen werk naar enkele uren per voorstel.",
     ],
+    voorWie: "Bedrijven die veel tijd kwijt zijn aan offertes en daardoor kansen mislopen",
   },
   {
     icon: <BarChart3 className="h-6 w-6 text-[#4F8EF7]" />,
-    title: "Slimme AI-assistenten voor je bedrijfsdata",
-    description:
-      "Een AI-assistent die je bedrijfsdocumenten, handleidingen en data kent. Stel een vraag en krijg direct het juiste antwoord — zonder zelf te zoeken.",
-    voorWie: "Bedrijven met veel interne documenten, kennisbanken of klantdata",
-    oplevert: [
-      "Direct antwoord in plaats van lang zoeken",
-      "Altijd actuele en betrouwbare informatie",
-      "Minder afhankelijk van die ene collega die alles weet",
+    title: "Interne kennisbank",
+    subtitle: "Hoeveel tijd verliest je team met zoeken naar informatie die er al is?",
+    paragraphs: [
+      "Handleidingen, procedures, productinfo — het bestaat allemaal. Maar niemand weet waar het staat. Dus wordt er gebeld, gezocht en gewacht.",
+      "Wij bouwen een AI-assistent die al je documenten kent. Medewerkers stellen een vraag en krijgen binnen seconden een antwoord met bronverwijzing.",
+      "Geen zoeken meer. Geen collega lastigvallen. Gewoon: vraag stellen, antwoord krijgen.",
     ],
+    voorWie: "Bedrijven met veel interne documenten, handleidingen of procedures",
   },
   {
     icon: <Cog className="h-6 w-6 text-[#4F8EF7]" />,
     title: "Procesautomatisering op maat",
-    description:
-      "Voor elk repetitief, handmatig proces. We beginnen bij het probleem, niet bij de technologie.",
-    voorWie: "Elk MKB-bedrijf met taken die te veel tijd kosten",
-    oplevert: [
-      "Oplossing die past bij jouw werkwijze",
-      "Groeit mee met je bedrijf",
-      "Minder fouten, meer output",
+    subtitle: "Heb je een proces dat veel tijd kost maar hier niet tussen staat?",
+    paragraphs: [
+      "Wij beginnen altijd bij het probleem, nooit bij de technologie. Eerst brengen we in kaart waar tijd verloren gaat. Dan pas bouwen we een oplossing die past bij hoe jij werkt.",
     ],
+    voorWie: "Elk MKB-bedrijf met taken die te veel tijd kosten",
   },
 ];
 
@@ -71,9 +65,8 @@ export default function DienstenPage() {
         <h1 className="mb-4 font-[family-name:var(--font-heading)] text-5xl font-bold text-white md:text-6xl">
           Wat we automatiseren
         </h1>
-        <p className="mx-auto max-w-[600px] text-xl text-[#6B6B8A]">
-          We beginnen bij jouw probleem — niet bij de technologie. Elk proces
-          dat handmatig draait, kan slimmer.
+        <p className="mx-auto max-w-[700px] text-xl text-[#6B6B8A]">
+          Je betaalt medewerkers om te denken, niet om te kopiëren en plakken. Wij halen het handmatige werk eruit.
         </p>
       </AnimateIn>
 
@@ -101,33 +94,27 @@ export default function DienstenPage() {
                   </h2>
                 </div>
 
-                <p className="mb-8 max-w-[700px] text-lg text-[#E8E8F0]">
-                  {dienst.description}
+                <p className="relative mb-6 max-w-[700px] text-lg font-medium text-[#E8E8F0]">
+                  {dienst.subtitle}
                 </p>
 
-                <div className="grid gap-8 md:grid-cols-2">
-                  <div>
-                    <h4 className="mb-2 font-[family-name:var(--font-heading)] text-sm font-semibold uppercase tracking-wider text-[#4F8EF7]">
-                      Voor wie
-                    </h4>
-                    <p className="text-[#6B6B8A]">{dienst.voorWie}</p>
+                <div className="relative mb-8 flex max-w-[700px] flex-col gap-4">
+                  {dienst.paragraphs.map((p) => (
+                    <p key={p} className="text-[#6B6B8A]">{p}</p>
+                  ))}
+                </div>
+
+                {dienst.highlight && (
+                  <div className="relative mb-8 rounded-lg border border-[#4F8EF7]/20 bg-[#4F8EF7]/5 px-6 py-4">
+                    <p className="text-[#E8E8F0]">{dienst.highlight}</p>
                   </div>
-                  <div>
-                    <h4 className="mb-2 font-[family-name:var(--font-heading)] text-sm font-semibold uppercase tracking-wider text-[#4F8EF7]">
-                      Wat het oplevert
-                    </h4>
-                    <ul className="flex flex-col gap-2">
-                      {dienst.oplevert.map((item) => (
-                        <li
-                          key={item}
-                          className="flex items-center gap-2 text-[#6B6B8A]"
-                        >
-                          <span className="font-bold text-[#4F8EF7]">→</span>{" "}
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                )}
+
+                <div className="relative">
+                  <h4 className="mb-2 font-[family-name:var(--font-heading)] text-sm font-semibold uppercase tracking-wider text-[#4F8EF7]">
+                    Voor wie
+                  </h4>
+                  <p className="text-[#6B6B8A]">{dienst.voorWie}</p>
                 </div>
               </div>
             </div>

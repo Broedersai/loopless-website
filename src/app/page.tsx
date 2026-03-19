@@ -44,7 +44,7 @@ export default function Home() {
             {[
               { num: "1", title: "Analyseren", desc: "We analyseren waar jouw team vastloopt" },
               { num: "2", title: "Bouwen", desc: "We bouwen een oplossing op maat" },
-              { num: "3", title: "Draaien", desc: "Jouw processen draaien 24/7 zonder fouten" },
+              { num: "3", title: "Draaien", desc: "Jouw processen lopen automatisch, zonder dat iemand er iets voor hoeft te doen." },
             ].map((step) => (
               <StaggerItem key={step.num} className="h-full">
                 <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-[#1E1E35] p-2">
@@ -73,7 +73,7 @@ export default function Home() {
           <StaggerContainer className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
             <StaggerItem><ServiceCard icon={<Target className="h-5 w-5" />} title="Lead Qualification" description="Automatisch leads zoeken, screenen en klaarzetten voor je team." /></StaggerItem>
             <StaggerItem><ServiceCard icon={<FileText className="h-5 w-5" />} title="Offerte-automatisering" description="Concept-voorstellen genereren op basis van eerdere offertes en productinfo." /></StaggerItem>
-            <StaggerItem><ServiceCard icon={<BarChart3 className="h-5 w-5" />} title="Slimme AI-assistenten" description="Een AI-assistent die je bedrijfsdata kent en direct antwoord geeft." /></StaggerItem>
+            <StaggerItem><ServiceCard icon={<BarChart3 className="h-5 w-5" />} title="Interne kennisbank" description="Een AI-assistent die je bedrijfsdata kent en direct antwoord geeft." /></StaggerItem>
             <StaggerItem><ServiceCard icon={<Cog className="h-5 w-5" />} title="Procesautomatisering" description="Maatwerk automatisering voor elk repetitief, handmatig proces." /></StaggerItem>
           </StaggerContainer>
         </div>
@@ -120,7 +120,7 @@ export default function Home() {
       {/* CTA */}
       <SectionWithParticles className="py-24 md:py-32" particleCount={300} speed={0.4} trailOpacity={0.06}>
         <AnimateIn className="mx-auto max-w-[1200px] px-6 text-center">
-          <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Klaar om tijd terug te winnen?</h2>
+          <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Benieuwd waar de meeste winst zit in jouw processen?</h2>
           <p className="mx-auto mb-8 max-w-[500px] text-lg text-[#6B6B8A]">Ontdek hoe Loopless jouw processen kan automatiseren. Plan een gratis gesprek — geheel vrijblijvend.</p>
           <Link href="/contact">
             <ShinyButton>Plan een gratis gesprek</ShinyButton>

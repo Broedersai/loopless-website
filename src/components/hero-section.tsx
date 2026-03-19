@@ -43,9 +43,9 @@ export function HeroSection({ children }: { children?: React.ReactNode }) {
               transition={{ duration: 0.7, delay: 0.15, ease }}
               className="mb-10 max-w-[560px] text-xl leading-relaxed text-[#6B6B8A]"
             >
-              Minder herhaling. Meer resultaat. Loopless automatiseert de
-              processen die jouw team vertragen — zodat jullie kunnen focussen op
-              wat er écht toe doet.
+              Minder herhaling. Meer resultaat. Loopless haalt de onnodige stappen
+              uit je processen — zodat je team zich kan richten op werk dat er
+              echt toe doet.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

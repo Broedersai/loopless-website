@@ -54,14 +54,6 @@ export default function OverPage() {
                   tijd verliest, dan pas bouwen. Geen onnodige technologie, alleen
                   oplossingen die direct resultaat opleveren.
                 </p>
-                <a
-                  href="https://www.linkedin.com/in/wessel-broeders-250767221/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-[#4F8EF7] transition-colors hover:text-[#3A75D8]"
-                >
-                  Bekijk mijn LinkedIn →
-                </a>
               </div>
             </div>
           </AnimateIn>
@@ -112,7 +104,7 @@ export default function OverPage() {
               {
                 num: "3",
                 title: "Implementeren",
-                desc: "Ik bouw de oplossing, test uitvoerig en zorg dat het naadloos in je workflow past.",
+                desc: "Ik bouw de oplossing en zorg dat je team er direct mee kan werken.",
               },
             ].map((step) => (
               <StaggerItem key={step.num}>
@@ -148,6 +140,14 @@ export default function OverPage() {
           <Link href="/contact">
             <ShinyButton>Plan een gesprek</ShinyButton>
           </Link>
+          <a
+            href="https://www.linkedin.com/in/wessel-broeders-250767221/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#4F8EF7] transition-colors hover:text-[#3A75D8]"
+          >
+            Bekijk mijn LinkedIn →
+          </a>
         </AnimateIn>
       </SectionWithParticles>
     </>
