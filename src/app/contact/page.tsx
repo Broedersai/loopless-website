@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Mail, Linkedin, Clock, ShieldCheck, Send } from "lucide-react";
 import { SectionWithParticles } from "@/components/section-with-particles";
+import { AnimateIn } from "@/components/ui/animate-in";
 
 const GOOGLE_FORM_ACTION =
   "https://docs.google.com/forms/d/e/1FAIpQLSdVQxlB5rLB_4WneVx29PWxF1zhf15Q5FF-cv-GaDgGRTCT1w/formResponse";
@@ -51,8 +52,8 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <SectionWithParticles className="pb-20 pt-40" particleCount={350} speed={0.4} trailOpacity={0.06}>
-        <div className="mx-auto max-w-[1200px] px-6 text-center">
-          <h1 className="mb-4 text-5xl font-bold text-white md:text-6xl">
+        <AnimateIn className="mx-auto max-w-[1200px] px-6 text-center">
+          <h1 className="mb-4 font-[family-name:var(--font-heading)] text-5xl font-bold text-white md:text-6xl">
             Laten we kennismaken
           </h1>
           <p className="mx-auto max-w-[600px] text-xl text-[#6B6B8A]">
@@ -75,7 +76,7 @@ export default function ContactPage() {
               <span>Duurt ~5 minuten</span>
             </div>
           </div>
-        </div>
+        </AnimateIn>
       </SectionWithParticles>
 
       {/* Contact Grid */}
@@ -83,7 +84,7 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-[1200px] gap-12 px-6 lg:grid-cols-[1fr_2fr]">
           {/* Sidebar */}
           <div className="lg:sticky lg:top-32 lg:self-start">
-            <h2 className="mb-4 text-3xl font-bold text-white">
+            <h2 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">
               Direct contact
             </h2>
             <p className="mb-8 text-[#6B6B8A]">
@@ -106,7 +107,8 @@ export default function ContactPage() {
             </div>
 
             {/* Trust card */}
-            <div className="mt-10 rounded-xl border border-[#1E1E35] bg-[#13131F] p-6">
+            <div className="mt-10 overflow-hidden rounded-xl border border-[#1E1E35] bg-[#0D0D1A] p-6 relative">
+              <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#4F8EF7]/10 to-transparent" />
               <p className="text-sm leading-relaxed text-[#6B6B8A]">
                 <span className="font-semibold text-[#E8E8F0]">Hoe werkt het?</span>
                 <br />
@@ -119,7 +121,8 @@ export default function ContactPage() {
           </div>
 
           {/* Form */}
-          <div className="rounded-2xl border border-[#1E1E35] bg-[#13131F] p-8">
+          <div className="relative overflow-hidden rounded-2xl border border-[#1E1E35] bg-[#0D0D1A] p-8">
+            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#4F8EF7]/10 to-transparent" />
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-16 text-center">
                 <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#4F8EF7]/10">
@@ -137,7 +140,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit}>
                 {/* Contact details section */}
                 <div className="mb-8">
-                  <h3 className="mb-1 text-lg font-semibold text-white">
+                  <h3 className="mb-1 font-[family-name:var(--font-heading)] text-lg font-semibold text-white">
                     Jouw gegevens
                   </h3>
                   <p className="mb-5 text-sm text-[#6B6B8A]">
@@ -164,7 +167,7 @@ export default function ContactPage() {
 
                 {/* Intake questions section */}
                 <div>
-                  <h3 className="mb-1 text-lg font-semibold text-white">
+                  <h3 className="mb-1 font-[family-name:var(--font-heading)] text-lg font-semibold text-white">
                     Over jullie situatie
                   </h3>
                   <p className="mb-5 text-sm text-[#6B6B8A]">
@@ -234,7 +237,7 @@ function ContactItem({
       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       className="flex items-start gap-4 rounded-lg p-2 -m-2 transition-colors hover:bg-[#4F8EF7]/5"
     >
-      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#4F8EF7]/10">
+      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#4F8EF7]/15 shadow-[0_0_20px_#4F8EF730]">
         {icon}
       </div>
       <div>

@@ -11,7 +11,6 @@ import { LogoWithText } from "@/components/logo";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/diensten", label: "Diensten" },
-  { href: "/cases", label: "Cases" },
   { href: "/over", label: "Over mij" },
   { href: "/contact", label: "Contact" },
 ];

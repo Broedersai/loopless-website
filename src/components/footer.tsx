@@ -19,14 +19,13 @@ export function Footer() {
           {/* Links */}
           <div className="flex gap-16">
             <div>
-              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
+              <h4 className="mb-4 font-[family-name:var(--font-heading)] text-sm font-semibold uppercase tracking-wider text-white">
                 Pagina&apos;s
               </h4>
               <ul className="flex flex-col gap-2">
                 {[
                   { href: "/", label: "Home" },
                   { href: "/diensten", label: "Diensten" },
-                  { href: "/cases", label: "Cases" },
                   { href: "/over", label: "Over mij" },
                   { href: "/contact", label: "Contact" },
                 ].map((item) => (
@@ -42,7 +41,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
+              <h4 className="mb-4 font-[family-name:var(--font-heading)] text-sm font-semibold uppercase tracking-wider text-white">
                 Contact
               </h4>
               <ul className="flex flex-col gap-2">

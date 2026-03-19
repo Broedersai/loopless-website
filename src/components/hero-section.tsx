@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import NeuralBackground from "@/components/ui/flow-field-background";
 import { ShinyButton } from "@/components/ui/shiny-button";
 
-export function HeroSection() {
+const ease = [0.16, 1, 0.3, 1] as const;
+
+export function HeroSection({ children }: { children?: React.ReactNode }) {
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden pt-20">
+    <section className="relative overflow-hidden">
       {/* Flow field background */}
       <div className="absolute inset-0">
         <NeuralBackground
@@ -21,30 +24,51 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto max-w-[1200px] px-6">
-        <div className="max-w-[720px]">
-          <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight text-white md:text-7xl">
-            Minder handen.
-            <br />
-            Betere resultaten.
-          </h1>
-          <p className="mb-10 max-w-[560px] text-xl leading-relaxed text-[#6B6B8A]">
-            Loopless automatiseert de repetitieve processen die jouw team
-            vertragen — zodat jullie kunnen focussen op wat er écht toe doet.
-          </p>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <Link
-              href="/diensten"
-              className="rounded-lg bg-[#4F8EF7] px-8 py-4 text-center font-semibold text-white shadow-[0_0_20px_#4F8EF740] transition-all hover:-translate-y-0.5 hover:bg-[#3A75D8] hover:shadow-[0_0_30px_#4F8EF740]"
+      <div className="relative z-10 flex min-h-screen items-center pt-20">
+        <div className="mx-auto max-w-[1200px] px-6">
+          <div className="max-w-[720px]">
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease }}
+              className="mb-6 font-[family-name:var(--font-heading)] text-5xl font-bold leading-tight tracking-tight text-white md:text-7xl"
             >
-              Bekijk onze diensten
-            </Link>
-            <Link href="/contact">
-              <ShinyButton>Plan een gesprek</ShinyButton>
-            </Link>
+              Doorbreek de loop
+              <br />
+              van handmatig werk.
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15, ease }}
+              className="mb-10 max-w-[560px] text-xl leading-relaxed text-[#6B6B8A]"
+            >
+              Minder herhaling. Meer resultaat. Loopless automatiseert de
+              processen die jouw team vertragen — zodat jullie kunnen focussen op
+              wat er écht toe doet.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease }}
+              className="flex flex-col gap-4 sm:flex-row"
+            >
+              <Link
+                href="/diensten"
+                className="rounded-lg bg-[#4F8EF7] px-8 py-4 text-center font-semibold text-white shadow-[0_0_20px_#4F8EF740] transition-all hover:-translate-y-0.5 hover:bg-[#3A75D8] hover:shadow-[0_0_30px_#4F8EF760]"
+              >
+                Bekijk onze diensten
+              </Link>
+              <Link href="/contact">
+                <ShinyButton>Plan een gesprek</ShinyButton>
+              </Link>
+            </motion.div>
           </div>
         </div>
       </div>
+
+      {/* Additional content within the same background */}
+      {children && <div className="relative z-10">{children}</div>}
     </section>
   );
 }
