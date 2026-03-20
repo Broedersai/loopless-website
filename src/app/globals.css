@@ -48,36 +48,36 @@
   --radius-4xl: calc(var(--radius) + 16px);
 
   /* Loopless custom colors */
-  --color-loopless-bg: #0D0D1A;
-  --color-loopless-surface: #13131F;
-  --color-loopless-border: #1E1E35;
+  --color-loopless-bg: #161625;
+  --color-loopless-surface: #1E1E30;
+  --color-loopless-border: #2E2E4A;
   --color-loopless-accent: #4F8EF7;
   --color-loopless-accent-hover: #3A75D8;
   --color-loopless-accent-glow: #4F8EF740;
-  --color-loopless-text: #E8E8F0;
-  --color-loopless-muted: #6B6B8A;
+  --color-loopless-text: #EDEDF4;
+  --color-loopless-muted: #8585A3;
 }
 
 /* Loopless dark theme as default */
 :root {
   --radius: 0.75rem;
-  --background: #0D0D1A;
-  --foreground: #E8E8F0;
-  --card: #13131F;
-  --card-foreground: #E8E8F0;
-  --popover: #13131F;
-  --popover-foreground: #E8E8F0;
+  --background: #161625;
+  --foreground: #EDEDF4;
+  --card: #1E1E30;
+  --card-foreground: #EDEDF4;
+  --popover: #1E1E30;
+  --popover-foreground: #EDEDF4;
   --primary: #4F8EF7;
   --primary-foreground: #FFFFFF;
-  --secondary: #1E1E35;
-  --secondary-foreground: #E8E8F0;
-  --muted: #13131F;
-  --muted-foreground: #6B6B8A;
-  --accent: #1E1E35;
-  --accent-foreground: #E8E8F0;
+  --secondary: #2E2E4A;
+  --secondary-foreground: #EDEDF4;
+  --muted: #1E1E30;
+  --muted-foreground: #8585A3;
+  --accent: #2E2E4A;
+  --accent-foreground: #EDEDF4;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: #1E1E35;
-  --input: #1E1E35;
+  --border: #2E2E4A;
+  --input: #2E2E4A;
   --ring: #4F8EF7;
   --chart-1: #4F8EF7;
   --chart-2: #5a922c;
@@ -96,15 +96,7 @@
   }
 }
 
-/* Loopless custom utilities */
-@layer utilities {
-  .glow-accent {
-    box-shadow: 0 0 20px #4F8EF740;
-  }
-  .glow-accent-lg {
-    box-shadow: 0 0 30px #4F8EF740;
-  }
-}
+
 
 @utility bg-noise-pattern {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 700'%3E%3Cdefs%3E%3Cfilter id='nnnoise-filter' x='-20%25' y='-20%25' width='140%25' height='140%25' filterUnits='objectBoundingBox' primitiveUnits='userSpaceOnUse' color-interpolation-filters='linearRGB'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.167' numOctaves='4' seed='15' stitchTiles='stitch' x='0%25' y='0%25' width='100%25' height='100%25' result='turbulence'%3E%3C/feTurbulence%3E%3CfeSpecularLighting surfaceScale='28' specularConstant='0.75' specularExponent='20' lighting-color='%23fff' x='0%25' y='0%25' width='100%25' height='100%25' in='turbulence' result='specularLighting'%3E%3CfeDistantLight azimuth='3' elevation='100'%3E%3C/feDistantLight%3E%3C/feSpecularLighting%3E%3C/filter%3E%3C/defs%3E%3Crect width='700' height='700' fill='%2309090B'%3E%3C/rect%3E%3Crect width='700' height='700' fill='%23ffffff' filter='url(%23nnnoise-filter)'%3E%3C/rect%3E%3C/svg%3E");

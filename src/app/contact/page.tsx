@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Mail, Linkedin, Clock, ShieldCheck, Send } from "lucide-react";
-import { SectionWithParticles } from "@/components/section-with-particles";
 import { AnimateIn } from "@/components/ui/animate-in";
 
 const GOOGLE_FORM_ACTION =
@@ -50,44 +49,50 @@ export default function ContactPage() {
 
   return (
     <>
-      {/* Hero */}
-      <SectionWithParticles className="pb-20 pt-40" particleCount={350} speed={0.4} trailOpacity={0.06}>
-        <AnimateIn className="mx-auto max-w-[1200px] px-6 text-center">
-          <h1 className="mb-4 font-[family-name:var(--font-heading)] text-5xl font-bold text-white md:text-6xl">
-            Laten we kennismaken
-          </h1>
-          <p className="mx-auto max-w-[600px] text-xl text-[#6B6B8A]">
-            Heb je een concreet probleem of twijfel je nog waar de winst zit?
-            In beide gevallen denk ik graag mee. Volledig vrijblijvend.
-          </p>
+      {/* Hero — links uitgelijnd */}
+      <section className="pb-12 pt-40">
+        <div className="mx-auto max-w-[1200px] px-6">
+          <AnimateIn>
+            <h1 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white md:text-5xl">
+              Laten we kennismaken
+            </h1>
+          </AnimateIn>
+          <AnimateIn delay={0.1}>
+            <p className="max-w-[600px] text-lg text-[#8585A3]">
+              Heb je een concreet probleem of twijfel je nog waar de winst zit?
+              In beide gevallen denk ik graag mee.
+            </p>
+          </AnimateIn>
 
           {/* Trust indicators */}
-          <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-[#6B6B8A]">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-[#4F8EF7]" />
-              <span>Volledig vrijblijvend</span>
+          <AnimateIn delay={0.2}>
+            <div className="mt-6 flex flex-wrap items-center gap-6 text-sm text-[#8585A3]">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-[#4F8EF7]" />
+                <span>Volledig vrijblijvend</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 text-[#4F8EF7]" />
+                <span>Reactie binnen 24 uur</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Send className="h-4 w-4 text-[#4F8EF7]" />
+                <span>~5 minuten</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4 text-[#4F8EF7]" />
-              <span>Reactie binnen 24 uur</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Send className="h-4 w-4 text-[#4F8EF7]" />
-              <span>Duurt ~5 minuten</span>
-            </div>
-          </div>
-        </AnimateIn>
-      </SectionWithParticles>
+          </AnimateIn>
+        </div>
+      </section>
 
       {/* Contact Grid */}
       <section className="py-24 md:py-32">
         <div className="mx-auto grid max-w-[1200px] gap-12 px-6 lg:grid-cols-[1fr_2fr]">
           {/* Sidebar */}
-          <div className="lg:sticky lg:top-32 lg:self-start">
+          <AnimateIn className="lg:sticky lg:top-32 lg:self-start">
             <h2 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">
               Direct contact
             </h2>
-            <p className="mb-8 text-[#6B6B8A]">
+            <p className="mb-8 text-[#8585A3]">
               Liever direct een bericht sturen? Dat kan ook.
             </p>
 
@@ -107,10 +112,9 @@ export default function ContactPage() {
             </div>
 
             {/* Trust card */}
-            <div className="mt-10 overflow-hidden rounded-xl border border-[#1E1E35] bg-[#0D0D1A] p-6 relative">
-              <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#4F8EF7]/10 to-transparent" />
-              <p className="text-sm leading-relaxed text-[#6B6B8A]">
-                <span className="font-semibold text-[#E8E8F0]">Hoe werkt het?</span>
+            <div className="mt-10 overflow-hidden rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-6 relative">
+              <p className="text-sm leading-relaxed text-[#8585A3]">
+                <span className="font-semibold text-[#EDEDF4]">Hoe werkt het?</span>
                 <br />
                 Na het invullen neem ik binnen 24 uur contact op. Samen kijken
                 we waar de grootste winst zit — ook als je nog niet precies weet
@@ -118,11 +122,10 @@ export default function ContactPage() {
                 verplichtingen, geen verborgen kosten.
               </p>
             </div>
-          </div>
+          </AnimateIn>
 
           {/* Form */}
-          <div className="relative overflow-hidden rounded-2xl border border-[#1E1E35] bg-[#0D0D1A] p-8">
-            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#4F8EF7]/10 to-transparent" />
+          <AnimateIn delay={0.15} className="relative overflow-hidden rounded-2xl border border-[#2E2E4A] bg-[#1E1E30] p-8">
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-16 text-center">
                 <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#4F8EF7]/10">
@@ -131,7 +134,7 @@ export default function ContactPage() {
                 <h3 className="mb-3 text-2xl font-bold text-white">
                   Bedankt voor het invullen!
                 </h3>
-                <p className="max-w-md text-[#6B6B8A]">
+                <p className="max-w-md text-[#8585A3]">
                   Ik heb je antwoorden ontvangen en neem binnen 24 uur contact
                   met je op om alles door te nemen.
                 </p>
@@ -143,54 +146,54 @@ export default function ContactPage() {
                   <h3 className="mb-1 font-[family-name:var(--font-heading)] text-lg font-semibold text-white">
                     Jouw gegevens
                   </h3>
-                  <p className="mb-5 text-sm text-[#6B6B8A]">
+                  <p className="mb-5 text-sm text-[#8585A3]">
                     Zodat ik je kan bereiken na het invullen.
                   </p>
                   <div className="grid gap-4 sm:grid-cols-2">
                     {contactFields.map(({ entry, label, type, placeholder }) => (
                       <div key={entry}>
-                        <label className="mb-1.5 block text-sm font-medium text-[#E8E8F0]">
+                        <label className="mb-1.5 block text-sm font-medium text-[#EDEDF4]">
                           {label}
                         </label>
                         <input
                           type={type}
                           name={entry}
                           placeholder={placeholder}
-                          className="w-full rounded-lg border border-[#1E1E35] bg-[#0D0D1A] px-4 py-3 text-[#E8E8F0] placeholder-[#6B6B8A] transition-colors focus:border-[#4F8EF7] focus:outline-none focus:ring-2 focus:ring-[#4F8EF740]"
+                          className="w-full rounded-lg border border-[#2E2E4A] bg-[#1E1E30] px-4 py-3 text-[#EDEDF4] placeholder-[#8585A3] transition-colors focus:border-[#4F8EF7] focus:outline-none focus:ring-2 focus:ring-[#4F8EF740]"
                         />
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="mb-8 border-t border-[#1E1E35]" />
+                <div className="mb-8 border-t border-[#2E2E4A]" />
 
                 {/* Intake questions section */}
                 <div>
                   <h3 className="mb-1 font-[family-name:var(--font-heading)] text-lg font-semibold text-white">
                     Over jullie situatie
                   </h3>
-                  <p className="mb-5 text-sm text-[#6B6B8A]">
+                  <p className="mb-5 text-sm text-[#8585A3]">
                     Weet je het antwoord niet zeker? Geen probleem — vul in wat je weet,
                     de rest bespreken we samen.
                   </p>
                   <div className="flex flex-col gap-6">
                     {intakeFields.map(({ entry, label, type }) => (
                       <div key={entry}>
-                        <label className="mb-1.5 block text-sm font-medium text-[#E8E8F0]">
+                        <label className="mb-1.5 block text-sm font-medium text-[#EDEDF4]">
                           {label}
                         </label>
                         {type === "textarea" ? (
                           <textarea
                             name={entry}
                             rows={3}
-                            className="w-full resize-y rounded-lg border border-[#1E1E35] bg-[#0D0D1A] px-4 py-3 text-[#E8E8F0] placeholder-[#6B6B8A] transition-colors focus:border-[#4F8EF7] focus:outline-none focus:ring-2 focus:ring-[#4F8EF740]"
+                            className="w-full resize-y rounded-lg border border-[#2E2E4A] bg-[#1E1E30] px-4 py-3 text-[#EDEDF4] placeholder-[#8585A3] transition-colors focus:border-[#4F8EF7] focus:outline-none focus:ring-2 focus:ring-[#4F8EF740]"
                           />
                         ) : (
                           <input
                             type="text"
                             name={entry}
-                            className="w-full rounded-lg border border-[#1E1E35] bg-[#0D0D1A] px-4 py-3 text-[#E8E8F0] placeholder-[#6B6B8A] transition-colors focus:border-[#4F8EF7] focus:outline-none focus:ring-2 focus:ring-[#4F8EF740]"
+                            className="w-full rounded-lg border border-[#2E2E4A] bg-[#1E1E30] px-4 py-3 text-[#EDEDF4] placeholder-[#8585A3] transition-colors focus:border-[#4F8EF7] focus:outline-none focus:ring-2 focus:ring-[#4F8EF740]"
                           />
                         )}
                       </div>
@@ -199,20 +202,20 @@ export default function ContactPage() {
                 </div>
 
                 {/* Submit */}
-                <div className="mt-8 rounded-xl border border-[#1E1E35] bg-[#0D0D1A] p-4 text-center text-sm text-[#6B6B8A]">
+                <div className="mt-8 rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-4 text-center text-sm text-[#8585A3]">
                   Invullen is volledig vrijblijvend — ik neem binnen 24 uur contact op.
                 </div>
 
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="mt-4 w-full rounded-lg bg-[#4F8EF7] px-8 py-4 font-semibold text-white shadow-[0_0_20px_#4F8EF740] transition-all hover:-translate-y-0.5 hover:bg-[#3A75D8] hover:shadow-[0_0_30px_#4F8EF740] disabled:opacity-50 disabled:hover:translate-y-0"
+                  className="mt-4 w-full rounded-lg bg-[#4F8EF7] px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-[#3A75D8] hover:shadow-[0_8px_30px_-8px_rgba(79,142,247,0.3)] disabled:opacity-50"
                 >
                   {submitting ? "Versturen..." : "Verstuur antwoorden"}
                 </button>
               </form>
             )}
-          </div>
+          </AnimateIn>
         </div>
       </section>
     </>
@@ -237,7 +240,7 @@ function ContactItem({
       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       className="flex items-start gap-4 rounded-lg p-2 -m-2 transition-colors hover:bg-[#4F8EF7]/5"
     >
-      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#4F8EF7]/15 shadow-[0_0_20px_#4F8EF730]">
+      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#2E2E4A]">
         {icon}
       </div>
       <div>

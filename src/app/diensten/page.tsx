@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AnimateIn } from "@/components/ui/animate-in";
+import { Target, FileText, BarChart3 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Diensten",
   description:
     "Van lead qualification tot procesautomatisering — ontdek hoe Loopless jouw team tijd bespaart met AI-oplossingen op maat.",
 };
-import { Target, FileText, BarChart3, Cog } from "lucide-react";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { SectionWithParticles } from "@/components/section-with-particles";
-import { ShinyButton } from "@/components/ui/shiny-button";
-import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/animate-in";
 
 const diensten = [
   {
+    id: "lead-qualification",
     icon: <Target className="h-6 w-6 text-[#4F8EF7]" />,
-    title: "Lead qualification automatisering",
+    title: "Lead qualification",
+    navLabel: "Lead qualification",
     subtitle: "Elke ochtend een lijst met gekwalificeerde leads — zonder dat je team er iets voor hoeft te doen.",
     paragraphs: [
       "Recruiters en salesteams verliezen dagelijks uren aan handmatig zoeken, checken en invoeren. Dat stopt.",
@@ -23,10 +22,13 @@ const diensten = [
     ],
     highlight: "Bewezen resultaat: vuljevacature.nl logt 's ochtends in en heeft direct een lijst klaarstaan. Geen handmatig zoekwerk meer.",
     voorWie: "Recruitmentbureaus, salesteams, B2B bedrijven",
+    accentColor: "#4F8EF7",
   },
   {
+    id: "offerte-automatisering",
     icon: <FileText className="h-6 w-6 text-[#4F8EF7]" />,
     title: "Offerte- en RFP-automatisering",
+    navLabel: "Offertes",
     subtitle: "Te traag met je voorstel is een gemiste deal.",
     paragraphs: [
       "Offertes opstellen kost tijd die je niet hebt. Steeds opnieuw dezelfde informatie opzoeken, kopiëren en consistent krijgen.",
@@ -34,10 +36,13 @@ const diensten = [
       "Van dagen werk naar enkele uren per voorstel.",
     ],
     voorWie: "Bedrijven die veel tijd kwijt zijn aan offertes en daardoor kansen mislopen",
+    accentColor: "#4F8EF7",
   },
   {
-    icon: <BarChart3 className="h-6 w-6 text-[#4F8EF7]" />,
+    id: "kennisbank",
+    icon: <BarChart3 className="h-6 w-6 text-[#E8A04E]" />,
     title: "Interne kennisbank",
+    navLabel: "Kennisbank",
     subtitle: "Hoeveel tijd verliest je team met zoeken naar informatie die er al is?",
     paragraphs: [
       "Handleidingen, procedures, productinfo — het bestaat allemaal. Maar niemand weet waar het staat. Dus wordt er gebeld, gezocht en gewacht.",
@@ -45,96 +50,125 @@ const diensten = [
       "Geen zoeken meer. Geen collega lastigvallen. Gewoon: vraag stellen, antwoord krijgen.",
     ],
     voorWie: "Bedrijven met veel interne documenten, handleidingen of procedures",
-  },
-  {
-    icon: <Cog className="h-6 w-6 text-[#4F8EF7]" />,
-    title: "Procesautomatisering op maat",
-    subtitle: "Heb je een proces dat veel tijd kost maar hier niet tussen staat?",
-    paragraphs: [
-      "Wij beginnen altijd bij het probleem, nooit bij de technologie. Eerst brengen we in kaart waar tijd verloren gaat. Dan pas bouwen we een oplossing die past bij hoe jij werkt.",
-    ],
-    voorWie: "Elk MKB-bedrijf met taken die te veel tijd kosten",
+    accentColor: "#E8A04E",
   },
 ];
 
 export default function DienstenPage() {
   return (
-    <SectionWithParticles className="pb-24 pt-40 md:pb-32" particleCount={500} speed={0.4} trailOpacity={0.07}>
-      {/* Hero */}
-      <AnimateIn className="mx-auto max-w-[1200px] px-6 text-center">
-        <h1 className="mb-4 font-[family-name:var(--font-heading)] text-5xl font-bold text-white md:text-6xl">
-          Wat we automatiseren
-        </h1>
-        <p className="mx-auto max-w-[700px] text-xl text-[#6B6B8A]">
-          Je betaalt medewerkers om te denken, niet om te kopiëren en plakken. Wij halen het handmatige werk eruit.
-        </p>
-      </AnimateIn>
+    <>
+      {/* Hero + anchor nav */}
+      <section className="pb-12 pt-40">
+        <div className="mx-auto max-w-[1200px] px-6">
+          <AnimateIn>
+            <h1 className="mb-4 font-[family-name:var(--font-heading)] text-5xl font-bold text-white md:text-6xl">
+              Wat we automatiseren
+            </h1>
+          </AnimateIn>
+          <AnimateIn delay={0.1}>
+            <p className="max-w-[600px] text-xl text-[#8585A3]">
+              Je betaalt medewerkers om te denken, niet om te kopiëren en plakken. Wij halen het handmatige werk eruit.
+            </p>
+          </AnimateIn>
+
+          {/* Anchor nav */}
+          <AnimateIn delay={0.2}>
+            <nav className="mt-12 flex flex-wrap gap-3">
+              {diensten.map((d) => (
+                <a
+                  key={d.id}
+                  href={`#${d.id}`}
+                  className="rounded-full border border-[#2E2E4A] px-4 py-2 text-sm font-medium text-[#8585A3] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#4F8EF7]/40 hover:text-white hover:shadow-[0_4px_12px_-4px_rgba(79,142,247,0.2)]"
+                >
+                  {d.navLabel}
+                </a>
+              ))}
+              <a
+                href="#maatwerk"
+                className="rounded-full border border-[#2E2E4A] px-4 py-2 text-sm font-medium text-[#8585A3] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#4F8EF7]/40 hover:text-white hover:shadow-[0_4px_12px_-4px_rgba(79,142,247,0.2)]"
+              >
+                Maatwerk
+              </a>
+            </nav>
+          </AnimateIn>
+        </div>
+      </section>
 
       {/* Diensten */}
-      <StaggerContainer className="mx-auto mt-24 flex max-w-[1200px] flex-col gap-8 px-6 md:mt-32" staggerDelay={0.12}>
-        {diensten.map((dienst) => (
-          <StaggerItem key={dienst.title}>
-            <div className="relative rounded-2xl border border-[#1E1E35] p-2">
-              <GlowingEffect
-                spread={40}
-                glow={true}
-                disabled={false}
-                proximity={64}
-                inactiveZone={0.01}
-                borderWidth={3}
-              />
-              <div className="relative overflow-hidden rounded-xl border border-[#1E1E35] bg-[#0D0D1A]/80 backdrop-blur-sm p-8 md:p-12">
-                <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#4F8EF7]/10 to-transparent" />
-                <div className="relative mb-6 flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#4F8EF7]/15 shadow-[0_0_20px_#4F8EF730]">
+      {diensten.map((dienst, i) => (
+        <section
+          key={dienst.id}
+          id={dienst.id}
+          className={`relative overflow-hidden py-24 md:py-32 ${
+            i % 2 === 1 ? "bg-[#1A1A2E]" : ""
+          }`}
+        >
+          <div className="mx-auto max-w-[900px] px-6">
+            <AnimateIn>
+              <article>
+                <div className="mb-8 flex items-start gap-5">
+                  <div
+                    className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#2E2E4A] transition-colors duration-300 hover:bg-[#3E3E5A]"
+                  >
                     {dienst.icon}
                   </div>
-                  <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-white">
+                  <h2 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-white md:text-3xl">
                     {dienst.title}
                   </h2>
                 </div>
 
-                <p className="relative mb-6 max-w-[700px] text-lg font-medium text-[#E8E8F0]">
+                <p className="mb-6 text-lg font-medium text-[#EDEDF4]">
                   {dienst.subtitle}
                 </p>
 
-                <div className="relative mb-8 flex max-w-[700px] flex-col gap-4">
+                <div className="mb-8 flex flex-col gap-4">
                   {dienst.paragraphs.map((p) => (
-                    <p key={p} className="text-[#6B6B8A]">{p}</p>
+                    <p key={p} className="text-[#8585A3] leading-relaxed">{p}</p>
                   ))}
                 </div>
 
                 {dienst.highlight && (
-                  <div className="relative mb-8 rounded-lg border border-[#4F8EF7]/20 bg-[#4F8EF7]/5 px-6 py-4">
-                    <p className="text-[#E8E8F0]">{dienst.highlight}</p>
+                  <div
+                    className="mb-8 border-l-2 py-1 pl-6"
+                    style={{ borderColor: dienst.accentColor }}
+                  >
+                    <p className="text-[#EDEDF4]">{dienst.highlight}</p>
                   </div>
                 )}
 
-                <div className="relative">
-                  <h4 className="mb-2 font-[family-name:var(--font-heading)] text-sm font-semibold uppercase tracking-wider text-[#4F8EF7]">
-                    Voor wie
-                  </h4>
-                  <p className="text-[#6B6B8A]">{dienst.voorWie}</p>
-                </div>
-              </div>
-            </div>
-          </StaggerItem>
-        ))}
-      </StaggerContainer>
+                <p className="text-sm text-[#8585A3]">
+                  <span className="font-semibold uppercase tracking-wider" style={{ color: dienst.accentColor }}>Voor wie</span>
+                  <span className="mx-3 text-[#2E2E4A]">|</span>
+                  {dienst.voorWie}
+                </p>
+              </article>
+            </AnimateIn>
+          </div>
+        </section>
+      ))}
 
-      {/* CTA */}
-      <AnimateIn className="mx-auto mt-24 max-w-[1200px] px-6 text-center md:mt-32">
-        <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">
-          Weet je niet welke dienst past?
-        </h2>
-        <p className="mx-auto mb-8 max-w-[500px] text-lg text-[#6B6B8A]">
-          Plan een gratis gesprek. We kijken samen waar de meeste winst zit in
-          jouw processen.
-        </p>
-        <Link href="/contact">
-          <ShinyButton>Plan een gratis gesprek</ShinyButton>
-        </Link>
-      </AnimateIn>
-    </SectionWithParticles>
+      {/* Maatwerk */}
+      <section id="maatwerk" className="border-t border-[#2E2E4A] py-24 md:py-32">
+        <div className="mx-auto max-w-[700px] px-6 text-center">
+          <AnimateIn>
+            <h2 className="mb-6 font-[family-name:var(--font-heading)] text-3xl font-bold text-white md:text-4xl">
+              Staat jouw proces er niet tussen?
+            </h2>
+            <p className="mb-4 text-lg text-[#EDEDF4]">
+              Wij beginnen altijd bij het probleem, nooit bij de technologie.
+            </p>
+            <p className="mb-10 text-[#8585A3]">
+              Eerst brengen we in kaart waar tijd verloren gaat. Dan pas bouwen we een oplossing die past bij hoe jij werkt. Elk MKB-bedrijf met taken die te veel tijd kosten is welkom.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-block rounded-full bg-[#4F8EF7] px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-[#3A75D8] hover:shadow-[0_8px_30px_-8px_rgba(79,142,247,0.3)]"
+            >
+              Vertel over je proces
+            </Link>
+          </AnimateIn>
+        </div>
+      </section>
+    </>
   );
 }

@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect, useCallback } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ShinyButton } from "@/components/ui/shiny-button";
 import { LogoWithText } from "@/components/logo";
 
 const navItems = [
@@ -43,7 +42,7 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-[#0D0D1A]/92 backdrop-blur-xl shadow-[0_1px_0_#1E1E35]"
+          ? "bg-[#161625]/92 backdrop-blur-xl shadow-[0_1px_0_#2E2E4A]"
           : "bg-transparent"
       )}
     >
@@ -63,14 +62,17 @@ export function Navbar() {
                 "relative text-sm font-medium transition-colors",
                 pathname === item.href
                   ? "text-white after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-0.5 after:rounded-full after:bg-[#4F8EF7]"
-                  : "text-[#6B6B8A] hover:text-white"
+                  : "text-[#8585A3] hover:text-white"
               )}
             >
               {item.label}
             </Link>
           ))}
-          <Link href="/contact">
-            <ShinyButton size="sm">Plan een gesprek</ShinyButton>
+          <Link
+            href="/contact"
+            className="rounded-full bg-[#4F8EF7] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#3A75D8]"
+          >
+            Plan een gesprek
           </Link>
         </nav>
 
@@ -99,7 +101,7 @@ export function Navbar() {
       {/* Mobile nav */}
       <nav
         className={cn(
-          "fixed top-0 right-0 z-40 flex h-full w-[280px] flex-col gap-6 border-l border-[#1E1E35] bg-[#13131F] px-8 pt-24 transition-transform duration-300 md:hidden",
+          "fixed top-0 right-0 z-40 flex h-full w-[280px] flex-col gap-6 border-l border-[#2E2E4A] bg-[#1E1E30] px-8 pt-24 transition-transform duration-300 md:hidden",
           mobileOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
@@ -112,14 +114,18 @@ export function Navbar() {
               "text-base font-medium transition-colors",
               pathname === item.href
                 ? "text-white"
-                : "text-[#6B6B8A] hover:text-white"
+                : "text-[#8585A3] hover:text-white"
             )}
           >
             {item.label}
           </Link>
         ))}
-        <Link href="/contact" onClick={closeMobile} className="mt-4">
-          <ShinyButton size="sm">Plan een gesprek</ShinyButton>
+        <Link
+          href="/contact"
+          onClick={closeMobile}
+          className="mt-4 inline-block rounded-full bg-[#4F8EF7] px-5 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-[#3A75D8]"
+        >
+          Plan een gesprek
         </Link>
       </nav>
     </header>

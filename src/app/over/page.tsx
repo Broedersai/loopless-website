@@ -1,125 +1,95 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/animate-in";
+import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Over mij",
   description:
     "Maak kennis met Wessel Broeders — oprichter van Loopless. Bedrijfskunde-achtergrond, passie voor AI en procesautomatisering.",
 };
-import Image from "next/image";
-import { SectionWithParticles } from "@/components/section-with-particles";
-import { NoisePatternCard, NoisePatternCardBody } from "@/components/ui/card-with-noise-patter";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { ShinyButton } from "@/components/ui/shiny-button";
-import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/animate-in";
+
+const werkStappen = [
+  { num: "01", label: "Luisteren", text: "Ik begin bij jouw dagelijkse werkelijkheid. Waar loop je vast? Wat kost de meeste tijd?" },
+  { num: "02", label: "Ontwerpen", text: "Samen bepalen we de beste aanpak. Geen overbodige technologie, alleen wat werkt." },
+  { num: "03", label: "Implementeren", text: "Ik bouw de oplossing en zorg dat je team er direct mee kan werken." },
+];
 
 export default function OverPage() {
   return (
     <>
-      {/* Hero */}
-      <SectionWithParticles className="pb-20 pt-40" particleCount={350} speed={0.4} trailOpacity={0.06}>
-        <AnimateIn className="mx-auto max-w-[1200px] px-6 text-center">
-          <h1 className="font-[family-name:var(--font-heading)] text-5xl font-bold text-white md:text-6xl">
-            Wie zit er achter Loopless?
-          </h1>
-        </AnimateIn>
-      </SectionWithParticles>
-
-      {/* Over Wessel */}
-      <section className="py-24 md:py-32">
-        <div className="mx-auto max-w-[800px] px-6">
-          <AnimateIn>
-            <div className="flex flex-col items-center gap-10 md:flex-row md:items-start">
-              <div className="relative h-[200px] w-[200px] flex-shrink-0 overflow-hidden rounded-full border-2 border-[#1E1E35]">
+      {/* Intro */}
+      <section className="pt-40 pb-24 md:pb-32">
+        <div className="mx-auto max-w-[1000px] px-6">
+          <div className="flex flex-col gap-12 md:flex-row md:items-start">
+            <AnimateIn className="flex-shrink-0 self-center md:self-start">
+              <div className="relative h-[280px] w-[280px] overflow-hidden rounded-2xl border border-[#2E2E4A] transition-all duration-500 hover:border-[#4F8EF7]/30 hover:shadow-[0_8px_30px_-12px_rgba(79,142,247,0.2)]">
                 <Image
                   src="/wessel.jpg"
                   alt="Wessel Broeders"
                   fill
-                  className="object-cover object-top"
-                  sizes="200px"
+                  className="object-cover object-top transition-transform duration-500 hover:scale-[1.03]"
+                  sizes="280px"
                 />
               </div>
+            </AnimateIn>
 
+            <AnimateIn delay={0.15}>
               <div>
-                <h2 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">
+                <p className="mb-3 text-sm font-medium uppercase tracking-wider text-[#4F8EF7]">Oprichter</p>
+                <h1 className="mb-6 font-[family-name:var(--font-heading)] text-4xl font-bold text-white md:text-5xl">
                   Wessel Broeders
-                </h2>
-                <p className="mb-4 text-lg text-[#E8E8F0]">
-                  Oprichter van Loopless en laatste jaar Bedrijfskunde student aan
-                  Avans Breda. Ik help MKB-bedrijven om tijd terug te winnen door
-                  processen slim te automatiseren.
+                </h1>
+                <p className="mb-4 text-lg leading-relaxed text-[#EDEDF4]">
+                  Laatste jaar Bedrijfskunde student aan Avans Breda. Ik help
+                  MKB-bedrijven om tijd terug te winnen door processen slim te
+                  automatiseren.
                 </p>
-                <p className="mb-4 text-[#6B6B8A]">
+                <p className="text-[#8585A3] leading-relaxed">
                   Mijn aanpak is altijd hetzelfde: eerst begrijpen waar jouw team
                   tijd verliest, dan pas bouwen. Geen onnodige technologie, alleen
                   oplossingen die direct resultaat opleveren.
                 </p>
               </div>
+            </AnimateIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Waarom Loopless */}
+      <section className="bg-[#1A1A2E] py-24 md:py-32">
+        <div className="mx-auto max-w-[700px] px-6">
+          <AnimateIn>
+            <h2 className="mb-8 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">Waarom Loopless</h2>
+            <div className="border-l-2 border-[#E8A04E] pl-8">
+              <p className="text-lg leading-relaxed text-[#EDEDF4]">
+                Tijdens mijn studie en werkervaring zag ik steeds hetzelfde
+                patroon: teams die vastlopen in handmatig werk. Slimme mensen die
+                uren besteden aan taken die een systeem in minuten kan doen.
+              </p>
+              <p className="mt-4 text-lg leading-relaxed text-[#8585A3]">
+                Loopless is ontstaan vanuit de overtuiging dat AI niet het doel is,
+                maar het middel — om mensen vrij te maken voor werk dat er echt toe
+                doet.
+              </p>
             </div>
           </AnimateIn>
         </div>
       </section>
 
-      {/* Waarom Loopless */}
-      <section className="bg-[#13131F] py-24 md:py-32">
-        <div className="mx-auto max-w-[1200px] px-6">
-          <AnimateIn className="mb-12 text-center">
-            <h2 className="font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Waarom Loopless</h2>
-          </AnimateIn>
-          <AnimateIn className="mx-auto max-w-[700px]" delay={0.1}>
-            <NoisePatternCard className="rounded-2xl border-[#1E1E35]">
-              <NoisePatternCardBody className="p-8 md:p-10 text-center">
-                <p className="text-lg leading-relaxed text-[#E8E8F0]">
-                  Tijdens mijn studie en werkervaring zag ik steeds hetzelfde
-                  patroon: teams die vastlopen in handmatig werk. Slimme mensen die
-                  uren besteden aan taken die een systeem in minuten kan doen.
-                  Loopless is ontstaan vanuit de overtuiging dat AI niet het doel is,
-                  maar het middel — om mensen vrij te maken voor werk dat er écht toe
-                  doet.
-                </p>
-              </NoisePatternCardBody>
-            </NoisePatternCard>
-          </AnimateIn>
-        </div>
-      </section>
-
-      {/* Aanpak */}
+      {/* Hoe ik werk */}
       <section className="py-24 md:py-32">
-        <div className="mx-auto max-w-[1200px] px-6">
-          <AnimateIn className="mb-16 text-center">
-            <h2 className="font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Mijn aanpak</h2>
+        <div className="mx-auto max-w-[1000px] px-6">
+          <AnimateIn>
+            <h2 className="mb-12 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">Hoe ik werk</h2>
           </AnimateIn>
-          <StaggerContainer className="grid gap-8 md:grid-cols-3">
-            {[
-              {
-                num: "1",
-                title: "Luisteren",
-                desc: "Ik begin bij jouw dagelijkse werkelijkheid. Waar loop je vast? Wat kost de meeste tijd?",
-              },
-              {
-                num: "2",
-                title: "Ontwerpen",
-                desc: "Samen bepalen we de beste aanpak. Geen overbodige technologie, alleen wat werkt.",
-              },
-              {
-                num: "3",
-                title: "Implementeren",
-                desc: "Ik bouw de oplossing en zorg dat je team er direct mee kan werken.",
-              },
-            ].map((step) => (
-              <StaggerItem key={step.num}>
-                <div className="relative rounded-[1.25rem] border-[0.75px] border-[#1E1E35] p-2">
-                  <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} borderWidth={3} />
-                  <div className="relative flex h-full flex-col items-center gap-4 overflow-hidden rounded-xl border-[0.75px] border-[#1E1E35] bg-[#0D0D1A] p-8 text-center">
-                    <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#4F8EF7]/10 to-transparent" />
-                    <div className="relative mx-auto mb-1 flex h-14 w-14 items-center justify-center rounded-full bg-[#4F8EF7]/15 text-xl font-bold text-[#4F8EF7] shadow-[0_0_20px_#4F8EF730]">
-                      {step.num}
-                    </div>
-                    <h3 className="relative mb-2 font-[family-name:var(--font-heading)] text-lg font-bold text-white">
-                      {step.title}
-                    </h3>
-                    <p className="relative text-[#6B6B8A]">{step.desc}</p>
-                  </div>
+          <StaggerContainer className="grid gap-px overflow-hidden rounded-xl border border-[#2E2E4A] bg-[#2E2E4A] md:grid-cols-3" staggerDelay={0.12}>
+            {werkStappen.map((item) => (
+              <StaggerItem key={item.label}>
+                <div className="group h-full bg-[#161625] p-8 transition-colors duration-300 hover:bg-[#1A1A2E]">
+                  <h3 className="mb-3 font-[family-name:var(--font-heading)] text-lg font-bold text-white transition-colors duration-300 group-hover:text-[#4F8EF7]">{item.label}</h3>
+                  <p className="text-sm text-[#8585A3] leading-relaxed">{item.text}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -128,28 +98,36 @@ export default function OverPage() {
       </section>
 
       {/* CTA */}
-      <SectionWithParticles className="py-24 md:py-32" particleCount={300} speed={0.4} trailOpacity={0.06}>
-        <AnimateIn className="mx-auto max-w-[1200px] px-6 text-center">
-          <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">
-            Benieuwd wat ik voor jou kan doen?
-          </h2>
-          <p className="mx-auto mb-8 max-w-[500px] text-lg text-[#6B6B8A]">
-            Plan een gratis gesprek. Ik kijk graag mee naar waar jouw team
-            vastloopt.
-          </p>
-          <Link href="/contact">
-            <ShinyButton>Plan een gesprek</ShinyButton>
-          </Link>
-          <a
-            href="https://www.linkedin.com/in/wessel-broeders-250767221/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[#4F8EF7] transition-colors hover:text-[#3A75D8]"
-          >
-            Bekijk mijn LinkedIn →
-          </a>
-        </AnimateIn>
-      </SectionWithParticles>
+      <section className="border-t border-[#2E2E4A] py-24 md:py-32">
+        <div className="mx-auto max-w-[700px] px-6">
+          <AnimateIn>
+            <h2 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">
+              Benieuwd wat ik voor jou kan doen?
+            </h2>
+            <p className="mb-8 text-lg text-[#8585A3]">
+              Plan een gratis gesprek. Ik kijk graag mee naar waar jouw team
+              vastloopt.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-block rounded-full bg-[#4F8EF7] px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-[#3A75D8] hover:shadow-[0_8px_30px_-8px_rgba(79,142,247,0.3)]"
+              >
+                Plan een gesprek
+              </Link>
+              <a
+                href="https://www.linkedin.com/in/wessel-broeders-250767221/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 text-sm font-medium text-[#4F8EF7] transition-colors hover:text-[#3A75D8]"
+              >
+                Bekijk mijn LinkedIn
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              </a>
+            </div>
+          </AnimateIn>
+        </div>
+      </section>
     </>
   );
 }

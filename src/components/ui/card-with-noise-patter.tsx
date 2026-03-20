@@ -20,8 +20,8 @@ export function NoisePatternCard({
     <motion.div
       className={cn(
         "w-full overflow-hidden rounded-md border",
-        "bg-[#0D0D1A]",
-        "border-[#1E1E35]",
+        "bg-[#161625]",
+        "border-[#2E2E4A]",
         className
       )}
       initial={{ opacity: 0, y: -20 }}
@@ -35,7 +35,7 @@ export function NoisePatternCard({
           patternClassName
         )}
       >
-        <div className={cn("bg-[#0D0D1A]/30", overlayClassName)}>
+        <div className={cn("bg-[#161625]/30", overlayClassName)}>
           {children}
         </div>
       </div>

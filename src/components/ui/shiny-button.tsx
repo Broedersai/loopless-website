@@ -43,8 +43,8 @@ export function ShinyButton({
         }
 
         .shiny-cta {
-          --shiny-cta-bg: #0d0d1a;
-          --shiny-cta-bg-subtle: #1e1e35;
+          --shiny-cta-bg: #161625;
+          --shiny-cta-bg-subtle: #2e2e4a;
           --shiny-cta-fg: #ffffff;
           --shiny-cta-highlight: #4f8ef7;
           --shiny-cta-highlight-subtle: #7aabff;
