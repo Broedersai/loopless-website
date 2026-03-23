@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AnimateIn } from "@/components/ui/animate-in";
+import { PageGlow } from "@/components/page-glow";
 
 const faqCategories = [
   {
@@ -133,8 +134,9 @@ function FaqItem({
 export default function FaqPage() {
   return (
     <>
+      <PageGlow />
       {/* Hero */}
-      <section className="pb-8 pt-40">
+      <section className="relative pb-8 pt-40">
         <div className="mx-auto max-w-[1200px] px-6">
           <AnimateIn>
             <h1 className="mb-4 font-[family-name:var(--font-heading)] text-5xl font-bold text-white md:text-6xl">

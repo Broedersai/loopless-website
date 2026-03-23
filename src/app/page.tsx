@@ -6,9 +6,9 @@ import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/animat
 import { Target, FileText, BarChart3, Cog, ArrowRight } from "lucide-react";
 
 const aanpakSteps = [
-  { num: "01", title: "Analyseren", desc: "We analyseren waar jouw team vastloopt" },
-  { num: "02", title: "Bouwen", desc: "We bouwen een oplossing op maat" },
-  { num: "03", title: "Draaien", desc: "Jouw processen lopen automatisch, zonder dat iemand er iets voor hoeft te doen." },
+  { num: "01", title: "Analyseren", desc: "We analyseren waar jouw team vastloopt", color: "#22D3EE" },
+  { num: "02", title: "Bouwen", desc: "We bouwen een oplossing op maat", color: "#A78BFA" },
+  { num: "03", title: "Draaien", desc: "Jouw processen lopen automatisch, zonder dat iemand er iets voor hoeft te doen.", color: "#34D399" },
 ];
 
 const caseResults = ["Uren per week bespaard", "24/7 automatisch actief", "Team focust op klantcontact"];
@@ -48,27 +48,30 @@ export default function Home() {
         </div>
       </HeroSection>
 
-      {/* Aanpak — clean timeline */}
+      {/* Aanpak */}
       <section className="overflow-hidden py-24 md:py-32">
-        <div className="mx-auto max-w-[900px] px-6">
-          <AnimateIn className="mb-20 text-center">
+        <div className="mx-auto max-w-[720px] px-6">
+          <AnimateIn className="mb-14">
             <h2 className="font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Onze aanpak</h2>
-            <p className="mt-4 text-lg text-[#8585A3]">
+            <p className="mt-3 text-[#8585A3]">
               We beginnen bij jouw probleem — niet bij de technologie.
             </p>
           </AnimateIn>
 
-          <div className="relative flex flex-col gap-16">
-            <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-[#2E2E4A] to-[#2E2E4A]/20" />
+          <div className="relative flex flex-col gap-0">
+            {/* Vertical line */}
+            <div className="absolute left-[11px] top-2 bottom-2 w-px bg-[#2E2E4A]" />
+
             {aanpakSteps.map((step, i) => (
-              <AnimateIn key={step.num} delay={i * 0.15}>
-                <div className="flex items-start gap-8">
-                  <div className="relative z-10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-[#2E2E4A] bg-[#1E1E30] text-sm font-bold text-white transition-colors duration-300 hover:border-[#4F8EF7]/40 hover:text-[#4F8EF7]">
-                    {step.num}
+              <AnimateIn key={step.num} delay={i * 0.1}>
+                <div className="relative flex items-start gap-6 py-6">
+                  <div className="relative z-10 mt-1 flex h-[23px] w-[23px] shrink-0 items-center justify-center">
+                    <div className="h-[7px] w-[7px] rounded-full bg-[#4F8EF7]" />
                   </div>
                   <div>
-                    <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold text-white">{step.title}</h3>
-                    <p className="mt-2 text-[#8585A3]">{step.desc}</p>
+                    <span className="mb-1 block text-xs font-medium tracking-wider text-[#4F8EF7]/60">{step.num}</span>
+                    <h3 className="font-[family-name:var(--font-heading)] text-lg font-bold text-white">{step.title}</h3>
+                    <p className="mt-1 text-[#8585A3] leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
               </AnimateIn>
@@ -97,16 +100,16 @@ export default function Home() {
           </AnimateIn>
           <StaggerContainer className="grid grid-cols-1 gap-5 md:grid-cols-2" staggerDelay={0.1}>
             <StaggerItem>
-              <ServiceCard icon={<Target className="h-5 w-5" />} title="Lead Qualification" description="Automatisch leads zoeken, screenen en klaarzetten voor je team." />
+              <ServiceCard icon={<Target className="h-5 w-5" />} title="Lead Qualification" description="Automatisch leads zoeken, screenen en klaarzetten voor je team." color="#22D3EE" />
             </StaggerItem>
             <StaggerItem>
-              <ServiceCard icon={<FileText className="h-5 w-5" />} title="Offerte-automatisering" description="Concept-voorstellen genereren op basis van eerdere offertes en productinfo." />
+              <ServiceCard icon={<FileText className="h-5 w-5" />} title="Offerte-automatisering" description="Concept-voorstellen genereren op basis van eerdere offertes en productinfo." color="#A78BFA" />
             </StaggerItem>
             <StaggerItem>
-              <ServiceCard icon={<BarChart3 className="h-5 w-5" />} title="Interne kennisbank" description="Een AI-assistent die je bedrijfsdata kent en direct antwoord geeft." />
+              <ServiceCard icon={<BarChart3 className="h-5 w-5" />} title="Interne kennisbank" description="Een AI-assistent die je bedrijfsdata kent en direct antwoord geeft." color="#E8A04E" />
             </StaggerItem>
             <StaggerItem>
-              <ServiceCard icon={<Cog className="h-5 w-5" />} title="Procesautomatisering" description="Maatwerk automatisering voor elk repetitief, handmatig proces." />
+              <ServiceCard icon={<Cog className="h-5 w-5" />} title="Procesautomatisering" description="Maatwerk automatisering voor elk repetitief, handmatig proces." color="#34D399" />
             </StaggerItem>
           </StaggerContainer>
         </div>
@@ -183,14 +186,14 @@ function ProblemCard({ number, title, description }: { number: string; title: st
   );
 }
 
-function ServiceCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
+function ServiceCard({ icon, title, description, color = "#4F8EF7" }: { icon: React.ReactNode; title: string; description: string; color?: string }) {
   return (
-    <Link href="/diensten" className="group block h-full">
-      <div className="relative h-full rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-7 transition-all duration-300 group-hover:-translate-y-1 group-hover:border-[#4F8EF7]/30 group-hover:shadow-[0_8px_30px_-12px_rgba(79,142,247,0.15)]">
-        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#2E2E4A] text-[#4F8EF7] transition-colors duration-300 group-hover:bg-[#4F8EF7]/15">{icon}</div>
+    <Link href="/diensten" className="group block h-full" style={{ "--service-color": color } as React.CSSProperties}>
+      <div className="relative h-full rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-7 transition-all duration-300 group-hover:-translate-y-1 group-hover:border-[var(--service-color)]/30" style={{ boxShadow: undefined }}>
+        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#2E2E4A] transition-all duration-300" style={{ color }}>{icon}</div>
         <h3 className="mb-2 font-[family-name:var(--font-heading)] text-lg font-bold text-white">{title}</h3>
         <p className="text-sm text-[#8585A3]">{description}</p>
-        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#4F8EF7] transition-all group-hover:gap-2">
+        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium transition-all group-hover:gap-2" style={{ color }}>
           Meer info
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
         </span>

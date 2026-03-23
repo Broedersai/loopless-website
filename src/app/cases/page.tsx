@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/animate-in";
+import { PageGlow, SectionDivider } from "@/components/page-glow";
 
 export const metadata: Metadata = {
   title: "Cases",
@@ -11,8 +12,9 @@ export const metadata: Metadata = {
 export default function CasesPage() {
   return (
     <>
+      <PageGlow />
       {/* Hero */}
-      <section className="pb-12 pt-40">
+      <section className="relative pb-12 pt-40">
         <div className="mx-auto max-w-[1000px] px-6">
           <AnimateIn>
             <h1 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white md:text-5xl">
@@ -95,8 +97,10 @@ export default function CasesPage() {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* CTA */}
-      <section className="border-t border-[#2E2E4A] py-24 md:py-32">
+      <section className="py-24 md:py-32">
         <div className="mx-auto max-w-[700px] px-6">
           <AnimateIn>
             <h2 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">

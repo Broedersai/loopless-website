@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Mail, Linkedin, Clock, ShieldCheck, Send } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
+import { PageGlow } from "@/components/page-glow";
 
 const GOOGLE_FORM_ACTION =
   "https://docs.google.com/forms/d/e/1FAIpQLSdVQxlB5rLB_4WneVx29PWxF1zhf15Q5FF-cv-GaDgGRTCT1w/formResponse";
@@ -49,8 +50,9 @@ export default function ContactPage() {
 
   return (
     <>
+      <PageGlow />
       {/* Hero — links uitgelijnd */}
-      <section className="pb-12 pt-40">
+      <section className="relative pb-12 pt-40">
         <div className="mx-auto max-w-[1200px] px-6">
           <AnimateIn>
             <h1 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white md:text-5xl">

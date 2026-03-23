@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AnimateIn } from "@/components/ui/animate-in";
+import { PageGlow, SectionDivider } from "@/components/page-glow";
 import { Target, FileText, BarChart3 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -12,44 +13,44 @@ export const metadata: Metadata = {
 const diensten = [
   {
     id: "lead-qualification",
-    icon: <Target className="h-6 w-6 text-[#4F8EF7]" />,
+    icon: <Target className="h-6 w-6" />,
     title: "Lead qualification",
     navLabel: "Lead qualification",
-    subtitle: "Elke ochtend een lijst met gekwalificeerde leads — zonder dat je team er iets voor hoeft te doen.",
+    subtitle: "Elke ochtend een lijst met gekwalificeerde leads, zonder dat je team er iets voor hoeft te doen.",
     paragraphs: [
       "Recruiters en salesteams verliezen dagelijks uren aan handmatig zoeken, checken en invoeren. Dat stopt.",
-      "Het systeem zoekt, screent en kwalificeert leads op basis van jouw criteria. 24/7, op de achtergrond.",
+      "Het systeem zoekt, screent en kwalificeert leads op basis van jouw criteria. 24/7, op de achtergrond. Jouw team logt in en gaat direct aan de slag met wat er echt toe doet: klantcontact.",
     ],
-    highlight: "Bewezen resultaat: vuljevacature.nl logt 's ochtends in en heeft direct een lijst klaarstaan. Geen handmatig zoekwerk meer.",
-    voorWie: "Recruitmentbureaus, salesteams, B2B bedrijven",
-    accentColor: "#4F8EF7",
+    highlight: "Bewezen resultaat: vuljevacature.nl logt 's ochtends in en heeft direct een lijst klaarstaan. Uren per week bespaard, structureel.",
+    voorWie: "Recruitmentbureaus en salesteams die dagelijks tijd kwijt zijn aan het zoeken en kwalificeren van leads",
+    accentColor: "#22D3EE",
   },
   {
     id: "offerte-automatisering",
-    icon: <FileText className="h-6 w-6 text-[#4F8EF7]" />,
-    title: "Offerte- en RFP-automatisering",
+    icon: <FileText className="h-6 w-6" />,
+    title: "Offerte-automatisering",
     navLabel: "Offertes",
-    subtitle: "Te traag met je voorstel is een gemiste deal.",
+    subtitle: "Een aanvraag komt binnen, een offerte gaat eruit. Zonder dat iemand er uren werk in steekt.",
     paragraphs: [
-      "Offertes opstellen kost tijd die je niet hebt. Steeds opnieuw dezelfde informatie opzoeken, kopiëren en consistent krijgen.",
-      "Wij bouwen een systeem dat automatisch een concept genereert op basis van jouw eerdere offertes en productinformatie. Jij controleert en verstuurt.",
-      "Van dagen werk naar enkele uren per voorstel.",
+      "Offertes opstellen betekent steeds opnieuw dezelfde informatie opzoeken en tarieven berekenen. Wij bouwen een systeem dat dat overneemt.",
+      "Je stopt de aanvraag erin, AI genereert een compleet concept op basis van jouw tarieven en kortingen. Jij controleert en verstuurt.",
+      "Van uren werk per offerte naar minuten.",
     ],
-    voorWie: "Bedrijven die veel tijd kwijt zijn aan offertes en daardoor kansen mislopen",
-    accentColor: "#4F8EF7",
+    voorWie: "Bedrijven die projectoffertes opstellen met vaste tarieven, zoals aannemers, groenvoorzieningsbedrijven en consultants",
+    accentColor: "#A78BFA",
   },
   {
     id: "kennisbank",
-    icon: <BarChart3 className="h-6 w-6 text-[#E8A04E]" />,
+    icon: <BarChart3 className="h-6 w-6" />,
     title: "Interne kennisbank",
     navLabel: "Kennisbank",
-    subtitle: "Hoeveel tijd verliest je team met zoeken naar informatie die er al is?",
+    subtitle: "Al je kennis op één plek, altijd direct beschikbaar.",
     paragraphs: [
-      "Handleidingen, procedures, productinfo — het bestaat allemaal. Maar niemand weet waar het staat. Dus wordt er gebeld, gezocht en gewacht.",
-      "Wij bouwen een AI-assistent die al je documenten kent. Medewerkers stellen een vraag en krijgen binnen seconden een antwoord met bronverwijzing.",
-      "Geen zoeken meer. Geen collega lastigvallen. Gewoon: vraag stellen, antwoord krijgen.",
+      "Handleidingen, procedures, productinfo — het bestaat allemaal. Maar het staat verspreid over mappen, drives en hoofden van collega's. Dus wordt er gebeld, gezocht en gewacht.",
+      "Wij bouwen een AI-assistent die al je documenten kent. Medewerkers stellen een vraag via chat en krijgen binnen seconden antwoord met een directe bronverwijzing.",
+      "Geen zoeken meer, geen collega lastigvallen. Gewoon: vraag stellen, antwoord krijgen.",
     ],
-    voorWie: "Bedrijven met veel interne documenten, handleidingen of procedures",
+    voorWie: "Bedrijven met veel interne documenten, handleidingen of procedures waar medewerkers dagelijks in moeten zoeken",
     accentColor: "#E8A04E",
   },
 ];
@@ -57,8 +58,9 @@ const diensten = [
 export default function DienstenPage() {
   return (
     <>
+      <PageGlow />
       {/* Hero + anchor nav */}
-      <section className="pb-12 pt-40">
+      <section className="relative pb-12 pt-40">
         <div className="mx-auto max-w-[1200px] px-6">
           <AnimateIn>
             <h1 className="mb-4 font-[family-name:var(--font-heading)] text-5xl font-bold text-white md:text-6xl">
@@ -109,6 +111,7 @@ export default function DienstenPage() {
                 <div className="mb-8 flex items-start gap-5">
                   <div
                     className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[#2E2E4A] transition-colors duration-300 hover:bg-[#3E3E5A]"
+                    style={{ color: dienst.accentColor }}
                   >
                     {dienst.icon}
                   </div>
@@ -147,8 +150,10 @@ export default function DienstenPage() {
         </section>
       ))}
 
+      <SectionDivider />
+
       {/* Maatwerk */}
-      <section id="maatwerk" className="border-t border-[#2E2E4A] py-24 md:py-32">
+      <section id="maatwerk" className="py-24 md:py-32">
         <div className="mx-auto max-w-[700px] px-6 text-center">
           <AnimateIn>
             <h2 className="mb-6 font-[family-name:var(--font-heading)] text-3xl font-bold text-white md:text-4xl">
