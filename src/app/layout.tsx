@@ -17,31 +17,72 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://loopless.nl"),
   title: {
-    default: "Loopless — Doorbreek de loop van handmatig werk.",
+    default: "Loopless — AI-automatisering voor het MKB",
     template: "%s | Loopless",
   },
   description:
-    "Loopless automatiseert repetitieve processen voor het MKB met AI. Geen overbodige stappen, alleen processen die werken.",
-  keywords: "AI automatisering, MKB, procesoptimalisatie, Loopless",
+    "Loopless automatiseert repetitieve processen voor het MKB met AI. Lead qualification, offerte-automatisering en kennisbanken op maat. Actief vanuit Tiel en Breda.",
+  keywords:
+    "AI automatisering, MKB automatisering, procesautomatisering, lead qualification, offerte automatisering, kennisbank AI, Loopless, Tiel, Breda, Nederland",
   authors: [{ name: "Wessel Broeders" }],
   icons: {
     icon: "/logo-icon-final.png",
     apple: "/logo-icon-final.png",
   },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "nl_NL",
     siteName: "Loopless",
-    title: "Loopless — Minder handen. Betere resultaten.",
+    title: "Loopless — AI-automatisering voor het MKB",
     description:
-      "Loopless automatiseert repetitieve processen voor het MKB met AI. Geen overbodige stappen, alleen processen die werken.",
-    images: [{ url: "/logo.png", width: 1200, height: 630, alt: "Loopless" }],
+      "Loopless automatiseert repetitieve processen voor het MKB met AI. Lead qualification, offerte-automatisering en kennisbanken op maat.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Loopless — AI-automatisering voor het MKB",
+    description:
+      "Loopless automatiseert repetitieve processen voor het MKB met AI. Lead qualification, offerte-automatisering en kennisbanken op maat.",
   },
   robots: {
     index: true,
     follow: true,
   },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Loopless",
+  legalName: "Broeders Digital",
+  url: "https://loopless.nl",
+  logo: "https://loopless.nl/logo-icon-final.png",
+  description:
+    "AI-automatisering voor het MKB. Lead qualification, offerte-automatisering en interne kennisbanken op maat.",
+  founder: {
+    "@type": "Person",
+    name: "Wessel Broeders",
+    jobTitle: "Oprichter",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Tiel",
+    addressRegion: "Gelderland",
+    addressCountry: "NL",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "wessel@loopless.nl",
+    contactType: "sales",
+    availableLanguage: "Dutch",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/wessel-broeders-250767221/",
+  ],
 };
 
 export default function RootLayout({
@@ -52,6 +93,10 @@ export default function RootLayout({
   return (
     <html lang="nl">
       <body className={`${spaceGrotesk.variable} ${dmSans.variable} font-sans antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Navbar />
         <main>{children}</main>
         <Footer />

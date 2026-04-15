@@ -4,9 +4,15 @@ import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/animat
 import { PageGlow, SectionDivider } from "@/components/page-glow";
 
 export const metadata: Metadata = {
-  title: "Cases",
+  title: "Cases — Bewezen resultaten met AI-automatisering",
   description:
-    "Bekijk hoe Loopless bedrijven helpt met AI-automatisering. Concrete resultaten en tijdsbesparing voor het MKB.",
+    "Bekijk hoe Loopless MKB-bedrijven helpt met AI-automatisering. Concrete resultaten: uren bespaard, processen geautomatiseerd, teams ontlast.",
+  alternates: { canonical: "/cases" },
+  openGraph: {
+    title: "Cases — Bewezen resultaten met AI-automatisering",
+    description:
+      "Bekijk hoe Loopless MKB-bedrijven helpt met AI-automatisering. Concrete resultaten: uren bespaard, processen geautomatiseerd, teams ontlast.",
+  },
 };
 
 export default function CasesPage() {

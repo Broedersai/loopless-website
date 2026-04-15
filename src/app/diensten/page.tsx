@@ -5,9 +5,37 @@ import { PageGlow, SectionDivider } from "@/components/page-glow";
 import { Target, FileText, BarChart3 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Diensten",
+  title: "Diensten — AI-automatisering op maat voor het MKB",
   description:
-    "Van lead qualification tot procesautomatisering — ontdek hoe Loopless jouw team tijd bespaart met AI-oplossingen op maat.",
+    "Van lead qualification tot offerte-automatisering en interne kennisbanken — ontdek hoe Loopless jouw MKB-team tijd bespaart met AI-oplossingen op maat.",
+  alternates: { canonical: "/diensten" },
+  openGraph: {
+    title: "Diensten — AI-automatisering op maat voor het MKB",
+    description:
+      "Van lead qualification tot offerte-automatisering en interne kennisbanken — ontdek hoe Loopless jouw MKB-team tijd bespaart met AI-oplossingen op maat.",
+  },
+};
+
+const servicesJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  provider: {
+    "@type": "Organization",
+    name: "Loopless",
+    url: "https://loopless.nl",
+  },
+  serviceType: "AI-automatisering",
+  areaServed: { "@type": "Country", name: "NL" },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "AI-automatiseringsdiensten",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Lead Qualification", description: "Automatisch leads zoeken, screenen en klaarzetten voor je team." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Offerte-automatisering", description: "Concept-offertes genereren op basis van eerdere offertes en productinfo." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Interne kennisbank", description: "Een AI-assistent die je bedrijfsdata kent en direct antwoord geeft." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Procesautomatisering op maat", description: "Maatwerk automatisering voor elk repetitief, handmatig proces." } },
+    ],
+  },
 };
 
 const diensten = [
@@ -58,6 +86,10 @@ const diensten = [
 export default function DienstenPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
+      />
       <PageGlow />
       {/* Hero + anchor nav */}
       <section className="relative pb-12 pt-40">

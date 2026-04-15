@@ -6,9 +6,15 @@ import { PageGlow, SectionDivider } from "@/components/page-glow";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Over mij",
+  title: "Over Loopless — Wessel Broeders, oprichter",
   description:
-    "Maak kennis met Wessel Broeders — oprichter van Loopless. Bedrijfskunde-achtergrond, passie voor AI en procesautomatisering.",
+    "Maak kennis met Wessel Broeders — oprichter van Loopless. Bedrijfskunde-achtergrond gecombineerd met AI-expertise. Procesautomatisering voor het MKB vanuit Tiel en Breda.",
+  alternates: { canonical: "/over" },
+  openGraph: {
+    title: "Over Loopless — Wessel Broeders, oprichter",
+    description:
+      "Maak kennis met Wessel Broeders — oprichter van Loopless. Bedrijfskunde-achtergrond gecombineerd met AI-expertise.",
+  },
 };
 
 export default function OverPage() {
