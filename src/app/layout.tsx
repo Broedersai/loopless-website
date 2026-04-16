@@ -27,10 +27,6 @@ export const metadata: Metadata = {
   keywords:
     "AI automatisering, MKB automatisering, procesautomatisering, lead qualification, offerte automatisering, kennisbank AI, Loopless, Tiel, Breda, Nederland",
   authors: [{ name: "Wessel Broeders" }],
-  icons: {
-    icon: "/logo-icon-final.png",
-    apple: "/logo-icon-final.png",
-  },
   alternates: {
     canonical: "/",
   },
