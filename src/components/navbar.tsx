@@ -90,19 +90,13 @@ export function Navbar() {
         </button>
       </div>
 
-      {/* Mobile overlay */}
-      {mobileOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/50"
-          onClick={closeMobile}
-        />
-      )}
-
-      {/* Mobile nav */}
+      {/* Mobile fullscreen nav */}
       <nav
         className={cn(
-          "fixed top-0 right-0 z-40 flex h-full w-[280px] flex-col gap-6 border-l border-[#2E2E4A] bg-[#1E1E30] px-8 pt-24 transition-transform duration-300 md:hidden",
-          mobileOpen ? "translate-x-0" : "translate-x-full"
+          "fixed inset-0 z-40 flex flex-col items-center justify-center gap-6 bg-[#161625] transition-all duration-300 md:hidden",
+          mobileOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         )}
       >
         {navItems.map((item) => (
@@ -111,7 +105,7 @@ export function Navbar() {
             href={item.href}
             onClick={closeMobile}
             className={cn(
-              "text-base font-medium transition-colors",
+              "text-lg font-medium transition-colors",
               pathname === item.href
                 ? "text-white"
                 : "text-[#8585A3] hover:text-white"
@@ -123,7 +117,7 @@ export function Navbar() {
         <Link
           href="/contact"
           onClick={closeMobile}
-          className="mt-4 inline-block rounded-full bg-[#4F8EF7] px-5 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-[#3A75D8]"
+          className="mt-4 inline-block rounded-full bg-[#4F8EF7] px-6 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[#3A75D8]"
         >
           Plan een gesprek
         </Link>
