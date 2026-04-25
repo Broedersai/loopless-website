@@ -38,62 +38,64 @@ export function Navbar() {
   }, [mobileOpen]);
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-[#161625]/92 backdrop-blur-xl shadow-[0_1px_0_#2E2E4A]"
-          : "bg-transparent"
-      )}
-    >
-      <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
-        {/* Logo with icon */}
-        <Link href="/" className="z-50">
-          <LogoWithText iconSize={30} />
-        </Link>
-
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-8 md:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "relative text-sm font-medium transition-colors",
-                pathname === item.href
-                  ? "text-white after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-0.5 after:rounded-full after:bg-[#4F8EF7]"
-                  : "text-[#8585A3] hover:text-white"
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            href="/contact"
-            className="rounded-full bg-[#4F8EF7] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#3A75D8]"
-          >
-            Plan een gesprek
+    <>
+      <header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          scrolled
+            ? "bg-[#161625]/92 backdrop-blur-xl shadow-[0_1px_0_#2E2E4A]"
+            : "bg-transparent"
+        )}
+      >
+        <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4">
+          {/* Logo with icon */}
+          <Link href="/" className="z-50">
+            <LogoWithText iconSize={30} />
           </Link>
-        </nav>
 
-        {/* Mobile toggle */}
-        <button
-          className="z-50 md:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Menu"
-        >
-          {mobileOpen ? (
-            <X className="h-6 w-6 text-white" />
-          ) : (
-            <Menu className="h-6 w-6 text-white" />
-          )}
-        </button>
-      </div>
+          {/* Desktop nav */}
+          <nav className="hidden items-center gap-8 md:flex">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "relative text-sm font-medium transition-colors",
+                  pathname === item.href
+                    ? "text-white after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-0.5 after:rounded-full after:bg-[#4F8EF7]"
+                    : "text-[#8585A3] hover:text-white"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              href="/contact"
+              className="rounded-full bg-[#4F8EF7] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#3A75D8]"
+            >
+              Plan een gesprek
+            </Link>
+          </nav>
 
-      {/* Mobile fullscreen nav */}
+          {/* Mobile toggle */}
+          <button
+            className="z-50 md:hidden"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Menu"
+          >
+            {mobileOpen ? (
+              <X className="h-6 w-6 text-white" />
+            ) : (
+              <Menu className="h-6 w-6 text-white" />
+            )}
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile fullscreen nav — outside header to avoid backdrop-blur containing block */}
       <nav
         className={cn(
-          "fixed inset-0 z-40 flex flex-col items-center justify-center gap-6 bg-[#161625] transition-all duration-300 md:hidden",
+          "fixed inset-0 z-[45] flex flex-col items-center justify-center gap-6 bg-[#161625] transition-all duration-300 md:hidden",
           mobileOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -122,6 +124,6 @@ export function Navbar() {
           Plan een gesprek
         </Link>
       </nav>
-    </header>
+    </>
   );
 }
