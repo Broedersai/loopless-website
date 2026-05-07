@@ -6,7 +6,17 @@ import NeuralBackground from "@/components/ui/flow-field-background";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-export function HeroSection({ children }: { children?: React.ReactNode }) {
+export function HeroSection({
+  children,
+  title,
+  subtitle,
+}: {
+  children?: React.ReactNode;
+  title: string;
+  subtitle: string;
+}) {
+  const titleLines = title.split("\n");
+
   return (
     <section className="relative overflow-hidden">
       {/* Flow field background */}
@@ -38,9 +48,12 @@ export function HeroSection({ children }: { children?: React.ReactNode }) {
               transition={{ duration: 0.7, ease }}
               className="mb-6 font-[family-name:var(--font-heading)] text-5xl font-bold leading-tight tracking-tight text-white md:text-7xl"
             >
-              Doorbreek de loop
-              <br />
-              van handmatig werk.
+              {titleLines.map((line, i) => (
+                <span key={i}>
+                  {line}
+                  {i < titleLines.length - 1 && <br />}
+                </span>
+              ))}
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 30 }}
@@ -48,9 +61,7 @@ export function HeroSection({ children }: { children?: React.ReactNode }) {
               transition={{ duration: 0.7, delay: 0.15, ease }}
               className="mb-10 max-w-[560px] text-xl leading-relaxed text-[#8585A3]"
             >
-              Minder herhaling. Meer resultaat. Loopless haalt de onnodige stappen
-              uit je processen — zodat je team zich kan richten op werk dat er
-              echt toe doet.
+              {subtitle}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

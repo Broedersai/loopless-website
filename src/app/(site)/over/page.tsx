@@ -4,6 +4,7 @@ import Image from "next/image";
 import { AnimateIn } from "@/components/ui/animate-in";
 import { PageGlow, SectionDivider } from "@/components/page-glow";
 import { ArrowRight } from "lucide-react";
+import { getBlocksByPage, blockText, blockImage } from "@/lib/supabase/content";
 
 export const metadata: Metadata = {
   title: "Over Loopless — Wessel Broeders, oprichter",
@@ -17,7 +18,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function OverPage() {
+export default async function OverPage() {
+  const blocks = await getBlocksByPage("over");
+
+  const kicker = blockText(blocks, "over_intro_kicker", "Oprichter Loopless");
+  const introP1 = blockText(blocks, "over_intro_p1", "De meeste automatiseringsbureaus komen met een oplossing voordat ze je bedrijf snappen. Ik begin met begrijpen hoe jij werkt, en bouw daarna pas.");
+  const introP2 = blockText(blocks, "over_intro_p2", "Dat is het verschil tussen een bedrijfskundige die ook kan bouwen, en een developer die ook adviseert.");
+  const photoUrl = blockImage(blocks, "over_photo", "/wessel.jpg");
+  const waaromP1 = blockText(blocks, "over_waarom_p1", "Tijdens mijn studie Bedrijfskunde aan Avans Breda leerde ik processen analyseren, knelpunten blootleggen en oplossingen ontwerpen vanuit de bedrijfsrealiteit. Naast mijn studie leerde ik automatiseren met AI — niet als hobby, maar als gereedschap om processen slimmer in te richten.");
+  const waaromP2 = blockText(blocks, "over_waarom_p2", "Die combinatie is zeldzaam. En voor jou als MKB'er precies wat je nodig hebt: iemand die begrijpt hoe jouw bedrijf werkt, én die de oplossing zelf kan bouwen.");
+  const praktijkP1 = blockText(blocks, "over_praktijk_p1", "Sommige bedrijven komen met een concreet idee: \"we willen dit proces automatiseren.\" Anderen weten dat er tijd verloren gaat, maar weten nog niet precies waar. Beide zijn een goed startpunt.");
+  const praktijkP2 = blockText(blocks, "over_praktijk_p2", "Ik kijk samen met je naar wat je wil bereiken, en bouw een oplossing die daar direct op aansluit.");
+  const resultaatText = blockText(blocks, "over_resultaat_text", "Voor vuljevacature.nl automatiseerde ik de volledige lead qualification. Het team logt 's ochtends in en heeft direct een lijst met gekwalificeerde leads klaarstaan. Uren per week bespaard, structureel.");
+  const ctaHeading = blockText(blocks, "over_cta_heading", "Benieuwd wat er mogelijk is voor jouw bedrijf?");
+  const ctaText = blockText(blocks, "over_cta_text", "Plan een gratis gesprek — ik denk graag mee.");
+
   return (
     <>
       <PageGlow />
@@ -28,7 +43,7 @@ export default function OverPage() {
             <AnimateIn className="flex-shrink-0 self-center md:self-start">
               <div className="relative h-[280px] w-[280px] overflow-hidden rounded-2xl border border-[#2E2E4A] transition-all duration-500 hover:border-[#4F8EF7]/30 hover:shadow-[0_8px_30px_-12px_rgba(79,142,247,0.2)]">
                 <Image
-                  src="/wessel.jpg"
+                  src={photoUrl}
                   alt="Wessel Broeders"
                   fill
                   className="object-cover object-top transition-transform duration-500 hover:scale-[1.03]"
@@ -39,16 +54,12 @@ export default function OverPage() {
 
             <AnimateIn delay={0.15}>
               <div>
-                <p className="mb-3 text-sm font-medium uppercase tracking-wider text-[#4F8EF7]">Oprichter Loopless</p>
+                <p className="mb-3 text-sm font-medium uppercase tracking-wider text-[#4F8EF7]">{kicker}</p>
                 <h1 className="mb-6 font-[family-name:var(--font-heading)] text-4xl font-bold text-white md:text-5xl">
                   Wessel Broeders
                 </h1>
-                <p className="mb-4 text-lg leading-relaxed text-[#EDEDF4]">
-                  De meeste automatiseringsbureaus komen met een oplossing voordat ze je bedrijf snappen. Ik begin met begrijpen hoe jij werkt, en bouw daarna pas.
-                </p>
-                <p className="text-[#8585A3] leading-relaxed">
-                  Dat is het verschil tussen een bedrijfskundige die ook kan bouwen, en een developer die ook adviseert.
-                </p>
+                <p className="mb-4 text-lg leading-relaxed text-[#EDEDF4]">{introP1}</p>
+                <p className="text-[#8585A3] leading-relaxed">{introP2}</p>
               </div>
             </AnimateIn>
           </div>
@@ -61,12 +72,8 @@ export default function OverPage() {
           <AnimateIn>
             <h2 className="mb-8 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">Waarom dat werkt</h2>
             <div className="space-y-4 text-[#EDEDF4] leading-relaxed">
-              <p>
-                Tijdens mijn studie Bedrijfskunde aan Avans Breda leerde ik processen analyseren, knelpunten blootleggen en oplossingen ontwerpen vanuit de bedrijfsrealiteit. Naast mijn studie leerde ik automatiseren met AI — niet als hobby, maar als gereedschap om processen slimmer in te richten.
-              </p>
-              <p className="text-[#8585A3]">
-                Die combinatie is zeldzaam. En voor jou als MKB&apos;er precies wat je nodig hebt: iemand die begrijpt hoe jouw bedrijf werkt, én die de oplossing zelf kan bouwen.
-              </p>
+              <p>{waaromP1}</p>
+              <p className="text-[#8585A3]">{waaromP2}</p>
             </div>
           </AnimateIn>
         </div>
@@ -78,12 +85,8 @@ export default function OverPage() {
           <AnimateIn>
             <h2 className="mb-8 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">Hoe dat er in de praktijk uitziet</h2>
             <div className="space-y-4 text-[#EDEDF4] leading-relaxed">
-              <p>
-                Sommige bedrijven komen met een concreet idee: &ldquo;we willen dit proces automatiseren.&rdquo; Anderen weten dat er tijd verloren gaat, maar weten nog niet precies waar. Beide zijn een goed startpunt.
-              </p>
-              <p className="text-[#8585A3]">
-                Ik kijk samen met je naar wat je wil bereiken, en bouw een oplossing die daar direct op aansluit.
-              </p>
+              <p>{praktijkP1}</p>
+              <p className="text-[#8585A3]">{praktijkP2}</p>
             </div>
           </AnimateIn>
         </div>
@@ -107,9 +110,7 @@ export default function OverPage() {
                 </a>
                 <span className="rounded-full border border-[#4F8EF7]/20 bg-[#4F8EF7]/10 px-3 py-0.5 text-xs font-medium text-[#4F8EF7]">Recruitment</span>
               </div>
-              <p className="text-[#EDEDF4] leading-relaxed">
-                Voor vuljevacature.nl automatiseerde ik de volledige lead qualification. Het team logt &apos;s ochtends in en heeft direct een lijst met gekwalificeerde leads klaarstaan. Uren per week bespaard, structureel.
-              </p>
+              <p className="text-[#EDEDF4] leading-relaxed">{resultaatText}</p>
             </div>
           </AnimateIn>
         </div>
@@ -121,12 +122,8 @@ export default function OverPage() {
       <section className="py-24 md:py-32">
         <div className="mx-auto max-w-[700px] px-6">
           <AnimateIn>
-            <h2 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">
-              Benieuwd wat er mogelijk is voor jouw bedrijf?
-            </h2>
-            <p className="mb-8 text-lg text-[#8585A3]">
-              Plan een gratis gesprek — ik denk graag mee.
-            </p>
+            <h2 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">{ctaHeading}</h2>
+            <p className="mb-8 text-lg text-[#8585A3]">{ctaText}</p>
             <div className="flex flex-wrap items-center gap-4">
               <Link
                 href="/contact"

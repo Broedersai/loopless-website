@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/hero-section";
 import { SectionWithParticles } from "@/components/section-with-particles";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/ui/animate-in";
 import { Target, FileText, BarChart3, Cog, ArrowRight } from "lucide-react";
+import { getBlocksByPage, blockText } from "@/lib/supabase/content";
 
 const aanpakSteps = [
   { num: "01", title: "Analyseren", desc: "We analyseren waar jouw team vastloopt", color: "#22D3EE" },
@@ -13,36 +14,45 @@ const aanpakSteps = [
 
 const caseResults = ["Uren per week bespaard", "24/7 automatisch actief", "Team focust op klantcontact"];
 
-export default function Home() {
+export default async function Home() {
+  const blocks = await getBlocksByPage("home");
+
+  const heroTitle = blockText(blocks, "home_hero_title", "Doorbreek de loop\nvan handmatig werk.");
+  const heroSubtitle = blockText(
+    blocks,
+    "home_hero_subtitle",
+    "Minder herhaling. Meer resultaat. Loopless haalt de onnodige stappen uit je processen — zodat je team zich kan richten op werk dat er echt toe doet.",
+  );
+  const problemsHeading = blockText(blocks, "home_problems_heading", "Herken je dit?");
+  const problem1Title = blockText(blocks, "home_problem_1_title", "Uren kwijt aan handmatig werk");
+  const problem1Desc = blockText(blocks, "home_problem_1_desc", "Je team besteedt wekelijks uren aan taken die eigenlijk automatisch zouden moeten gaan.");
+  const problem2Title = blockText(blocks, "home_problem_2_title", "Medewerkers vastlopen in admin");
+  const problem2Desc = blockText(blocks, "home_problem_2_desc", "In plaats van waardevolle taken, zitten medewerkers vast in eindeloze administratie.");
+  const problem3Title = blockText(blocks, "home_problem_3_title", "Processen waar fouten insluipen");
+  const problem3Desc = blockText(blocks, "home_problem_3_desc", "Handmatige stappen zorgen voor inconsistenties en fouten die je liever vermijdt.");
+  const caseIntro = blockText(blocks, "home_case_intro", "Niet alleen mooie woorden — dit is wat we al hebben opgeleverd.");
+  const caseTitle = blockText(blocks, "home_case_title", "Van uren zoekwerk naar gekwalificeerde leads elke ochtend");
+  const caseDesc = blockText(blocks, "home_case_desc", "Elke ochtend een lijst met relevante kandidaten klaar — zonder dat het team er iets voor hoeft te doen.");
+  const ctaHeading = blockText(blocks, "home_cta_heading", "Benieuwd waar de meeste winst zit in jouw processen?");
+  const ctaText = blockText(blocks, "home_cta_text", "Ontdek hoe Loopless jouw processen kan automatiseren. Plan een gratis gesprek — geheel vrijblijvend.");
+
   return (
     <>
       {/* Hero — particles hier, nergens anders tot CTA */}
-      <HeroSection>
+      <HeroSection title={heroTitle} subtitle={heroSubtitle}>
         <div className="mx-auto max-w-[1200px] px-6 py-24 md:py-32">
           <AnimateIn>
-            <h2 className="mb-16 text-center font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Herken je dit?</h2>
+            <h2 className="mb-16 text-center font-[family-name:var(--font-heading)] text-4xl font-bold text-white">{problemsHeading}</h2>
           </AnimateIn>
           <StaggerContainer className="grid gap-6 md:grid-cols-3" staggerDelay={0.12}>
             <StaggerItem>
-              <ProblemCard
-                number="01"
-                title="Uren kwijt aan handmatig werk"
-                description="Je team besteedt wekelijks uren aan taken die eigenlijk automatisch zouden moeten gaan."
-              />
+              <ProblemCard number="01" title={problem1Title} description={problem1Desc} />
             </StaggerItem>
             <StaggerItem>
-              <ProblemCard
-                number="02"
-                title="Medewerkers vastlopen in admin"
-                description="In plaats van waardevolle taken, zitten medewerkers vast in eindeloze administratie."
-              />
+              <ProblemCard number="02" title={problem2Title} description={problem2Desc} />
             </StaggerItem>
             <StaggerItem>
-              <ProblemCard
-                number="03"
-                title="Processen waar fouten insluipen"
-                description="Handmatige stappen zorgen voor inconsistenties en fouten die je liever vermijdt."
-              />
+              <ProblemCard number="03" title={problem3Title} description={problem3Desc} />
             </StaggerItem>
           </StaggerContainer>
         </div>
@@ -122,9 +132,7 @@ export default function Home() {
             <AnimateIn className="md:w-2/5">
               <span className="mb-4 inline-block rounded-full border border-[#E8A04E]/20 bg-[#E8A04E]/10 px-4 py-1 text-xs font-medium text-[#E8A04E]">Case study</span>
               <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Bewezen resultaat</h2>
-              <p className="text-[#8585A3]">
-                Niet alleen mooie woorden — dit is wat we al hebben opgeleverd.
-              </p>
+              <p className="text-[#8585A3]">{caseIntro}</p>
             </AnimateIn>
             <AnimateIn className="md:w-3/5" delay={0.15}>
               <div className="flex flex-col gap-6 rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-8 transition-colors duration-300 hover:border-[#3E3E5A] md:p-10">
@@ -140,8 +148,8 @@ export default function Home() {
                   </a>
                   <span className="rounded-full border border-[#4F8EF7]/20 bg-[#4F8EF7]/10 px-3 py-0.5 text-xs font-medium text-[#4F8EF7]">Recruitment</span>
                 </div>
-                <h3 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-white">Van uren zoekwerk naar gekwalificeerde leads elke ochtend</h3>
-                <p className="text-[#8585A3]">Elke ochtend een lijst met relevante kandidaten klaar — zonder dat het team er iets voor hoeft te doen.</p>
+                <h3 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-white">{caseTitle}</h3>
+                <p className="text-[#8585A3]">{caseDesc}</p>
                 <div className="flex flex-col gap-2">
                   {caseResults.map((s) => (
                     <div key={s} className="flex items-center gap-2 text-[#EDEDF4]">
@@ -162,8 +170,8 @@ export default function Home() {
       {/* CTA — particles terug */}
       <SectionWithParticles className="py-24 md:py-32" particleCount={300} speed={0.4} trailOpacity={0.06}>
         <AnimateIn className="mx-auto max-w-[1200px] px-6 text-center">
-          <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Benieuwd waar de meeste winst zit in jouw processen?</h2>
-          <p className="mx-auto mb-8 max-w-[500px] text-lg text-[#8585A3]">Ontdek hoe Loopless jouw processen kan automatiseren. Plan een gratis gesprek — geheel vrijblijvend.</p>
+          <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">{ctaHeading}</h2>
+          <p className="mx-auto mb-8 max-w-[500px] text-lg text-[#8585A3]">{ctaText}</p>
           <Link
             href="/contact"
             className="inline-block rounded-full bg-[#4F8EF7] px-8 py-4 font-semibold text-white transition-colors hover:bg-[#3A75D8]"
@@ -190,7 +198,7 @@ function ServiceCard({ icon, title, description, color = "#4F8EF7" }: { icon: Re
   return (
     <Link href="/diensten" className="group block h-full" style={{ "--service-color": color } as React.CSSProperties}>
       <div className="relative h-full rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-7 transition-all duration-300 group-hover:-translate-y-1 group-hover:border-[var(--service-color)]/30" style={{ boxShadow: undefined }}>
-        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#2E2E4A] transition-all duration-300" style={{ color }}>{icon}</div>
+        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-[#2E2E4A]" style={{ color }}>{icon}</div>
         <h3 className="mb-2 font-[family-name:var(--font-heading)] text-lg font-bold text-white">{title}</h3>
         <p className="text-sm text-[#8585A3]">{description}</p>
         <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium transition-all group-hover:gap-2" style={{ color }}>
