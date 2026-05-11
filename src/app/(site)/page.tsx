@@ -58,6 +58,39 @@ export default async function Home() {
         </div>
       </HeroSection>
 
+      {/* Wat is AI-automatisering voor het MKB */}
+      <section className="overflow-hidden bg-[#1A1A2E] py-24 md:py-32">
+        <div className="mx-auto max-w-[760px] px-6">
+          <AnimateIn>
+            <h2 className="mb-8 font-[family-name:var(--font-heading)] text-3xl font-bold text-white md:text-4xl">
+              Wat is AI-automatisering voor het MKB?
+            </h2>
+          </AnimateIn>
+          <AnimateIn delay={0.1}>
+            <div className="space-y-5 text-[#EDEDF4] leading-relaxed">
+              <p>
+                AI-automatisering voor het MKB betekent dat slimme systemen repetitief, handmatig werk overnemen — zonder dat je een IT-afdeling nodig hebt. Het verschil met zware enterprise-oplossingen: het past op jouw schaal, jouw budget en jouw manier van werken.
+              </p>
+              <p className="text-[#8585A3]">
+                Voor een MKB-bedrijf zit de winst niet in een dashboard vol grafieken, maar in concrete uren die je team terugkrijgt. Een lead die automatisch wordt gescreend. Een offerte die als concept klaarstaat voordat iemand 'm hoeft te schrijven. Een vraag die direct antwoord krijgt uit je eigen documenten.
+              </p>
+              <p className="text-[#8585A3]">
+                Wat we automatiseren hangt af van waar bij jou tijd verloren gaat. Geen one-size-fits-all-tool, wel een oplossing die past.
+              </p>
+            </div>
+          </AnimateIn>
+          <AnimateIn delay={0.2}>
+            <Link
+              href="/diensten"
+              className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-[#4F8EF7] transition-colors hover:text-[#3A75D8]"
+            >
+              Bekijk wat we automatiseren
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          </AnimateIn>
+        </div>
+      </section>
+
       {/* Aanpak */}
       <section className="overflow-hidden py-24 md:py-32">
         <div className="mx-auto max-w-[720px] px-6">

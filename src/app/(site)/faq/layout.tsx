@@ -10,12 +10,26 @@ export const metadata: Metadata = {
     description:
       "Veelgestelde vragen over procesautomatisering, AI-oplossingen, kosten en samenwerking. Ontdek hoe Loopless werkt voor MKB-bedrijven.",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Veelgestelde vragen over AI-automatisering",
+    description:
+      "Veelgestelde vragen over procesautomatisering, AI-oplossingen, kosten en samenwerking. Ontdek hoe Loopless werkt voor MKB-bedrijven.",
+  },
 };
 
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
+    {
+      "@type": "Question",
+      name: "Wat is AI-automatisering voor het MKB?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "AI-automatisering voor het MKB betekent dat slimme systemen repetitieve handmatige taken overnemen — leads zoeken, offertes opstellen, informatie opzoeken — zonder dat je een IT-afdeling nodig hebt. Het past op de schaal en het budget van een MKB-bedrijf, in tegenstelling tot zware enterprise-oplossingen. Je team krijgt uren per week terug om aan klantcontact en groei te besteden.",
+      },
+    },
     {
       "@type": "Question",
       name: "Waarom zou ik mijn bedrijfsprocessen automatiseren?",

@@ -12,6 +12,11 @@ const faqCategories = [
     label: "Over automatisering",
     items: [
       {
+        question: "Wat is AI-automatisering voor het MKB?",
+        answer:
+          "AI-automatisering voor het MKB betekent dat slimme systemen repetitieve handmatige taken overnemen — leads zoeken, offertes opstellen, informatie opzoeken — zonder dat je een IT-afdeling nodig hebt. Het past op de schaal en het budget van een MKB-bedrijf, in tegenstelling tot zware enterprise-oplossingen. Je team krijgt uren per week terug om aan klantcontact en groei te besteden.",
+      },
+      {
         question: "Waarom zou ik mijn bedrijfsprocessen automatiseren?",
         answer:
           "Handmatig werk kost tijd die je maar één keer kunt uitgeven. Elke uur die een medewerker besteedt aan kopiëren, zoeken of invoeren, is een uur dat niet naar klanten, groei of vakmanschap gaat. Automatisering haalt die stappen eruit zodat je team zich kan richten op werk dat er echt toe doet.",
