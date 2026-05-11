@@ -16,6 +16,12 @@ export const metadata: Metadata = {
     description:
       "Maak kennis met Wessel Broeders — oprichter van Loopless. Bedrijfskunde-achtergrond gecombineerd met AI-expertise.",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Over Loopless — Wessel Broeders, oprichter",
+    description:
+      "Maak kennis met Wessel Broeders — oprichter van Loopless. Bedrijfskunde-achtergrond gecombineerd met AI-expertise.",
+  },
 };
 
 export default async function OverPage() {

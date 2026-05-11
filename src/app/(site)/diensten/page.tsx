@@ -14,6 +14,12 @@ export const metadata: Metadata = {
     description:
       "Van lead qualification tot offerte-automatisering en interne kennisbanken — ontdek hoe Loopless jouw MKB-team tijd bespaart met AI-oplossingen op maat.",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Diensten — AI-automatisering op maat voor het MKB",
+    description:
+      "Van lead qualification tot offerte-automatisering en interne kennisbanken — ontdek hoe Loopless jouw MKB-team tijd bespaart met AI-oplossingen op maat.",
+  },
 };
 
 const servicesJsonLd = {

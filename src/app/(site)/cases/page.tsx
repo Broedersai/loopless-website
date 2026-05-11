@@ -13,6 +13,12 @@ export const metadata: Metadata = {
     description:
       "Bekijk hoe Loopless MKB-bedrijven helpt met AI-automatisering. Concrete resultaten: uren bespaard, processen geautomatiseerd, teams ontlast.",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cases — Bewezen resultaten met AI-automatisering",
+    description:
+      "Bekijk hoe Loopless MKB-bedrijven helpt met AI-automatisering. Concrete resultaten: uren bespaard, processen geautomatiseerd, teams ontlast.",
+  },
 };
 
 export default function CasesPage() {

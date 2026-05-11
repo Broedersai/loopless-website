@@ -79,6 +79,24 @@ const organizationJsonLd = {
   ],
 };
 
+const professionalServiceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Loopless",
+  url: "https://loopless.nl",
+  image: "https://loopless.nl/logo-icon-final.png",
+  description:
+    "AI-automatisering voor Nederlandse MKB-bedrijven. Lead qualification, offerte-automatisering en interne kennisbanken op maat.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Tiel",
+    addressRegion: "Gelderland",
+    addressCountry: "NL",
+  },
+  areaServed: ["Nederland", "Tiel", "Breda", "Gelderland", "Noord-Brabant"],
+  priceRange: "€€",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -90,6 +108,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceJsonLd) }}
         />
         {children}
       </body>

@@ -10,6 +10,12 @@ export const metadata: Metadata = {
     description:
       "Neem contact op met Loopless voor een vrijblijvend gesprek over AI-automatisering voor jouw MKB-bedrijf.",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact — Plan een gratis gesprek",
+    description:
+      "Neem contact op met Loopless voor een vrijblijvend gesprek over AI-automatisering voor jouw MKB-bedrijf.",
+  },
 };
 
 export default function ContactLayout({

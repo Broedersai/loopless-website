@@ -1,0 +1,26 @@
+# Loopless — AI-automatisering voor het MKB
+
+> Loopless (Broeders Digital) bouwt op maat AI-automatisering voor Nederlandse MKB-bedrijven.
+> Gespecialiseerd in lead qualification, offerte-automatisering en interne kennisbanken (RAG).
+> Eigenaar: Wessel Broeders. Gevestigd in Tiel, actief vanuit Tiel en Breda.
+
+## Diensten
+- [Diensten overzicht](https://loopless.nl/diensten)
+- [Bewezen cases](https://loopless.nl/cases)
+
+## Over
+- [Over Wessel](https://loopless.nl/over)
+- [FAQ](https://loopless.nl/faq)
+- [Contact](https://loopless.nl/contact)
+
+## Kerncase
+vuljevacature.nl — lead qualification volledig geautomatiseerd. Het team logt 's ochtends in en heeft direct een lijst met gekwalificeerde leads klaarstaan. Uren per week bespaard, structureel.
+
+## Aanpak
+1. Analyseren — probleem eerst, technologie tweede
+2. Bouwen — binnen 2 weken werkende oplossing
+3. Draaien — 2 weken testfase, daarna live op klant-eigen infrastructuur
+
+## Contact
+- E-mail: wessel@loopless.nl
+- LinkedIn: https://www.linkedin.com/in/wessel-broeders-250767221/
