@@ -1,55 +1,115 @@
-import { unstable_cache } from "next/cache";
+import { draftMode } from "next/headers";
+import { cacheLife, cacheTag } from "next/cache";
 import { createClient } from "@supabase/supabase-js";
 
+// Leesbaar voor de paginas: een blok is uiteindelijk tekst of een (publieke) foto-URL,
+// gesleuteld op de slug (deel na de "/" in de portal-key page/slug).
 export type ContentBlock = {
-  id: string;
   slug: string;
-  page: string;
-  label: string;
   type: "text" | "image";
   text_value: string | null;
   image_url: string | null;
-  sort_order: number;
 };
 
-export const CONTENT_TAG = "content";
+// Rauwe blok-shape zoals beide bronnen (anon-Supabase EN portal-BFF) hem leveren:
+// key = "page/slug", image_url = STORAGE-PATH (geen URL). De BFF heeft draft al over
+// live gemerged, dus beide paden consumeren dezelfde velden.
+type RawBlock = {
+  key: string;
+  type: string;
+  text_value: string | null;
+  image_url: string | null;
+};
 
-async function fetchAllBlocks(): Promise<ContentBlock[]> {
-  // Anon client (no cookies) — safe inside unstable_cache. Public read via RLS.
+// De portal bewaart in image_url een storage-PATH ({tenant_id}/...), niet een URL.
+// Bouw de publieke URL uit het pad. Bucket tenant-assets is public (9-01).
+function toPublicUrl(path: string | null): string | null {
+  if (!path) return null;
+  if (/^https?:\/\//i.test(path)) return path; // defensief: al een absolute URL
+  return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/tenant-assets/${path}`;
+}
+
+// Published-pad: anon-read (cookieless) uit het portal-project. RLS filtert al op
+// draft_status='clean' (mig 0008); de expliciete .eq is belt-and-suspenders.
+// 'use cache' + lange cacheLife + per-tenant cacheTag → revalidatie via de
+// publish-webhook (9-05). draftMode() wordt BEWUST buiten deze cache-scope gelezen.
+async function getPublishedBlocks(tenantId: string): Promise<RawBlock[]> {
+  "use cache";
+  cacheLife("max");
+  cacheTag(`tenant:${tenantId}:content`);
+
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );
   const { data, error } = await supabase
     .from("content_blocks")
-    .select("id, slug, page, label, type, text_value, image_url, sort_order")
-    .order("page")
-    .order("sort_order");
+    .select("key, type, text_value, image_url")
+    .eq("tenant_id", tenantId)
+    .eq("draft_status", "clean");
 
   if (error) {
-    console.error("[content] fetchAllBlocks failed:", error.message);
+    console.error("[content] getPublishedBlocks failed:", error.message);
     return [];
   }
-  return (data ?? []) as ContentBlock[];
+  return (data ?? []) as RawBlock[];
 }
 
-export const getAllBlocks = unstable_cache(fetchAllBlocks, ["content_blocks_all"], {
-  tags: [CONTENT_TAG],
-});
+// Draft-pad: via de portal-BFF (service-role, draft-over-live al gemerged). no-store,
+// want drafts veranderen bij elke save. Shape { tenantId, blocks, collections } as-is.
+async function getDraftBlocks(tenantId: string): Promise<RawBlock[]> {
+  const url = `${process.env.PORTAAL_BFF_URL}?token=${process.env.PORTAAL_PREVIEW_SECRET}&tenantId=${tenantId}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) {
+    console.error("[content] getDraftBlocks failed:", res.status);
+    return [];
+  }
+  const json = (await res.json()) as { blocks?: RawBlock[] };
+  return json.blocks ?? [];
+}
 
-export async function getBlocksByPage(page: string): Promise<Record<string, ContentBlock>> {
-  const all = await getAllBlocks();
+export async function getBlocksByPage(
+  page: string,
+): Promise<Record<string, ContentBlock>> {
+  // Request-API: BUITEN elke 'use cache'-scope lezen (Next 16 pitfall). Bepaalt of we
+  // de gecachte published-tak of de no-store draft-tak nemen.
+  const { isEnabled } = await draftMode();
+  const tenantId = process.env.TENANT_ID ?? "";
+
+  const raw = isEnabled
+    ? await getDraftBlocks(tenantId)
+    : await getPublishedBlocks(tenantId);
+
+  // Geen page-kolom meer in het portal-schema: page/slug zit in de key.
   const result: Record<string, ContentBlock> = {};
-  for (const block of all) {
-    if (block.page === page) result[block.slug] = block;
+  for (const b of raw) {
+    const slashIndex = b.key.indexOf("/");
+    if (slashIndex === -1) continue;
+    const blockPage = b.key.slice(0, slashIndex);
+    const slug = b.key.slice(slashIndex + 1);
+    if (blockPage !== page || !slug) continue;
+    result[slug] = {
+      slug,
+      type: b.type === "image" ? "image" : "text",
+      text_value: b.text_value,
+      image_url: toPublicUrl(b.image_url),
+    };
   }
   return result;
 }
 
-export function blockText(blocks: Record<string, ContentBlock>, slug: string, fallback: string): string {
+export function blockText(
+  blocks: Record<string, ContentBlock>,
+  slug: string,
+  fallback: string,
+): string {
   return blocks[slug]?.text_value ?? fallback;
 }
 
-export function blockImage(blocks: Record<string, ContentBlock>, slug: string, fallback: string): string {
+export function blockImage(
+  blocks: Record<string, ContentBlock>,
+  slug: string,
+  fallback: string,
+): string {
   return blocks[slug]?.image_url ?? fallback;
 }

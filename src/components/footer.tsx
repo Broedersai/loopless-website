@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LogoWithText } from "@/components/logo";
+import { CurrentYear } from "@/components/current-year";
 
 export function Footer() {
   return (
@@ -71,7 +72,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="border-t border-[#2E2E4A] pt-6">
           <p className="text-center text-xs text-[#8585A3]">
-            &copy; {new Date().getFullYear()} Loopless — Broeders Digital | KVK: 42004729
+            &copy; <CurrentYear /> Loopless — Broeders Digital | KVK: 42004729
           </p>
         </div>
       </div>
