@@ -29,8 +29,10 @@ function toPublicUrl(path: string | null): string | null {
   return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/tenant-assets/${path}`;
 }
 
-// Published-pad: anon-read (cookieless) uit het portal-project. RLS filtert al op
-// draft_status='clean' (mig 0008); de expliciete .eq is belt-and-suspenders.
+// Published-pad: anon-read (cookieless) uit het portal-project. Leest de LIVE kolommen
+// van álle rijen; drafts zijn column-level afgeschermd in het portaal (mig 0022), niet
+// meer via een row-filter. Zo valt een blok in draft-status niet terug op de
+// code-placeholder maar toont het z'n laatst-gepubliceerde waarde (ISS-004).
 // 'use cache' + lange cacheLife + per-tenant cacheTag → revalidatie via de
 // publish-webhook (9-05). draftMode() wordt BEWUST buiten deze cache-scope gelezen.
 async function getPublishedBlocks(tenantId: string): Promise<RawBlock[]> {
@@ -45,8 +47,7 @@ async function getPublishedBlocks(tenantId: string): Promise<RawBlock[]> {
   const { data, error } = await supabase
     .from("content_blocks")
     .select("key, type, text_value, image_url")
-    .eq("tenant_id", tenantId)
-    .eq("draft_status", "clean");
+    .eq("tenant_id", tenantId);
 
   if (error) {
     console.error("[content] getPublishedBlocks failed:", error.message);
