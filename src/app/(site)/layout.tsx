@@ -9,9 +9,10 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       {/* PreviewBanner leest draftMode() (request-API) → dynamisch. Met cacheComponents
           moet die dynamische read in een Suspense-grens staan zodat de statische shell
           (navbar/footer) prerenderbaar blijft; fallback=null want in de published-laag
-          rendert de banner toch niets. De banner is position:fixed en overlapt in
-          preview-modus de bovenrand — bewust laagcomplex (geen conditionele padding,
-          layout blijft sync). Preview is een interne review-modus, geen published view. */}
+          rendert de banner toch niets. De banner is position:sticky: in preview-modus
+          duwt 'ie de navbar omlaag (navbar blijft klikbaar) én blijft zichtbaar bij
+          scrollen; in de published-laag neemt 'ie geen ruimte in. Preview is een interne
+          review-modus, geen published view. */}
       <Suspense fallback={null}>
         <PreviewBanner />
       </Suspense>
