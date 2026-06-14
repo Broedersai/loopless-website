@@ -114,3 +114,129 @@ export function blockImage(
 ): string {
   return blocks[slug]?.image_url ?? fallback;
 }
+
+// ============================================================================
+// Collecties — herhaalbare items (projecten/diensten/portfolio) met titel +
+// tekst + foto, in een door de klant bepaalde volgorde. Zelfde draft/published-
+// splitsing als de blocks hierboven. De portaal-CRUD (Phase 5) en de BFF-draft-
+// merge (10-04) leverden dit al; dit is de ontbrekende render-kant.
+// ============================================================================
+
+// Eén item van een collectie zoals de pagina's het consumeren: image_url is hier
+// al een publieke URL (toPublicUrl toegepast), sort_order al een number.
+export type CollectionItem = {
+  id: string;
+  title: string | null;
+  text: string | null;
+  image_url: string | null;
+  sort_order: number;
+};
+
+// Rauwe item-shape zoals beide bronnen (anon-Supabase EN portal-BFF) hem leveren:
+// image_url = STORAGE-PATH (geen URL), sort_order kan string zijn (DB-numeric via
+// PostgREST). De BFF heeft draft al over live gemerged én gesorteerd.
+type RawCollectionItem = {
+  id: string;
+  title: string | null;
+  text: string | null;
+  image_url: string | null;
+  sort_order: number | string | null;
+};
+
+type RawCollection = {
+  key: string;
+  title: string | null;
+  items: RawCollectionItem[];
+};
+
+// Published-pad voor collecties: anon-read (cookieless) uit het portal-project.
+// Leest de LIVE kolommen van collections + nested collection_items (mig 0022 laat
+// anon de live-kolommen van álle rijen lezen; draft_* is column-level afgeschermd).
+// Zelfde cache-tag als de blocks → de publish-webhook (9-05) revalideert beide.
+// draftMode() wordt BEWUST buiten deze cache-scope gelezen.
+async function getPublishedCollections(
+  tenantId: string,
+): Promise<RawCollection[]> {
+  "use cache";
+  cacheLife("max");
+  cacheTag(`tenant:${tenantId}:content`);
+
+  // Defensief: zonder portaal-config (verse clone, ontbrekende env) geen crash
+  // maar een lege laag → de pagina toont z'n leegstaat. Spiegelt getPublishedBlocks.
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.warn(
+      "[content] Supabase-env ontbreekt — collecties leeg, leegstaat wordt getoond.",
+    );
+    return [];
+  }
+
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
+  const { data, error } = await supabase
+    .from("collections")
+    .select(
+      "key, title, collection_items (id, title, text, image_url, sort_order)",
+    )
+    .eq("tenant_id", tenantId);
+
+  if (error) {
+    console.error("[content] getPublishedCollections failed:", error.message);
+    return [];
+  }
+
+  // Untyped anon-client → map de nested shape expliciet naar RawCollection (geen any-lek).
+  const rows = (data ?? []) as Array<{
+    key: string;
+    title: string | null;
+    collection_items: RawCollectionItem[] | null;
+  }>;
+  return rows.map((c) => ({
+    key: c.key,
+    title: c.title,
+    items: c.collection_items ?? [],
+  }));
+}
+
+// Draft-pad voor collecties: via de portal-BFF (service-role, draft-over-live al
+// gemerged én gesorteerd). no-store. Mirrort getDraftBlocks; consumeert json.collections.
+async function getDraftCollections(tenantId: string): Promise<RawCollection[]> {
+  const url = `${process.env.PORTAAL_BFF_URL}?token=${process.env.PORTAAL_PREVIEW_SECRET}&tenantId=${tenantId}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) {
+    console.error("[content] getDraftCollections failed:", res.status);
+    return [];
+  }
+  const json = (await res.json()) as { collections?: RawCollection[] };
+  return json.collections ?? [];
+}
+
+// Haal één collectie op z'n key op (published of draft), gemapt naar CollectionItem[]
+// en gesorteerd op effectieve volgorde. draftMode() BUITEN de cache-scope (Next 16
+// pitfall — zelfde patroon als getBlocksByPage). Lege/onbekende collectie → [].
+export async function getCollectionByKey(
+  key: string,
+): Promise<CollectionItem[]> {
+  const { isEnabled } = await draftMode();
+  const tenantId = process.env.TENANT_ID ?? "";
+
+  const raw = isEnabled
+    ? await getDraftCollections(tenantId)
+    : await getPublishedCollections(tenantId);
+
+  const collection = raw.find((c) => c.key === key);
+  if (!collection) return [];
+
+  const items = collection.items.map((i) => ({
+    id: i.id,
+    title: i.title,
+    text: i.text,
+    image_url: toPublicUrl(i.image_url),
+    sort_order: Number(i.sort_order ?? 0),
+  }));
+
+  // Sorteer op sort_order (decision 05-01): de published-tak komt ongesorteerd uit de
+  // anon-read; de draft-tak is al BFF-gesorteerd, dus deze sort is daar idempotent.
+  items.sort((a, b) => a.sort_order - b.sort_order);
+  return items;
+}
