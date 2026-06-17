@@ -5,47 +5,53 @@ import { Mail, Linkedin, Clock, ShieldCheck, Send } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
 import { PageGlow } from "@/components/page-glow";
 
-const GOOGLE_FORM_ACTION =
-  "https://docs.google.com/forms/d/e/1FAIpQLSdVQxlB5rLB_4WneVx29PWxF1zhf15Q5FF-cv-GaDgGRTCT1w/formResponse";
+const FORMSPREE_ACTION = "https://formspree.io/f/xbdeeolq";
 
 const contactFields = [
-  { entry: "entry.403495529", label: "Naam", type: "text", placeholder: "Jouw naam" },
-  { entry: "entry.1501416755", label: "Bedrijfsnaam", type: "text", placeholder: "Jouw bedrijf" },
-  { entry: "entry.888579366", label: "E-mailadres", type: "email", placeholder: "naam@bedrijf.nl" },
-  { entry: "entry.832062819", label: "Telefoonnummer", type: "tel", placeholder: "+31 6 12345678" },
+  { entry: "naam", label: "Naam", type: "text", placeholder: "Jouw naam" },
+  { entry: "bedrijf", label: "Bedrijfsnaam", type: "text", placeholder: "Jouw bedrijf" },
+  { entry: "email", label: "E-mailadres", type: "email", placeholder: "naam@bedrijf.nl" },
+  { entry: "telefoon", label: "Telefoonnummer", type: "tel", placeholder: "+31 6 12345678" },
 ];
 
 const intakeFields = [
-  { entry: "entry.2130855848", label: "Welk werk kost jullie team de meeste tijd, maar voegt weinig waarde toe?", type: "textarea" },
-  { entry: "entry.1783601044", label: "Hoeveel uur per week schat je dat dit het hele team kost?", type: "text" },
-  { entry: "entry.1716856525", label: "Hoe lossen jullie dit op dit moment op?", type: "textarea" },
-  { entry: "entry.1329753922", label: "Hoe ziet de ideale situatie eruit?", type: "textarea" },
-  { entry: "entry.1960148829", label: "Welke tools en systemen gebruiken jullie?", type: "text" },
-  { entry: "entry.1783374432", label: "Hebben jullie dit eerder geprobeerd op te lossen? Zo ja, wat werkte niet?", type: "textarea" },
+  { entry: "tijdrovend-werk", label: "Welk werk kost jullie team de meeste tijd, maar voegt weinig waarde toe?", type: "textarea" },
+  { entry: "uren-per-week", label: "Hoeveel uur per week schat je dat dit het hele team kost?", type: "text" },
+  { entry: "huidige-oplossing", label: "Hoe lossen jullie dit op dit moment op?", type: "textarea" },
+  { entry: "ideale-situatie", label: "Hoe ziet de ideale situatie eruit?", type: "textarea" },
+  { entry: "tools-en-systemen", label: "Welke tools en systemen gebruiken jullie?", type: "text" },
+  { entry: "eerder-geprobeerd", label: "Hebben jullie dit eerder geprobeerd op te lossen? Zo ja, wat werkte niet?", type: "textarea" },
 ];
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
+    setError(false);
 
     const formData = new FormData(e.currentTarget);
 
     try {
-      await fetch(GOOGLE_FORM_ACTION, {
+      const res = await fetch(FORMSPREE_ACTION, {
         method: "POST",
         body: formData,
-        mode: "no-cors",
+        headers: { Accept: "application/json" },
       });
+
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setError(true);
+      }
     } catch {
-      // Google Forms returns opaque response with no-cors, this is expected
+      setError(true);
     }
 
     setSubmitting(false);
-    setSubmitted(true);
   }
 
   return (
@@ -143,6 +149,11 @@ export default function ContactPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit}>
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="Nieuwe intake via loopless.nl"
+                />
                 {/* Contact details section */}
                 <div className="mb-8">
                   <h3 className="mb-1 font-[family-name:var(--font-heading)] text-lg font-semibold text-white">
@@ -207,6 +218,20 @@ export default function ContactPage() {
                 <div className="mt-8 rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-4 text-center text-sm text-[#8585A3]">
                   Invullen is volledig vrijblijvend — ik neem binnen 24 uur contact op.
                 </div>
+
+                {error && (
+                  <div className="mt-4 rounded-xl border border-[#F75F5F]/40 bg-[#F75F5F]/10 p-4 text-center text-sm text-[#F7A5A5]">
+                    Er ging iets mis bij het versturen. Probeer het opnieuw of
+                    mail me direct op{" "}
+                    <a
+                      href="mailto:wessel@loopless.nl"
+                      className="font-semibold underline"
+                    >
+                      wessel@loopless.nl
+                    </a>
+                    .
+                  </div>
+                )}
 
                 <button
                   type="submit"
