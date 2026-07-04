@@ -1,4 +1,4 @@
-# Loopless — AI-automatisering voor het MKB
+# Loopless: AI-automatisering voor het MKB
 
 > Loopless (Broeders Digital) bouwt op maat AI-automatisering voor Nederlandse MKB-bedrijven.
 > Gespecialiseerd in lead qualification, offerte-automatisering en interne kennisbanken (RAG).
@@ -14,12 +14,12 @@
 - [Contact](https://loopless.nl/contact)
 
 ## Kerncase
-vuljevacature.nl — lead qualification volledig geautomatiseerd. Het team logt 's ochtends in en heeft direct een lijst met gekwalificeerde leads klaarstaan. Uren per week bespaard, structureel.
+vuljevacature.nl: lead qualification volledig geautomatiseerd. Het team logt 's ochtends in en heeft direct een lijst met gekwalificeerde leads klaarstaan. Uren per week bespaard, structureel.
 
 ## Aanpak
-1. Analyseren — probleem eerst, technologie tweede
-2. Bouwen — binnen 2 weken werkende oplossing
-3. Draaien — 2 weken testfase, daarna live op klant-eigen infrastructuur
+1. Analyseren: probleem eerst, technologie tweede
+2. Bouwen: binnen 2 weken werkende oplossing
+3. Draaien: 2 weken testfase, daarna live op klant-eigen infrastructuur
 
 ## Contact
 - E-mail: wessel@loopless.nl
