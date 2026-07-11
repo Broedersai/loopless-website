@@ -59,8 +59,14 @@ async function getPublishedBlocks(tenantId: string): Promise<RawBlock[]> {
 // Draft-pad: via de portal-BFF (service-role, draft-over-live al gemerged). no-store,
 // want drafts veranderen bij elke save. Shape { tenantId, blocks, collections } as-is.
 async function getDraftBlocks(tenantId: string): Promise<RawBlock[]> {
-  const url = `${process.env.PORTAAL_BFF_URL}?token=${process.env.PORTAAL_PREVIEW_SECRET}&tenantId=${tenantId}`;
-  const res = await fetch(url, { cache: "no-store" });
+  // Secret in de X-Preview-Secret-header, nooit in de URL (A-01/4.1-06): query-strings
+  // belanden in logs/history. Server-to-server fetch, dus een header kan gewoon;
+  // tenantId is geen secret en mag in de query blijven.
+  const url = `${process.env.PORTAAL_BFF_URL}?tenantId=${tenantId}`;
+  const res = await fetch(url, {
+    cache: "no-store",
+    headers: { "X-Preview-Secret": process.env.PORTAAL_PREVIEW_SECRET ?? "" },
+  });
   if (!res.ok) {
     console.error("[content] getDraftBlocks failed:", res.status);
     return [];
@@ -176,7 +182,9 @@ async function getPublishedCollections(
   const { data, error } = await supabase
     .from("collections")
     .select(
-      "key, title, collection_items (id, title, text, image_url, sort_order)",
+      // Expliciete FK-hint: sinds portaal-mig 0029 zijn er twee FK's naar collections
+      // (composite tenant-FK erbij) → embed zonder hint geeft PGRST201.
+      "key, title, collection_items!collection_items_collection_id_fkey (id, title, text, image_url, sort_order)",
     )
     .eq("tenant_id", tenantId);
 
@@ -201,8 +209,12 @@ async function getPublishedCollections(
 // Draft-pad voor collecties: via de portal-BFF (service-role, draft-over-live al
 // gemerged én gesorteerd). no-store. Mirrort getDraftBlocks; consumeert json.collections.
 async function getDraftCollections(tenantId: string): Promise<RawCollection[]> {
-  const url = `${process.env.PORTAAL_BFF_URL}?token=${process.env.PORTAAL_PREVIEW_SECRET}&tenantId=${tenantId}`;
-  const res = await fetch(url, { cache: "no-store" });
+  // Zelfde header-patroon als getDraftBlocks (A-01/4.1-06): secret nooit in de URL.
+  const url = `${process.env.PORTAAL_BFF_URL}?tenantId=${tenantId}`;
+  const res = await fetch(url, {
+    cache: "no-store",
+    headers: { "X-Preview-Secret": process.env.PORTAAL_PREVIEW_SECRET ?? "" },
+  });
   if (!res.ok) {
     console.error("[content] getDraftCollections failed:", res.status);
     return [];
