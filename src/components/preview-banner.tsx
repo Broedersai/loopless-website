@@ -9,6 +9,10 @@ import { draftMode } from "next/headers";
 // verlaten"-link naar /api/draft/disable, die de draft-cookie wist en terugstuurt naar
 // de published-site (ISS-006).
 //
+// ONDERAAN gefixeerd, niet bovenaan: klantsites hebben vaak een eigen fixed header
+// op z-50 bovenaan; een top-banner verliest die stapeling (later in de DOM wint) en
+// wordt onklikbaar. Onderaan is er nooit een fixed element om mee te botsen.
+//
 // Dependency-vrij en zonder repo-specifieke imports → engine byte-identiek
 // template↔loopless (conventie 11-01).
 export async function PreviewBanner() {
@@ -18,7 +22,7 @@ export async function PreviewBanner() {
   return (
     <div
       role="status"
-      className="sticky top-0 z-50 flex items-center justify-between gap-4 bg-amber-400 px-4 py-2 text-sm text-amber-950 shadow-md"
+      className="fixed bottom-0 left-0 right-0 z-[60] flex items-center justify-between gap-4 bg-amber-400 px-4 py-2 text-sm text-amber-950 shadow-md"
     >
       <span className="font-medium">
         Voorbeeldmodus — je bekijkt niet-gepubliceerde wijzigingen.
