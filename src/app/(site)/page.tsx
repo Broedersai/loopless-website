@@ -17,29 +17,39 @@ const caseResults = ["Uren per week bespaard", "24/7 automatisch actief", "Team 
 export default async function Home() {
   const blocks = await getBlocksByPage("home");
 
-  const heroTitle = blockText(blocks, "home_hero_title", "Doorbreek de loop\nvan handmatig werk.");
+  const heroTitle = blockText(blocks, "home_hero_title", "Laat je mensen doen\nwaarvoor je ze\nhebt aangenomen.");
   const heroSubtitle = blockText(
     blocks,
     "home_hero_subtitle",
-    "Minder herhaling. Meer resultaat. Loopless haalt de onnodige stappen uit je processen — zodat je team zich kan richten op werk dat er echt toe doet.",
+    "Je inkoper wil inkopen. Je binnendienst wil klanten helpen. Toch gaat hun dag op aan uitzoeken, overtypen en mail. Loopless bouwt systemen die dat werk op de achtergrond doen. Het resultaat: het werk komt af zonder extra mensen aan te nemen, en iedereen heeft weer tijd voor het werk dat er echt toe doet.",
   );
   const problemsHeading = blockText(blocks, "home_problems_heading", "Herken je dit?");
-  const problem1Title = blockText(blocks, "home_problem_1_title", "Uren kwijt aan handmatig werk");
-  const problem1Desc = blockText(blocks, "home_problem_1_desc", "Je team besteedt wekelijks uren aan taken die eigenlijk automatisch zouden moeten gaan.");
-  const problem2Title = blockText(blocks, "home_problem_2_title", "Medewerkers vastlopen in admin");
-  const problem2Desc = blockText(blocks, "home_problem_2_desc", "In plaats van waardevolle taken, zitten medewerkers vast in eindeloze administratie.");
-  const problem3Title = blockText(blocks, "home_problem_3_title", "Processen waar fouten insluipen");
-  const problem3Desc = blockText(blocks, "home_problem_3_desc", "Handmatige stappen zorgen voor inconsistenties en fouten die je liever vermijdt.");
-  const caseIntro = blockText(blocks, "home_case_intro", "Niet alleen mooie woorden — dit is wat we al hebben opgeleverd.");
+  const problem1Title = blockText(blocks, "home_problem_1_title", "Je beste mensen zijn uren kwijt aan uitzoeken");
+  const problem1Desc = blockText(blocks, "home_problem_1_desc", "Mail doorspitten, Excel bijwerken, leveranciersdocs doorzoeken. Uren per week die niet naar hun vak gaan.");
+  const problem2Title = blockText(blocks, "home_problem_2_title", "De kennis zit in het hoofd van één iemand");
+  const problem2Desc = blockText(blocks, "home_problem_2_desc", "Is die collega er niet, dan staat het stil. Vragen blijven liggen tot diegene terug is.");
+  const problem3Title = blockText(blocks, "home_problem_3_title", "Jij beantwoordt zelf nog elke lastige vraag");
+  const problem3Desc = blockText(blocks, "home_problem_3_desc", "Terwijl je bedrijf jouw aandacht ergens anders nodig heeft. Ondernemen komt er niet meer van.");
+  const caseIntro = blockText(blocks, "home_case_intro", "Niet alleen mooie woorden: dit is wat we al hebben opgeleverd.");
   const caseTitle = blockText(blocks, "home_case_title", "Van uren zoekwerk naar gekwalificeerde leads elke ochtend");
-  const caseDesc = blockText(blocks, "home_case_desc", "Elke ochtend een lijst met relevante kandidaten klaar — zonder dat het team er iets voor hoeft te doen.");
+  const caseDesc = blockText(blocks, "home_case_desc", "Elke ochtend een lijst met relevante kandidaten klaar, zonder dat het team er iets voor hoeft te doen. De vrijgekomen tijd gaat naar waar het om draait: leads benaderen en vacatures vullen.");
   const ctaHeading = blockText(blocks, "home_cta_heading", "Benieuwd waar de meeste winst zit in jouw processen?");
-  const ctaText = blockText(blocks, "home_cta_text", "Ontdek hoe Loopless jouw processen kan automatiseren. Plan een gratis gesprek — geheel vrijblijvend.");
+  const ctaText = blockText(blocks, "home_cta_text", "Ontdek waar jouw team de meeste tijd terugwint. Plan een gratis gesprek, geheel vrijblijvend.");
+  const replaceHeading = blockText(blocks, "home_replace_heading", "Vervangt dit mijn mensen? Nee. Bewust niet.");
+  const replaceIntro = blockText(blocks, "home_replace_intro", "Wij automatiseren het uitzoeken, niet het beslissen. Daar zijn drie redenen voor:");
+  const replace1Title = blockText(blocks, "home_replace_1_title", "Je mensen zíjn je bedrijf");
+  const replace1Desc = blockText(blocks, "home_replace_1_desc", "Hun kennis van klanten, leveranciers en uitzonderingen kan geen systeem vervangen. Die kennis wordt juist meer waard als het werk eromheen verdwijnt.");
+  const replace2Title = blockText(blocks, "home_replace_2_title", "Ook een slim systeem maakt fouten");
+  const replace2Desc = blockText(blocks, "home_replace_2_desc", "Daarom gaat er bij ons niets ongecontroleerd de deur uit. Jouw mensen controleren, het systeem bereidt voor.");
+  const replace3Title = blockText(blocks, "home_replace_3_title", "Het werkt beter");
+  const replace3Desc = blockText(blocks, "home_replace_3_desc", "Een team dat sneller wordt, werkt mee. Bij onze klanten beslist de inkoper nog steeds zelf. Ze doen alleen het werk eromheen niet meer.");
+  const promiseHeading = blockText(blocks, "home_promise_heading", "Binnen 4 tot 6 weken draait er één proces dat je nu handmatig doet.");
+  const promiseText = blockText(blocks, "home_promise_text", "Vaste prijs, duidelijke acceptatiecriteria vooraf. Werkt het niet zoals afgesproken, dan betaal je de laatste termijn niet.");
 
   return (
     <>
-      {/* Hero — particles hier, nergens anders tot CTA */}
-      <HeroSection title={heroTitle} subtitle={heroSubtitle}>
+      {/* Hero — particles hier, nergens anders tot CTA. Merkslogan als kicker boven de kop. */}
+      <HeroSection title={heroTitle} subtitle={heroSubtitle} kicker="Doorbreek de loop van handmatig werk.">
         <div className="mx-auto max-w-[1200px] px-6 py-24 md:py-32">
           <AnimateIn>
             <h2 className="mb-16 text-center font-[family-name:var(--font-heading)] text-4xl font-bold text-white">{problemsHeading}</h2>
@@ -69,13 +79,13 @@ export default async function Home() {
           <AnimateIn delay={0.1}>
             <div className="space-y-5 text-[#EDEDF4] leading-relaxed">
               <p>
-                AI-automatisering voor het MKB betekent dat slimme systemen repetitief, handmatig werk overnemen — zonder dat je een IT-afdeling nodig hebt. Het verschil met zware enterprise-oplossingen: het past op jouw schaal, jouw budget en jouw manier van werken.
+                Automatisering betekent bij ons niet dat een systeem je mensen vervangt. Het betekent dat het werk waarvoor je niemand hebt aangenomen alvast gedaan is. Een lead die gescreend klaarstaat. Een besteladvies met één knop. Een antwoord dat alleen nog gecontroleerd hoeft te worden.
               </p>
               <p className="text-[#8585A3]">
-                Voor een MKB-bedrijf zit de winst niet in een dashboard vol grafieken, maar in concrete uren die je team terugkrijgt. Een lead die automatisch wordt gescreend. Een offerte die als concept klaarstaat voordat iemand 'm hoeft te schrijven. Een vraag die direct antwoord krijgt uit je eigen documenten.
+                Jouw mensen doen wat een systeem niet kan: beslissen, uitzonderingen zien, de klant kennen. En het bedrijf merkt het: er wordt meer werk verzet met hetzelfde team, omdat iedereen weer zijn vak doet.
               </p>
               <p className="text-[#8585A3]">
-                Wat we automatiseren hangt af van waar bij jou tijd verloren gaat. Geen one-size-fits-all-tool, wel een oplossing die past.
+                Wat we bouwen hangt af van waar bij jou tijd verloren gaat. Geen one-size-fits-all-tool, wel een systeem dat past op jouw schaal en jouw manier van werken.
               </p>
             </div>
           </AnimateIn>
@@ -97,7 +107,7 @@ export default async function Home() {
           <AnimateIn className="mb-14">
             <h2 className="font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Onze aanpak</h2>
             <p className="mt-3 text-[#8585A3]">
-              We beginnen bij jouw probleem — niet bij de technologie.
+              We beginnen bij jouw probleem, niet bij de technologie.
             </p>
           </AnimateIn>
 
@@ -143,20 +153,52 @@ export default async function Home() {
           </AnimateIn>
           <StaggerContainer className="grid grid-cols-1 gap-5 md:grid-cols-2" staggerDelay={0.1}>
             <StaggerItem>
-              <ServiceCard icon={<Target className="h-5 w-5" />} title="Lead Qualification" description="Automatisch leads zoeken, screenen en klaarzetten voor je team." color="#22D3EE" />
+              <ServiceCard icon={<Target className="h-5 w-5" />} title="Lead Qualification" description="Je team begint de ochtend met een gescreende leadlijst. De machine heeft gezocht, jouw mensen bellen." color="#22D3EE" />
             </StaggerItem>
             <StaggerItem>
-              <ServiceCard icon={<FileText className="h-5 w-5" />} title="Offerte-automatisering" description="Concept-voorstellen genereren op basis van eerdere offertes en productinfo." color="#A78BFA" />
+              <ServiceCard icon={<FileText className="h-5 w-5" />} title="Offerte-automatisering" description="Het concept staat klaar, jij zet de kennis en de prijs erin. Uren opzoekwerk, minuten controle." color="#A78BFA" />
             </StaggerItem>
             <StaggerItem>
-              <ServiceCard icon={<BarChart3 className="h-5 w-5" />} title="Interne kennisbank" description="Een AI-assistent die je bedrijfsdata kent en direct antwoord geeft." color="#E8A04E" />
+              <ServiceCard icon={<BarChart3 className="h-5 w-5" />} title="Interne kennisbank" description="Alle kennis uit hoofden en documenten, opvraagbaar voor iedereen. Nieuwe mensen zijn sneller ingewerkt, de expert wordt niet meer voor alles gestoord." color="#E8A04E" />
             </StaggerItem>
             <StaggerItem>
-              <ServiceCard icon={<Cog className="h-5 w-5" />} title="Procesautomatisering" description="Maatwerk automatisering voor elk repetitief, handmatig proces." color="#34D399" />
+              <ServiceCard icon={<Cog className="h-5 w-5" />} title="Procesautomatisering" description="Maatwerk voor het uitzoekwerk dat jouw team het meeste tijd kost. We beginnen bij de persoon die verzuipt, niet bij de tool." color="#34D399" />
             </StaggerItem>
           </StaggerContainer>
         </div>
       </section>
+
+      {/* Vervangt dit mijn mensen? — het onderscheidende blok (positionering 2026-07-22) */}
+      <section className="overflow-hidden py-24 md:py-32">
+        <div className="mx-auto max-w-[760px] px-6">
+          <AnimateIn>
+            <h2 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-white md:text-4xl">{replaceHeading}</h2>
+            <p className="mb-12 text-[#8585A3]">{replaceIntro}</p>
+          </AnimateIn>
+          <StaggerContainer className="flex flex-col gap-8" staggerDelay={0.1}>
+            {[
+              { num: "01", title: replace1Title, desc: replace1Desc },
+              { num: "02", title: replace2Title, desc: replace2Desc },
+              { num: "03", title: replace3Title, desc: replace3Desc },
+            ].map((r) => (
+              <StaggerItem key={r.num}>
+                <div className="flex items-start gap-6">
+                  <span className="mt-1 shrink-0 font-[family-name:var(--font-heading)] text-xs font-bold tracking-widest text-[#4F8EF7]/60">{r.num}</span>
+                  <div>
+                    <h3 className="mb-2 font-[family-name:var(--font-heading)] text-lg font-bold text-white">{r.title}</h3>
+                    <p className="text-[#8585A3] leading-relaxed">{r.desc}</p>
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="mx-auto max-w-[1200px] px-6">
+        <div className="h-px bg-gradient-to-r from-transparent via-[#2E2E4A] to-transparent" />
+      </div>
 
       {/* Resultaat */}
       <section className="overflow-hidden py-24 md:py-32">
@@ -197,6 +239,18 @@ export default async function Home() {
               </div>
             </AnimateIn>
           </div>
+        </div>
+      </section>
+
+      {/* Belofte-strook — 4-6 weken, vaste prijs, laatste termijn vervalt (besloten 2026-07-22) */}
+      <section className="overflow-hidden bg-[#1A1A2E] py-16 md:py-20">
+        <div className="mx-auto max-w-[760px] px-6">
+          <AnimateIn>
+            <div className="rounded-xl border border-[#4F8EF7]/25 bg-[#1E1E30] p-8 text-center md:p-10">
+              <h2 className="mb-3 font-[family-name:var(--font-heading)] text-2xl font-bold text-white">{promiseHeading}</h2>
+              <p className="text-[#8585A3]">{promiseText}</p>
+            </div>
+          </AnimateIn>
         </div>
       </section>
 

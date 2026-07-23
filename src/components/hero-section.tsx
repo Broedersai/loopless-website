@@ -10,10 +10,12 @@ export function HeroSection({
   children,
   title,
   subtitle,
+  kicker,
 }: {
   children?: React.ReactNode;
   title: string;
   subtitle: string;
+  kicker?: string;
 }) {
   const titleLines = title.split("\n");
 
@@ -42,6 +44,16 @@ export function HeroSection({
               transition={{ duration: 0.5, ease }}
               className="mb-8 h-px w-16 origin-left bg-[#4F8EF7]"
             />
+            {kicker && (
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease }}
+                className="mb-4 block text-sm font-medium uppercase tracking-[0.2em] text-[#4F8EF7]"
+              >
+                {kicker}
+              </motion.span>
+            )}
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -51,7 +63,13 @@ export function HeroSection({
               {titleLines.map((line, i) => (
                 <span key={i}>
                   {line}
-                  {i < titleLines.length - 1 && <br />}
+                  {/* Geforceerde breekpunten alleen op md+; mobiel wrapt natuurlijk (spatie als fallback) */}
+                  {i < titleLines.length - 1 && (
+                    <>
+                      {" "}
+                      <br className="hidden md:inline" />
+                    </>
+                  )}
                 </span>
               ))}
             </motion.h1>
