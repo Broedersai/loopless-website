@@ -87,7 +87,7 @@ export default async function Image() {
             justifyContent: "center",
           }}
         >
-          {["Lead Qualification", "Offerte-automatisering", "Kennisbank", "Procesautomatisering"].map(
+          {["Leads uitzoeken", "Offertes klaarzetten", "Vragen & kennis", "Maatwerk uitzoekwerk"].map(
             (service) => (
               <div
                 key={service}
