@@ -21,7 +21,7 @@ export default async function Home() {
   const heroSubtitle = blockText(
     blocks,
     "home_hero_subtitle",
-    "Je inkoper wil inkopen. Je binnendienst wil klanten helpen. Toch gaat hun dag op aan uitzoeken, overtypen en mail. Loopless bouwt systemen die dat werk op de achtergrond doen. Het resultaat: het werk komt af zonder extra mensen aan te nemen, en iedereen heeft weer tijd voor het werk dat er echt toe doet.",
+    "Je inkoper wil inkopen. Je binnendienst wil klanten helpen. Loopless bouwt systemen die het uitzoekwerk op de achtergrond doen, zodat iedereen weer tijd heeft voor het werk dat er echt toe doet.",
   );
   const problemsHeading = blockText(blocks, "home_problems_heading", "Herken je dit?");
   const problem1Title = blockText(blocks, "home_problem_1_title", "Je beste mensen zijn uren kwijt aan uitzoeken");
@@ -153,16 +153,16 @@ export default async function Home() {
           </AnimateIn>
           <StaggerContainer className="grid grid-cols-1 gap-5 md:grid-cols-2" staggerDelay={0.1}>
             <StaggerItem>
-              <ServiceCard icon={<Target className="h-5 w-5" />} title="Lead Qualification" description="Je team begint de ochtend met een gescreende leadlijst. De machine heeft gezocht, jouw mensen bellen." color="#22D3EE" />
+              <ServiceCard icon={<Target className="h-5 w-5" />} title="Leads voorsorteren" description="Elke ochtend staat de gescreende lijst klaar. Jouw mensen voeren de gesprekken." color="#22D3EE" />
             </StaggerItem>
             <StaggerItem>
-              <ServiceCard icon={<FileText className="h-5 w-5" />} title="Offerte-automatisering" description="Het concept staat klaar, jij zet de kennis en de prijs erin. Uren opzoekwerk, minuten controle." color="#A78BFA" />
+              <ServiceCard icon={<FileText className="h-5 w-5" />} title="Offertes klaarzetten" description="Het concept staat klaar uit je eigen gegevens. Jij zet de kennis en de prijs erin en verstuurt." color="#A78BFA" />
             </StaggerItem>
             <StaggerItem>
-              <ServiceCard icon={<BarChart3 className="h-5 w-5" />} title="Interne kennisbank" description="Alle kennis uit hoofden en documenten, opvraagbaar voor iedereen. Nieuwe mensen zijn sneller ingewerkt, de expert wordt niet meer voor alles gestoord." color="#E8A04E" />
+              <ServiceCard icon={<BarChart3 className="h-5 w-5" />} title="Vragen beantwoorden uit eigen documentatie" description="Alle kennis uit hoofden en documenten, opvraagbaar voor iedereen. De expert wordt niet meer voor alles gestoord." color="#E8A04E" />
             </StaggerItem>
             <StaggerItem>
-              <ServiceCard icon={<Cog className="h-5 w-5" />} title="Procesautomatisering" description="Maatwerk voor het uitzoekwerk dat jouw team het meeste tijd kost. We beginnen bij de persoon die verzuipt, niet bij de tool." color="#34D399" />
+              <ServiceCard icon={<Cog className="h-5 w-5" />} title="Maatwerk voor jouw uitzoekwerk" description="Bij elk bedrijf zit het werk ergens anders. We beginnen bij de persoon die verzuipt, niet bij de tool." color="#34D399" />
             </StaggerItem>
           </StaggerContainer>
         </div>
