@@ -8,7 +8,11 @@ import Link from "next/link";
 // geen cijfers/besparingen, "systeem" altijd met object, AI niet als kop,
 // bewijs bij naam alleen Drabor + Vuljevacature. Geen em-dashes in copy.
 // Flow: intro → grootte → pijn-kaarten → aanscherping → gegevens → uitslag.
-// De uitslag zit bewust ACHTER de gegevens-gate (besluit Wessel 2026-07-23).
+// De uitslag zit bewust ACHTER de gegevens-gate (besluit Wessel 2026-07-23);
+// sinds de review-ronde wordt de uitslag ook per mail naar de lead gestuurd
+// (n8n rendert de blokken uit payload.uitslag, copy leeft alleen hier).
+// "Wessel neemt er één keer contact over op" is een harde belofte: max één
+// opvolg-poging (besluit Wessel 2026-07-23).
 
 type CardId = "vragen" | "beslissen" | "benaderen" | "overtypen" | "vacature" | "offertes";
 
@@ -26,14 +30,14 @@ const CARDS: Card[] = [
     id: "vragen",
     pijn: "Mijn mensen beantwoorden de hele dag dezelfde vragen",
     kop: "Je binnendienst helpt weer klanten, in plaats van antwoorden op te zoeken.",
-    body: "Een systeem beantwoordt de terugkerende vragen uit jullie eigen handleidingen en leveranciersdocumentatie. Nieuwe vraag binnen? Het antwoord staat klaar, met bronverwijzing.",
+    body: "Elke vraag die vaker langskomt, zoekt nu iemand opnieuw op in handleidingen, oude mails en leveranciersdocumenten. Een systeem dat die stukken kent, zet het antwoord klaar op het moment dat de vraag binnenkomt, met erbij waar het vandaan komt.",
     controle: "Jouw mensen controleren het antwoord voordat het de deur uit gaat.",
   },
   {
     id: "beslissen",
     pijn: "Voor elke bestelling zoekt iemand eerst prijzen, voorraad en levertijden bij elkaar",
     kop: "Je inkoper koopt weer in, in plaats van uit te zoeken.",
-    body: "Dat verzamelwerk gaat naar de achtergrond: 's ochtends staat het besteladvies al klaar, met de prijzen, voorraad en levertijden erbij.",
+    body: "Nu struint je inkoper leverancierslijsten, mail en het voorraadscherm af voordat er besteld kan worden. Dat verzamelwerk gaat naar de achtergrond: 's ochtends staat het besteladvies al klaar, met de prijzen, voorraad en levertijden erbij.",
     controle: "Jij blijft beslissen. Het advies is een voorstel, geen bestelling. Je inkoper controleert het en drukt zelf op de knop.",
     bewijs: "Zo werkt het bij Drabor, een groothandel: de inkopers vragen met één knop een besteladvies op en controleren het voordat er iets besteld wordt.",
   },
@@ -41,15 +45,15 @@ const CARDS: Card[] = [
     id: "benaderen",
     pijn: "We zoeken met de hand uit welke bedrijven we benaderen",
     kop: "Elke ochtend ligt de lijst klaar. Je sales voert weer gesprekken.",
-    body: "Een systeem zoekt en screent op de achtergrond welke bedrijven passen bij wat je verkoopt, en zet 's ochtends de lijst klaar die de moeite waard is.",
+    body: "Nu kost elke nieuwe klant eerst een middag zoeken en lijstjes maken. Een systeem doet dat zoeken en screenen op de achtergrond en legt er elke ochtend alleen de bedrijven neer die passen bij wat je verkoopt.",
     controle: "Jouw mensen kiezen wie ze benaderen en voeren het gesprek. Het systeem heeft alleen het zoekwerk gedaan.",
     bewijs: "Zo werkt het bij vuljevacature.nl: de leadkwalificatie draait elke ochtend vanzelf, het team benadert de kandidaten.",
   },
   {
     id: "overtypen",
     pijn: "Gegevens gaan met de hand van de mail naar Excel naar ons systeem",
-    kop: "Niemand typt meer over. De fouten die daarbij sluipen verdwijnen.",
-    body: "Een systeem haalt de gegevens uit mail en bestanden en zet ze op de juiste plek in jullie systeem.",
+    kop: "Niemand typt meer over. De fouten die daarbij insluipen, verdwijnen.",
+    body: "Een order of bevestiging komt per mail binnen, iemand typt hem over in Excel, en daarna nog een keer in jullie eigen systeem. Een systeem dat die mail en bestanden zelf leest, zet de gegevens in één keer op de juiste plek.",
     controle: "Twijfelgevallen legt het systeem apart voor een mens. Niets verdwijnt ongezien in de administratie.",
   },
   {
@@ -63,7 +67,7 @@ const CARDS: Card[] = [
     id: "offertes",
     pijn: "Offertes of facturen maken kost steeds opnieuw veel tijd",
     kop: "De concept-offerte staat klaar. Jij controleert en verstuurt.",
-    body: "Een systeem zet het concept klaar uit je eigen tarieven, productinfo en eerdere offertes. Geen leeg document meer, geen opzoekwerk.",
+    body: "Nu begint elke offerte met een leeg document en zoeken naar tarieven en oude offertes. Een systeem dat jullie tarieven, productinfo en eerdere offertes kent, zet het concept alvast klaar. Jij hoeft alleen nog aan te vullen wat deze klant anders maakt.",
     controle: "Er gaat niets de deur uit zonder jouw controle. Jij zet de kennis en de prijs erin en drukt op versturen.",
   },
 ];
@@ -89,6 +93,15 @@ const SHARPEN: Partial<Record<CardId, { vraag: string; opties: [string, string] 
   },
 };
 
+const VAKWERK_PANEL = {
+  kop: "Eerlijk antwoord: voor vakwerk of fysiek werk bouw je geen systeem.",
+  tekst:
+    "Die vacature los je niet op met automatisering, en dat gaan we ook niet beweren. Wat wél vaak kan: het uitzoek- en administratiewerk rond die functie weghalen, zodat de mensen die je hebt meer aan hun echte werk toekomen. Dat is een gesprek waard, geen belofte.",
+};
+
+const BELOFTE =
+  "Binnen 4 tot 6 weken draait er één proces dat je nu handmatig doet. Vaste prijs, duidelijke acceptatiecriteria vooraf. Werkt het niet zoals afgesproken, dan betaal je de laatste termijn niet.";
+
 type Step = "intro" | "grootte" | "kaarten" | "aanscherping" | "gegevens" | "uitslag";
 
 export function Configurator() {
@@ -100,8 +113,10 @@ export function Configurator() {
   const [bedrijf, setBedrijf] = useState("");
   const [email, setEmail] = useState("");
   const [telefoon, setTelefoon] = useState("");
+  const [hp, setHp] = useState("");
   const [formError, setFormError] = useState("");
   const [sending, setSending] = useState(false);
+  const [sendFailed, setSendFailed] = useState(false);
 
   const toggle = (id: string) =>
     setGekozen((g) => (g.includes(id) ? g.filter((x) => x !== id) : [...g, id]));
@@ -109,6 +124,33 @@ export function Configurator() {
   const gekozenKaarten = CARDS.filter((c) => gekozen.includes(c.id));
   const isEscapeOnly = gekozen.includes(ESCAPE_ID) && gekozenKaarten.length === 0;
   const sharpenTargets = gekozenKaarten.filter((c) => SHARPEN[c.id]);
+  const vacatureNaarVakwerk = aanscherping["vacature"] === SHARPEN.vacature!.opties[1];
+  // Het vakwerk-antwoord vervangt alleen de vacature-kaart, niet de andere gekozen kaarten.
+  const zichtbareKaarten = gekozenKaarten.filter(
+    (c) => !(vacatureNaarVakwerk && c.id === "vacature"),
+  );
+
+  const nuances: string[] = [];
+  if (grootte === SIZES[0])
+    nuances.push(
+      "Eerlijk: met minder dan 10 mensen loont een systeem alleen als het uitzoekwerk echt dagelijks terugkomt. Vaak is één gericht gesprek dan waardevoller dan een bouwtraject.",
+    );
+  if (grootte === SIZES[3])
+    nuances.push(
+      "Boven de 100 mensen spelen er meestal ook IT-afdelingen en bestaande systemen mee. Dat kan prima, maar het gesprek gaat dan eerst over waar wij naast jullie eigen mensen passen.",
+    );
+  if (gekozen.includes(MODIFIER_ID))
+    nuances.push(
+      "Je gaf aan dat de kennis vooral in het hoofd van één of twee mensen zit. Dan is de eerlijke eerste stap: die kennis vastleggen. Pas daarna kan een systeem er iets mee. Dat vastleggen hoort bij het traject.",
+    );
+  if (aanscherping["vragen"] === SHARPEN.vragen!.opties[1])
+    nuances.push(
+      "De antwoorden zitten nu vooral in hoofden. Eerst vastleggen, dan pas een systeem erop. Dat is minder spannend, maar wel de volgorde die werkt.",
+    );
+  if (aanscherping["beslissen"] === SHARPEN.beslissen!.opties[1])
+    nuances.push(
+      "Als het uitzoeken elke keer echt anders is, neemt een systeem een deel over en houdt de mens de leiding. Ook dat is winst, maar we beloven niet meer dan dat.",
+    );
 
   const naKaarten = () => setStep(sharpenTargets.length > 0 ? "aanscherping" : "gegevens");
 
@@ -130,43 +172,37 @@ export function Configurator() {
       pijn_zinnen: gekozenKaarten.map((c) => c.pijn),
       escape: gekozen.includes(ESCAPE_ID),
       modifier_kennis: gekozen.includes(MODIFIER_ID),
+      _hp: hp,
+      // Render-klare uitslag voor de mail naar de lead: n8n rendert alleen,
+      // de copy heeft precies één bron (dit bestand).
+      uitslag: {
+        escape_only: isEscapeOnly,
+        vakwerk: vacatureNaarVakwerk ? VAKWERK_PANEL : null,
+        kaarten: zichtbareKaarten.map(({ kop, body, controle, bewijs }) => ({
+          kop,
+          body,
+          controle,
+          bewijs: bewijs ?? "",
+        })),
+        nuances,
+        belofte: BELOFTE,
+      },
     };
     try {
-      await fetch("/api/configurator", {
+      const res = await fetch("/api/configurator", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+      setSendFailed(!res.ok);
     } catch {
-      // Inzending mag de bezoeker nooit blokkeren: uitslag tonen we sowieso.
+      // Inzending mag de bezoeker nooit blokkeren: uitslag tonen we sowieso,
+      // maar we melden wel dat de gegevens niet zijn aangekomen.
+      setSendFailed(true);
     }
     setSending(false);
     setStep("uitslag");
   };
-
-  const nuances: string[] = [];
-  if (grootte === SIZES[0])
-    nuances.push(
-      "Eerlijk: met minder dan 10 mensen loont een systeem alleen als het uitzoekwerk echt dagelijks terugkomt. Vaak is één gericht gesprek dan waardevoller dan een bouwtraject.",
-    );
-  if (grootte === SIZES[3])
-    nuances.push(
-      "Boven de 100 mensen spelen er meestal ook IT-afdelingen en bestaande systemen mee. Dat kan prima, maar het gesprek gaat dan eerst over waar wij naast jullie eigen mensen passen.",
-    );
-  if (gekozen.includes(MODIFIER_ID))
-    nuances.push(
-      "Je gaf aan dat de kennis vooral in het hoofd van één of twee mensen zit. Dan is de eerlijke eerste stap: die kennis vastleggen. Pas daarna kan een systeem er iets mee. Dat vastleggen hoort bij het traject.",
-    );
-  if (aanscherping["vragen"] === SHARPEN.vragen!.opties[1])
-    nuances.push(
-      "De antwoorden zitten nu vooral in hoofden. Eerst vastleggen, dan pas een systeem erop. Dat is minder sexy, maar wel de volgorde die werkt.",
-    );
-  if (aanscherping["beslissen"] === SHARPEN.beslissen!.opties[1])
-    nuances.push(
-      "Als het uitzoeken elke keer echt anders is, neemt een systeem een deel over en houdt de mens de leiding. Ook dat is winst, maar we beloven niet meer dan dat.",
-    );
-
-  const vacatureNaarVakwerk = aanscherping["vacature"] === SHARPEN.vacature!.opties[1];
 
   return (
     <div className="mx-auto max-w-[760px] px-6">
@@ -184,7 +220,8 @@ export function Configurator() {
             Niemand wordt vervangen. Jouw mensen controleren en beslissen.
           </p>
           <p className="mb-8 text-sm text-[#8585A3]">
-            Ongeveer 2 minuten. Je ziet het overzicht direct nadat je je gegevens hebt ingevuld.
+            Ongeveer 2 minuten. Je ziet het overzicht direct op je scherm, en je krijgt het ook per
+            mail.
           </p>
           <PrimaryButton onClick={() => setStep("grootte")}>Start</PrimaryButton>
         </Panel>
@@ -192,7 +229,7 @@ export function Configurator() {
 
       {step === "grootte" && (
         <Panel>
-          <StepLabel n={1} totaal={3} />
+          <StepLabel n={1} />
           <h2 className="mb-6 font-[family-name:var(--font-heading)] text-2xl font-bold text-white">
             Hoeveel mensen werken er bij jullie?
           </h2>
@@ -209,7 +246,7 @@ export function Configurator() {
 
       {step === "kaarten" && (
         <Panel>
-          <StepLabel n={2} totaal={3} />
+          <StepLabel n={2} />
           <h2 className="mb-2 font-[family-name:var(--font-heading)] text-2xl font-bold text-white">
             Je mensen zijn meer tijd kwijt aan uitzoeken dan aan hun eigenlijke werk. Waar zit dat
             bij jou?
@@ -234,14 +271,14 @@ export function Configurator() {
           <NavRow
             terug={() => setStep("grootte")}
             verder={naKaarten}
-            verderDisabled={gekozen.length === 0}
+            verderDisabled={gekozenKaarten.length === 0 && !gekozen.includes(ESCAPE_ID)}
           />
         </Panel>
       )}
 
       {step === "aanscherping" && (
         <Panel>
-          <StepLabel n={3} totaal={3} />
+          <StepLabel n={3} />
           {sharpenTargets.map((c) => {
             const s = SHARPEN[c.id]!;
             return (
@@ -278,15 +315,31 @@ export function Configurator() {
             Bijna klaar. Waar mag het overzicht heen?
           </h2>
           <p className="mb-6 text-[#8585A3]">
-            Je ziet het overzicht direct op je scherm. Wessel neemt er daarna één keer contact over
-            op. Je praat direct met degene die het bouwt, geen verkoper.
+            Je ziet het overzicht direct op je scherm en krijgt het ook per mail. Wessel neemt er
+            daarna één keer contact over op. Je praat direct met degene die het bouwt, geen
+            verkoper.
           </p>
-          <div className="mb-2 grid gap-3 md:grid-cols-2">
-            <Input placeholder="Naam" value={naam} onChange={setNaam} />
-            <Input placeholder="Bedrijf" value={bedrijf} onChange={setBedrijf} />
-            <Input placeholder="E-mailadres" type="email" value={email} onChange={setEmail} />
-            <Input placeholder="Telefoon (optioneel)" type="tel" value={telefoon} onChange={setTelefoon} />
+          <div className="mb-3 grid gap-3 md:grid-cols-2">
+            <Input label="Naam" placeholder="Jouw naam" value={naam} onChange={setNaam} />
+            <Input label="Bedrijf" placeholder="Jouw bedrijf" value={bedrijf} onChange={setBedrijf} />
+            <Input label="E-mailadres" placeholder="naam@bedrijf.nl" type="email" value={email} onChange={setEmail} />
+            <Input label="Telefoon (optioneel)" placeholder="+31 6 12345678" type="tel" value={telefoon} onChange={setTelefoon} />
           </div>
+          {/* Honeypot: onzichtbaar voor mensen, bots vullen het wel in. */}
+          <input
+            type="text"
+            name="website"
+            value={hp}
+            onChange={(e) => setHp(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="hidden"
+          />
+          <p className="mb-2 text-xs text-[#8585A3]">
+            We gebruiken je gegevens alleen om je het overzicht te mailen en er één keer contact
+            over op te nemen.
+          </p>
           {formError && <p className="mb-2 text-sm text-[#E8A04E]">{formError}</p>}
           <NavRow
             terug={() => setStep(sharpenTargets.length > 0 ? "aanscherping" : "kaarten")}
@@ -301,42 +354,47 @@ export function Configurator() {
         <div className="flex flex-col gap-6">
           <Panel>
             <h2 className="mb-2 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">
-              {isEscapeOnly ? "Dan is een gesprek eerlijker dan een tool." : `Dit staat er voor jou klaar, ${naam.split(" ")[0]}.`}
+              {isEscapeOnly ? "Dan is een gesprek eerlijker dan een uitslag." : `Dit staat er voor jou klaar, ${naam.split(" ")[0]}.`}
             </h2>
             <p className="text-[#8585A3]">
               {isEscapeOnly
                 ? "Jouw situatie past niet in een standaardhokje, en dat gaan we ook niet forceren. In een kort gesprek komen we er samen achter waar de tijd bij jullie echt blijft hangen, en of een systeem daar iets kan betekenen."
                 : "Geen offerte, geen verplichting: dit is wat een systeem bij jullie zou kunnen overnemen, op basis van wat je aangaf. Wessel neemt er één keer contact over op."}
+              {!isEscapeOnly && !sendFailed && " Het overzicht staat ook in je mailbox."}
             </p>
+            {sendFailed && (
+              <p className="mt-4 text-sm text-[#E8A04E]">
+                Door een technisch probleem zijn je gegevens niet verstuurd. Het overzicht hieronder
+                klopt gewoon, maar mail even naar{" "}
+                <a href="mailto:wessel@loopless.nl" className="font-semibold underline">
+                  wessel@loopless.nl
+                </a>
+                , dan komt het alsnog goed.
+              </p>
+            )}
           </Panel>
 
-          {!vacatureNaarVakwerk &&
-            gekozenKaarten.map((c) => (
-              <Panel key={c.id}>
-                <h3 className="mb-3 font-[family-name:var(--font-heading)] text-xl font-bold text-white">
-                  {c.kop}
-                </h3>
-                <p className="mb-3 leading-relaxed text-[#8585A3]">{c.body}</p>
-                <p className="mb-3 font-medium text-[#EDEDF4]">{c.controle}</p>
-                {c.bewijs && (
-                  <p className="border-l-2 border-[#4F8EF7] pl-4 text-sm italic text-[#8585A3]">
-                    {c.bewijs}
-                  </p>
-                )}
-              </Panel>
-            ))}
+          {zichtbareKaarten.map((c) => (
+            <Panel key={c.id}>
+              <h3 className="mb-3 font-[family-name:var(--font-heading)] text-xl font-bold text-white">
+                {c.kop}
+              </h3>
+              <p className="mb-3 leading-relaxed text-[#8585A3]">{c.body}</p>
+              <p className="mb-3 font-medium text-[#EDEDF4]">{c.controle}</p>
+              {c.bewijs && (
+                <p className="border-l-2 border-[#4F8EF7] pl-4 text-sm italic text-[#8585A3]">
+                  {c.bewijs}
+                </p>
+              )}
+            </Panel>
+          ))}
 
           {vacatureNaarVakwerk && (
             <Panel>
               <h3 className="mb-3 font-[family-name:var(--font-heading)] text-xl font-bold text-white">
-                Eerlijk antwoord: voor vakwerk of fysiek werk bouw je geen systeem.
+                {VAKWERK_PANEL.kop}
               </h3>
-              <p className="leading-relaxed text-[#8585A3]">
-                Die vacature los je niet op met automatisering, en dat gaan we ook niet beweren.
-                Wat wél vaak kan: het uitzoek- en administratiewerk rond die functie weghalen, zodat
-                de mensen die je hebt meer aan hun echte werk toekomen. Dat is een gesprek waard,
-                geen belofte.
-              </p>
+              <p className="leading-relaxed text-[#8585A3]">{VAKWERK_PANEL.tekst}</p>
             </Panel>
           )}
 
@@ -356,11 +414,10 @@ export function Configurator() {
           )}
 
           <Panel>
-            <p className="mb-6 text-[#EDEDF4]">
-              Binnen 4 tot 6 weken draait er één proces dat je nu handmatig doet. Vaste prijs,
-              duidelijke acceptatiecriteria vooraf. Werkt het niet zoals afgesproken, dan betaal je
-              de laatste termijn niet.
-            </p>
+            <h3 className="mb-3 font-[family-name:var(--font-heading)] text-lg font-bold text-white">
+              Zo werkt een pilot
+            </h3>
+            <p className="mb-6 text-[#EDEDF4]">{BELOFTE}</p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link
                 href="/contact"
@@ -388,10 +445,10 @@ function Panel({ children }: { children: React.ReactNode }) {
   );
 }
 
-function StepLabel({ n, totaal }: { n: number; totaal: number }) {
+function StepLabel({ n }: { n: number }) {
   return (
     <span className="mb-4 block text-xs font-medium uppercase tracking-[0.2em] text-[#4F8EF7]">
-      Vraag {n} van {totaal}
+      Vraag {n}
     </span>
   );
 }
@@ -436,14 +493,17 @@ function NavRow({ terug, verder, verderDisabled, verderLabel }: { terug: () => v
   );
 }
 
-function Input({ placeholder, value, onChange, type = "text" }: { placeholder: string; value: string; onChange: (v: string) => void; type?: string }) {
+function Input({ label, placeholder, value, onChange, type = "text" }: { label: string; placeholder: string; value: string; onChange: (v: string) => void; type?: string }) {
   return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className="rounded-xl border border-[#2E2E4A] bg-[#161625] px-5 py-4 text-white placeholder-[#8585A3] outline-none transition-colors focus:border-[#4F8EF7]"
-    />
+    <label className="block">
+      <span className="mb-1.5 block text-sm font-medium text-[#EDEDF4]">{label}</span>
+      <input
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full rounded-xl border border-[#2E2E4A] bg-[#161625] px-5 py-4 text-white placeholder-[#8585A3] outline-none transition-colors focus:border-[#4F8EF7]"
+      />
+    </label>
   );
 }

@@ -1,9 +1,15 @@
 import { type NextRequest } from "next/server";
 
-// Configurator-intake: stuurt de inzending door naar de n8n-webhook
-// (server-to-server, zodat de webhook-URL niet in de browser ligt).
-// De bezoeker mag hier nooit op stranden: de uitslag is client-side,
-// dus fouten loggen we en geven we terug zonder de flow te breken.
+// Configurator-intake: valideert de inzending en stuurt hem door naar de
+// n8n-webhook (server-to-server, zodat de webhook-URL niet in de browser ligt).
+// De bezoeker mag hier nooit op stranden: de uitslag is client-side, maar de
+// client toont bij een niet-ok antwoord wel een herstel-regel (mail Wessel).
+
+const MAX_BODY_BYTES = 20_000;
+
+const str = (v: unknown, max: number) =>
+  typeof v === "string" ? v.trim().slice(0, max) : "";
+
 export async function POST(request: NextRequest) {
   const webhook = process.env.CONFIGURATOR_WEBHOOK_URL;
   if (!webhook) {
@@ -11,10 +17,36 @@ export async function POST(request: NextRequest) {
     return Response.json({ ok: false }, { status: 500 });
   }
 
-  let payload: unknown;
+  let text: string;
   try {
-    payload = await request.json();
+    text = await request.text();
   } catch {
+    return Response.json({ ok: false }, { status: 400 });
+  }
+  if (text.length > MAX_BODY_BYTES) {
+    return Response.json({ ok: false }, { status: 400 });
+  }
+
+  let payload: Record<string, unknown>;
+  try {
+    const parsed: unknown = JSON.parse(text);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error();
+    payload = parsed as Record<string, unknown>;
+  } catch {
+    return Response.json({ ok: false }, { status: 400 });
+  }
+
+  // Honeypot: mensen zien dit veld niet, bots vullen het in.
+  // Doen alsof het gelukt is en niets doorsturen.
+  if (str(payload._hp, 200)) {
+    return Response.json({ ok: true });
+  }
+  delete payload._hp;
+
+  const naam = str(payload.naam, 120);
+  const bedrijf = str(payload.bedrijf, 160);
+  const email = str(payload.email, 200);
+  if (!naam || !bedrijf || !/.+@.+\..+/.test(email)) {
     return Response.json({ ok: false }, { status: 400 });
   }
 
