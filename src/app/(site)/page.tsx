@@ -153,7 +153,7 @@ export default async function Home() {
           </AnimateIn>
           <StaggerContainer className="grid grid-cols-1 gap-5 md:grid-cols-2" staggerDelay={0.1}>
             <StaggerItem>
-              <ServiceCard icon={<Target className="h-5 w-5" />} title="Leads voorsorteren" description="Elke ochtend staat de gescreende lijst klaar. Jouw mensen voeren de gesprekken." color="#22D3EE" />
+              <ServiceCard icon={<Target className="h-5 w-5" />} title="Leads uitzoeken" description="Elke ochtend staat de gescreende lijst klaar. Jouw mensen voeren de gesprekken." color="#22D3EE" />
             </StaggerItem>
             <StaggerItem>
               <ServiceCard icon={<FileText className="h-5 w-5" />} title="Offertes klaarzetten" description="Het concept staat klaar uit je eigen gegevens. Jij zet de kennis en de prijs erin en verstuurt." color="#A78BFA" />

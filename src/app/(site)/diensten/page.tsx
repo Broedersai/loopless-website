@@ -7,18 +7,18 @@ import { Target, FileText, BarChart3 } from "lucide-react";
 export const metadata: Metadata = {
   title: "Diensten — AI-automatisering op maat voor het MKB",
   description:
-    "Van lead qualification tot offerte-automatisering en interne kennisbanken — ontdek hoe Loopless jouw MKB-team tijd bespaart met AI-oplossingen op maat.",
+    "Van leads uitzoeken tot offertes klaarzetten en vragen beantwoorden uit eigen documentatie: AI-automatisering op maat die jouw MKB-team tijd teruggeeft.",
   alternates: { canonical: "/diensten" },
   openGraph: {
     title: "Diensten — AI-automatisering op maat voor het MKB",
     description:
-      "Van lead qualification tot offerte-automatisering en interne kennisbanken — ontdek hoe Loopless jouw MKB-team tijd bespaart met AI-oplossingen op maat.",
+      "Van leads uitzoeken tot offertes klaarzetten en vragen beantwoorden uit eigen documentatie: AI-automatisering op maat die jouw MKB-team tijd teruggeeft.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Diensten — AI-automatisering op maat voor het MKB",
     description:
-      "Van lead qualification tot offerte-automatisering en interne kennisbanken — ontdek hoe Loopless jouw MKB-team tijd bespaart met AI-oplossingen op maat.",
+      "Van leads uitzoeken tot offertes klaarzetten en vragen beantwoorden uit eigen documentatie: AI-automatisering op maat die jouw MKB-team tijd teruggeeft.",
   },
 };
 
@@ -36,10 +36,10 @@ const servicesJsonLd = {
     "@type": "OfferCatalog",
     name: "AI-automatiseringsdiensten",
     itemListElement: [
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Lead Qualification", description: "Automatisch leads zoeken, screenen en klaarzetten voor je team." } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Offerte-automatisering", description: "Concept-offertes genereren op basis van eerdere offertes en productinfo." } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Interne kennisbank", description: "Een AI-assistent die je bedrijfsdata kent en direct antwoord geeft." } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Procesautomatisering op maat", description: "Maatwerk automatisering voor elk repetitief, handmatig proces." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Leads uitzoeken", description: "Het systeem zoekt, screent en kwalificeert leads. Jouw mensen voeren de gesprekken." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Offertes klaarzetten", description: "Concept-offertes staan klaar uit je eigen tarieven en productinfo. Jij controleert en verstuurt." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Vragen beantwoorden uit eigen documentatie", description: "Antwoorden uit je eigen documenten, met directe bronverwijzing." } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Maatwerk voor jouw uitzoekwerk", description: "Maatwerk automatisering voor het uitzoekwerk dat jouw team het meeste tijd kost." } },
     ],
   },
 };
@@ -48,8 +48,8 @@ const diensten = [
   {
     id: "lead-qualification",
     icon: <Target className="h-6 w-6" />,
-    title: "Lead qualification",
-    navLabel: "Lead qualification",
+    title: "Leads uitzoeken",
+    navLabel: "Leads",
     subtitle: "Elke ochtend een lijst met gekwalificeerde leads, zonder dat je team er iets voor hoeft te doen.",
     paragraphs: [
       "Recruiters en salesteams verliezen dagelijks uren aan handmatig zoeken, checken en invoeren. Dat stopt.",
@@ -62,7 +62,7 @@ const diensten = [
   {
     id: "offerte-automatisering",
     icon: <FileText className="h-6 w-6" />,
-    title: "Offerte-automatisering",
+    title: "Offertes klaarzetten",
     navLabel: "Offertes",
     subtitle: "Een aanvraag komt binnen, een offerte gaat eruit. Zonder dat iemand er uren werk in steekt.",
     paragraphs: [
@@ -76,13 +76,13 @@ const diensten = [
   {
     id: "kennisbank",
     icon: <BarChart3 className="h-6 w-6" />,
-    title: "Interne kennisbank",
-    navLabel: "Kennisbank",
+    title: "Vragen beantwoorden uit eigen documentatie",
+    navLabel: "Vragen & kennis",
     subtitle: "Al je kennis op één plek, altijd direct beschikbaar.",
     paragraphs: [
-      "Handleidingen, procedures, productinfo — het bestaat allemaal. Maar het staat verspreid over mappen, drives en hoofden van collega's. Dus wordt er gebeld, gezocht en gewacht.",
+      "Handleidingen, procedures, productinfo: het bestaat allemaal. Maar het staat verspreid over mappen, drives en hoofden van collega's. Dus wordt er gebeld, gezocht en gewacht.",
       "Wij bouwen een AI-assistent die al je documenten kent. Medewerkers stellen een vraag via chat en krijgen binnen seconden antwoord met een directe bronverwijzing.",
-      "Geen zoeken meer, geen collega lastigvallen. Gewoon: vraag stellen, antwoord krijgen.",
+      "Geen zoeken meer, geen collega storen. De expert doet weer zijn eigen werk, en iedereen krijgt toch antwoord.",
     ],
     voorWie: "Bedrijven met veel interne documenten, handleidingen of procedures waar medewerkers dagelijks in moeten zoeken",
     accentColor: "#E8A04E",
@@ -102,12 +102,12 @@ export default function DienstenPage() {
         <div className="mx-auto max-w-[1200px] px-6">
           <AnimateIn>
             <h1 className="mb-4 font-[family-name:var(--font-heading)] text-5xl font-bold text-white md:text-6xl">
-              Wat we automatiseren
+              Het werk waarvoor je niemand hebt aangenomen
             </h1>
           </AnimateIn>
           <AnimateIn delay={0.1}>
             <p className="max-w-[600px] text-xl text-[#8585A3]">
-              Je betaalt medewerkers om te denken, niet om te kopiëren en plakken. Wij halen het handmatige werk eruit.
+              Uitzoeken, overtypen, mail doorspitten, gegevens bij elkaar rapen. Wij bouwen systemen die dat werk op de achtergrond doen. Jouw mensen controleren en beslissen.
             </p>
           </AnimateIn>
 
@@ -198,7 +198,7 @@ export default function DienstenPage() {
               Staat jouw proces er niet tussen?
             </h2>
             <p className="mb-4 text-lg text-[#EDEDF4]">
-              Wij beginnen altijd bij het probleem, nooit bij de technologie.
+              Wij beginnen altijd bij het probleem, nooit bij de technologie. Of preciezer: bij de persoon die verzuipt, niet bij de tool.
             </p>
             <p className="mb-10 text-[#8585A3]">
               Eerst brengen we in kaart waar tijd verloren gaat. Dan pas bouwen we een oplossing die past bij hoe jij werkt. Elk MKB-bedrijf met taken die te veel tijd kosten is welkom.
