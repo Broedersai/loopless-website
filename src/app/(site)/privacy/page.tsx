@@ -1,0 +1,95 @@
+import type { Metadata } from "next";
+import { PageGlow } from "@/components/page-glow";
+
+// Privacyverklaring — toegevoegd 2026-07-24 (review-ronde configurator).
+// Claims hier zijn geverifieerd tegen de werkelijke stack: contactformulier
+// via Formspree, configurator via eigen server (n8n, EU) naar Google
+// Workspace, hosting Vercel, geen tracking-cookies of analytics.
+
+export const metadata: Metadata = {
+  title: "Privacyverklaring",
+  description:
+    "Hoe Loopless omgaat met de gegevens die je achterlaat via het contactformulier of de configurator.",
+  alternates: { canonical: "/privacy" },
+};
+
+function H2({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="mb-3 mt-12 font-[family-name:var(--font-heading)] text-2xl font-bold text-white">
+      {children}
+    </h2>
+  );
+}
+
+function P({ children }: { children: React.ReactNode }) {
+  return <p className="mb-4 leading-relaxed text-[#8585A3]">{children}</p>;
+}
+
+export default function PrivacyPage() {
+  return (
+    <>
+      <PageGlow />
+      <section className="relative pb-24 pt-40">
+        <div className="mx-auto max-w-[720px] px-6">
+          <h1 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white md:text-5xl">
+            Privacyverklaring
+          </h1>
+          <p className="mb-2 text-sm text-[#8585A3]">Laatst bijgewerkt: 24 juli 2026</p>
+          <P>
+            Loopless is een handelsnaam van Broeders Digital (eenmanszaak, KVK 42004729). Deze
+            pagina legt uit welke gegevens we verwerken als je iets achterlaat op loopless.nl, en
+            wat we daarmee doen. Kort samengevat: alleen wat nodig is om je te antwoorden, niets
+            wordt verkocht of gedeeld voor marketing.
+          </P>
+
+          <H2>Welke gegevens we verwerken</H2>
+          <P>
+            Via het contactformulier en de configurator: je naam, bedrijfsnaam, e-mailadres,
+            telefoonnummer (als je dat invult) en de antwoorden die je zelf geeft over jullie
+            situatie. Verder houdt de hosting standaard technische serverlogs bij, zoals elk
+            website-platform.
+          </P>
+
+          <H2>Waarvoor we ze gebruiken</H2>
+          <P>
+            Om je het overzicht uit de configurator te mailen, je vraag te beantwoorden en er
+            daarna contact over op te nemen. Dat is ook de grondslag: je vraagt er zelf om. We
+            zetten je niet op een nieuwsbrief of marketinglijst.
+          </P>
+
+          <H2>Waar je gegevens staan</H2>
+          <P>
+            Inzendingen via de configurator lopen via onze eigen automatiseringsserver in een
+            EU-datacenter en worden bewaard in Google Workspace (mail en een spreadsheet). Het
+            contactformulier wordt verwerkt door Formspree. De website wordt gehost bij Vercel.
+            Voor zover deze partijen gegevens buiten de EU verwerken, gebeurt dat onder de
+            waarborgen die de AVG daarvoor kent, zoals het EU-VS Data Privacy Framework of
+            standaardcontractbepalingen.
+          </P>
+
+          <H2>Hoe lang we ze bewaren</H2>
+          <P>
+            Zolang dat nodig is voor de opvolging van je aanvraag, en maximaal twaalf maanden na
+            het laatste contact. Word je klant, dan gelden de afspraken uit de overeenkomst.
+          </P>
+
+          <H2>Cookies</H2>
+          <P>
+            Loopless.nl gebruikt geen tracking-cookies en geen analytics. Er kan alleen een
+            functionele cookie worden gezet die nodig is om de site te laten werken.
+          </P>
+
+          <H2>Je rechten</H2>
+          <P>
+            Je kunt je gegevens inzien, laten corrigeren of laten verwijderen. Mail daarvoor naar{" "}
+            <a href="mailto:wessel@loopless.nl" className="text-[#4F8EF7] hover:underline">
+              wessel@loopless.nl
+            </a>
+            . Ben je het niet eens met hoe we met je gegevens omgaan, dan kun je een klacht
+            indienen bij de Autoriteit Persoonsgegevens.
+          </P>
+        </div>
+      </section>
+    </>
+  );
+}

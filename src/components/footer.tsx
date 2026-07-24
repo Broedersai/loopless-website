@@ -72,7 +72,10 @@ export function Footer() {
         {/* Bottom */}
         <div className="border-t border-[#2E2E4A] pt-6">
           <p className="text-center text-xs text-[#8585A3]">
-            &copy; <CurrentYear /> Loopless — Broeders Digital | KVK: 42004729
+            &copy; <CurrentYear /> Loopless — Broeders Digital | KVK: 42004729 |{" "}
+            <Link href="/privacy" className="transition-colors hover:text-[#4F8EF7]">
+              Privacy
+            </Link>
           </p>
         </div>
       </div>

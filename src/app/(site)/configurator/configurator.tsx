@@ -338,7 +338,11 @@ export function Configurator() {
           />
           <p className="mb-2 text-xs text-[#8585A3]">
             We gebruiken je gegevens alleen om je het overzicht te mailen en er één keer contact
-            over op te nemen.
+            over op te nemen. Zie de{" "}
+            <Link href="/privacy" className="text-[#4F8EF7] hover:underline">
+              privacyverklaring
+            </Link>
+            .
           </p>
           {formError && <p className="mb-2 text-sm text-[#E8A04E]">{formError}</p>}
           <NavRow
