@@ -2,21 +2,21 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AnimateIn } from "@/components/ui/animate-in";
 import { PageGlow, SectionDivider } from "@/components/page-glow";
-import { Target, FileText, BarChart3 } from "lucide-react";
+import { Target, FileText, BarChart3, PackageSearch } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Diensten — AI-automatisering op maat voor het MKB",
+  title: "Diensten: AI-automatisering op maat voor het MKB",
   description:
     "Van leads uitzoeken tot offertes klaarzetten en vragen beantwoorden uit eigen documentatie: AI-automatisering op maat die jouw MKB-team tijd teruggeeft.",
   alternates: { canonical: "/diensten" },
   openGraph: {
-    title: "Diensten — AI-automatisering op maat voor het MKB",
+    title: "Diensten: AI-automatisering op maat voor het MKB",
     description:
       "Van leads uitzoeken tot offertes klaarzetten en vragen beantwoorden uit eigen documentatie: AI-automatisering op maat die jouw MKB-team tijd teruggeeft.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Diensten — AI-automatisering op maat voor het MKB",
+    title: "Diensten: AI-automatisering op maat voor het MKB",
     description:
       "Van leads uitzoeken tot offertes klaarzetten en vragen beantwoorden uit eigen documentatie: AI-automatisering op maat die jouw MKB-team tijd teruggeeft.",
   },
@@ -36,6 +36,7 @@ const servicesJsonLd = {
     "@type": "OfferCatalog",
     name: "AI-automatiseringsdiensten",
     itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Besteladvies en inkoop-uitzoekwerk", description: "Het systeem zoekt prijzen, voorraad en levertijden bij elkaar en zet 's ochtends een besteladvies klaar. Je inkoper controleert en beslist." } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Leads uitzoeken", description: "Het systeem zoekt, screent en kwalificeert leads. Jouw mensen voeren de gesprekken." } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Offertes klaarzetten", description: "Concept-offertes staan klaar uit je eigen tarieven en productinfo. Jij controleert en verstuurt." } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Vragen beantwoorden uit eigen documentatie", description: "Antwoorden uit je eigen documenten, met directe bronverwijzing." } },
@@ -46,6 +47,20 @@ const servicesJsonLd = {
 
 const diensten = [
   {
+    id: "inkoop-besteladvies",
+    icon: <PackageSearch className="h-6 w-6" />,
+    title: "Besteladvies en inkoop-uitzoekwerk",
+    navLabel: "Inkoop",
+    subtitle: "Je inkoper koopt weer in, in plaats van uit te zoeken.",
+    paragraphs: [
+      "Voor elke bestelling zoekt iemand eerst prijzen, voorraad en levertijden bij elkaar. Leverancierslijsten, mail, het voorraadscherm: dat verzamelwerk vreet de dag op.",
+      "Wij bouwen een systeem dat dat uitzoekwerk op de achtergrond doet: 's ochtends staat het besteladvies klaar, met de prijzen, voorraad en levertijden erbij. Het advies is een voorstel, geen bestelling. Je inkoper controleert het en drukt zelf op de knop.",
+    ],
+    highlight: "Zo werkt het bij Drabor, een groothandel: de inkopers vragen met één knop een besteladvies op en controleren het voordat er iets besteld wordt.",
+    voorWie: "Groothandels en technische handel waar inkopers of binnendienst dagelijks prijzen, voorraad en levertijden bij elkaar zoeken",
+    accentColor: "#4F8EF7",
+  },
+  {
     id: "lead-qualification",
     icon: <Target className="h-6 w-6" />,
     title: "Leads uitzoeken",
@@ -53,9 +68,9 @@ const diensten = [
     subtitle: "Elke ochtend een lijst met gekwalificeerde leads, zonder dat je team er iets voor hoeft te doen.",
     paragraphs: [
       "Recruiters en salesteams verliezen dagelijks uren aan handmatig zoeken, checken en invoeren. Dat stopt.",
-      "Het systeem zoekt, screent en kwalificeert leads op basis van jouw criteria. 24/7, op de achtergrond. Jouw team logt in en gaat direct aan de slag met wat er echt toe doet: klantcontact.",
+      "Het systeem zoekt, screent en kwalificeert leads op basis van jouw criteria, op de achtergrond, ook 's nachts en in het weekend. Jouw team logt in en gaat direct aan de slag met wat er echt toe doet: klantcontact.",
     ],
-    highlight: "Bewezen resultaat: vuljevacature.nl logt 's ochtends in en heeft direct een lijst klaarstaan. Uren per week bespaard, structureel.",
+    highlight: "Zo werkt het bij vuljevacature.nl: de leadkwalificatie draait elke ochtend vanzelf, het team benadert de kandidaten.",
     voorWie: "Recruitmentbureaus en salesteams die dagelijks tijd kwijt zijn aan het zoeken en kwalificeren van leads",
     accentColor: "#22D3EE",
   },
@@ -67,8 +82,8 @@ const diensten = [
     subtitle: "Een aanvraag komt binnen, een offerte gaat eruit. Zonder dat iemand er uren werk in steekt.",
     paragraphs: [
       "Offertes opstellen betekent steeds opnieuw dezelfde informatie opzoeken en tarieven berekenen. Wij bouwen een systeem dat dat overneemt.",
-      "Je stopt de aanvraag erin, AI genereert een compleet concept op basis van jouw tarieven en kortingen. Jij controleert en verstuurt.",
-      "Van uren werk per offerte naar minuten.",
+      "Een aanvraag komt binnen en het systeem zet een compleet concept klaar uit jouw tarieven en kortingen. Jij controleert en verstuurt.",
+      "Wie de offerte maakt, begint niet meer bij nul maar bij een concept dat al klopt.",
     ],
     voorWie: "Bedrijven die projectoffertes opstellen met vaste tarieven, zoals aannemers, groenvoorzieningsbedrijven en consultants",
     accentColor: "#A78BFA",
@@ -81,7 +96,7 @@ const diensten = [
     subtitle: "Al je kennis op één plek, altijd direct beschikbaar.",
     paragraphs: [
       "Handleidingen, procedures, productinfo: het bestaat allemaal. Maar het staat verspreid over mappen, drives en hoofden van collega's. Dus wordt er gebeld, gezocht en gewacht.",
-      "Wij bouwen een AI-assistent die al je documenten kent. Medewerkers stellen een vraag via chat en krijgen binnen seconden antwoord met een directe bronverwijzing.",
+      "Wij bouwen een AI-assistent die al je documenten kent. Medewerkers stellen hun vraag en krijgen direct antwoord, met erbij waar het vandaan komt.",
       "Geen zoeken meer, geen collega storen. De expert doet weer zijn eigen werk, en iedereen krijgt toch antwoord.",
     ],
     voorWie: "Bedrijven met veel interne documenten, handleidingen of procedures waar medewerkers dagelijks in moeten zoeken",
