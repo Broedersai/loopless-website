@@ -6,87 +6,7 @@ import { ChevronDown, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AnimateIn } from "@/components/ui/animate-in";
 import { PageGlow } from "@/components/page-glow";
-
-const faqCategories = [
-  {
-    label: "Over automatisering",
-    items: [
-      {
-        question: "Wat is AI-automatisering voor het MKB?",
-        answer:
-          "AI-automatisering voor het MKB betekent dat slimme systemen repetitieve handmatige taken overnemen — leads zoeken, offertes opstellen, informatie opzoeken — zonder dat je een IT-afdeling nodig hebt. Het past op de schaal en het budget van een MKB-bedrijf, in tegenstelling tot zware enterprise-oplossingen. Je team krijgt uren per week terug om aan klantcontact en groei te besteden.",
-      },
-      {
-        question: "Waarom zou ik mijn bedrijfsprocessen automatiseren?",
-        answer:
-          "Handmatig werk kost tijd die je maar één keer kunt uitgeven. Elke uur die een medewerker besteedt aan kopiëren, zoeken of invoeren, is een uur dat niet naar klanten, groei of vakmanschap gaat. Automatisering haalt die stappen eruit zodat je team zich kan richten op werk dat er echt toe doet.",
-      },
-      {
-        question: "Welke processen kan ik automatiseren in mijn bedrijf?",
-        answer:
-          "Elk proces waarbij medewerkers dezelfde stappen herhalen. Denk aan leads zoeken en screenen, offertes opstellen, informatie opzoeken in documenten, rapporten samenstellen of data overzetten tussen systemen. Als het handmatig en repetitief is, is het een kandidaat.",
-      },
-      {
-        question:
-          "Wat is het verschil tussen procesautomatisering en gewone software kopen?",
-        answer:
-          "Software koop je en past je bedrijf erop aan. Automatisering bouw ik op maat zodat het past bij hoe jullie al werken. We beginnen altijd bij het probleem, niet bij de technologie.",
-      },
-    ],
-  },
-  {
-    label: "Over de samenwerking",
-    items: [
-      {
-        question: "Wat kost procesautomatisering voor een klein bedrijf?",
-        answer:
-          "Dat hangt af van hoe groot het project is. We kijken samen wat er nodig is en wat dat kost — pas daarna maak ik een voorstel. Hoe kleiner het project, hoe lager de kosten. Je betaalt nooit voor meer dan wat je nodig hebt.",
-      },
-      {
-        question:
-          "Is AI-automatisering ook geschikt voor een MKB-bedrijf zonder IT-afdeling?",
-        answer:
-          "Ja. Ik regel alle technische zaken van opzetten tot inrichten. Jij hoeft alleen aan te geven waar je vastloopt. Je hebt geen IT-kennis nodig om te beginnen.",
-      },
-      {
-        question: "Hoe lang duurt het om een automatisering te laten werken?",
-        answer:
-          "Binnen twee weken bouw ik de oplossing, daarna volgt een testfase van twee weken. Binnen een maand heb je een werkend systeem.",
-      },
-      {
-        question:
-          "Hoe weet ik of automatisering geschikt is voor mijn situatie?",
-        answer:
-          "Dat bepalen we samen in een gratis gesprek. Ik breng in kaart waar de meeste tijd verloren gaat en of automatisering daar de juiste oplossing voor is. Soms is een betere werkafspraak effectiever. Dat zeg ik dan ook gewoon.",
-      },
-      {
-        question: "Wat heb ik nodig om te beginnen met procesautomatisering?",
-        answer:
-          "Alleen een gesprek. Geen technische kennis, geen voorbereiding. Ik stel de vragen en breng in kaart waar de winst zit.",
-      },
-      {
-        question: "Wat als het systeem niet werkt zoals verwacht?",
-        answer:
-          "Ik hanteer no cure no pay. Als het systeem niet doet wat we hebben afgesproken, betaal je niet.",
-      },
-    ],
-  },
-  {
-    label: "Na oplevering",
-    items: [
-      {
-        question: "Wie beheert het systeem na de oplevering?",
-        answer:
-          "Het systeem draait op jullie eigen netwerk. Wil je geen omkijken naar de technische kant? Dan log ik op afstand in om alles werkend te houden via een onderhoudsabonnement.",
-      },
-      {
-        question: "Is mijn data veilig als ik werk met AI-automatisering?",
-        answer:
-          "Ja. Het systeem draait op jullie eigen netwerk, dus jullie data blijft bij jullie. Ik heb alleen toegang als jullie dat toestaan voor onderhoud.",
-      },
-    ],
-  },
-];
+import { faqCategories } from "./faq-data";
 
 function FaqItem({
   question,
@@ -149,9 +69,9 @@ export default function FaqPage() {
             </h1>
           </AnimateIn>
           <AnimateIn delay={0.1}>
-            <p className="max-w-[500px] text-xl text-[#8585A3]">
-              Alles wat je wilt weten over procesautomatisering en hoe Loopless
-              werkt.
+            <p className="max-w-[560px] text-xl text-[#8585A3]">
+              Welk werk een systeem kan overnemen, wat het kost, en wat er
+              gebeurt als het niet doet wat we hebben afgesproken.
             </p>
           </AnimateIn>
         </div>

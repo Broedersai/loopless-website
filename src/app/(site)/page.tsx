@@ -31,10 +31,10 @@ export default async function Home() {
   const problem3Title = blockText(blocks, "home_problem_3_title", "Jij beantwoordt zelf nog elke lastige vraag");
   const problem3Desc = blockText(blocks, "home_problem_3_desc", "Terwijl je bedrijf jouw aandacht ergens anders nodig heeft. Ondernemen komt er niet meer van.");
   const caseIntro = blockText(blocks, "home_case_intro", "Niet alleen mooie woorden: dit is wat we al hebben opgeleverd.");
-  const caseTitle = blockText(blocks, "home_case_title", "Van uren zoekwerk naar gekwalificeerde leads elke ochtend");
-  const caseDesc = blockText(blocks, "home_case_desc", "Elke ochtend een lijst met relevante kandidaten klaar, zonder dat het team er iets voor hoeft te doen. De vrijgekomen tijd gaat naar waar het om draait: leads benaderen en vacatures vullen.");
-  const ctaHeading = blockText(blocks, "home_cta_heading", "Benieuwd waar de meeste winst zit in jouw processen?");
-  const ctaText = blockText(blocks, "home_cta_text", "Ontdek waar jouw team de meeste tijd terugwint. Plan een gratis gesprek, geheel vrijblijvend.");
+  const caseTitle = blockText(blocks, "home_case_title", "Van zoekwerk naar een lijst die 's ochtends klaarstaat");
+  const caseDesc = blockText(blocks, "home_case_desc", "Elke ochtend staat de lijst klaar met wie de moeite waard is. Het team begint de dag met bellen in plaats van met zoeken, en bepaalt zelf wie er benaderd wordt.");
+  const ctaHeading = blockText(blocks, "home_cta_heading", "Benieuwd welk werk bij jou eraf kan?");
+  const ctaText = blockText(blocks, "home_cta_text", "Weet je waar het blijft hangen, plan dan een gesprek. Weet je het nog niet precies, loop dan de configurator langs.");
   const replaceHeading = blockText(blocks, "home_replace_heading", "Vervangt dit mijn mensen? Nee. Bewust niet.");
   const replaceIntro = blockText(blocks, "home_replace_intro", "Wij automatiseren het uitzoeken, niet het beslissen. Daar zijn drie redenen voor:");
   const replace1Title = blockText(blocks, "home_replace_1_title", "Je mensen zíjn je bedrijf");
@@ -258,13 +258,21 @@ export default async function Home() {
       <SectionWithParticles className="py-24 md:py-32" particleCount={300} speed={0.4} trailOpacity={0.06}>
         <AnimateIn className="mx-auto max-w-[1200px] px-6 text-center">
           <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">{ctaHeading}</h2>
-          <p className="mx-auto mb-8 max-w-[500px] text-lg text-[#8585A3]">{ctaText}</p>
-          <Link
-            href="/contact"
-            className="inline-block rounded-full bg-[#4F8EF7] px-8 py-4 font-semibold text-white transition-colors hover:bg-[#3A75D8]"
-          >
-            Plan een gratis gesprek
-          </Link>
+          <p className="mx-auto mb-8 max-w-[520px] text-lg text-[#8585A3]">{ctaText}</p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-block rounded-full bg-[#4F8EF7] px-8 py-4 font-semibold text-white transition-colors hover:bg-[#3A75D8]"
+            >
+              Plan een gratis gesprek
+            </Link>
+            <Link
+              href="/configurator"
+              className="inline-block rounded-full border border-[#2E2E4A] px-8 py-4 font-semibold text-[#EDEDF4] transition-all duration-300 hover:border-[#4F8EF7]/40 hover:text-white"
+            >
+              Naar de configurator
+            </Link>
+          </div>
         </AnimateIn>
       </SectionWithParticles>
     </>

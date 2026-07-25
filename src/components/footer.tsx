@@ -27,7 +27,10 @@ export function Footer() {
                 {[
                   { href: "/", label: "Home" },
                   { href: "/diensten", label: "Diensten" },
+                  { href: "/configurator", label: "Wat kan bij jou?" },
+                  { href: "/cases", label: "Cases" },
                   { href: "/over", label: "Over mij" },
+                  { href: "/faq", label: "FAQ" },
                   { href: "/contact", label: "Contact" },
                 ].map((item) => (
                   <li key={item.href}>

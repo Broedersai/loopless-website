@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Mail, Linkedin, Clock, ShieldCheck, Send } from "lucide-react";
 import { AnimateIn } from "@/components/ui/animate-in";
 import { PageGlow } from "@/components/page-glow";
@@ -14,14 +15,14 @@ const contactFields = [
   { entry: "telefoon", label: "Telefoonnummer", type: "tel", placeholder: "+31 6 12345678" },
 ];
 
-const intakeFields = [
-  { entry: "tijdrovend-werk", label: "Welk werk kost jullie team de meeste tijd, maar voegt weinig waarde toe?", type: "textarea" },
-  { entry: "uren-per-week", label: "Hoeveel uur per week schat je dat dit het hele team kost?", type: "text" },
-  { entry: "huidige-oplossing", label: "Hoe lossen jullie dit op dit moment op?", type: "textarea" },
-  { entry: "ideale-situatie", label: "Hoe ziet de ideale situatie eruit?", type: "textarea" },
-  { entry: "tools-en-systemen", label: "Welke tools en systemen gebruiken jullie?", type: "text" },
-  { entry: "eerder-geprobeerd", label: "Hebben jullie dit eerder geprobeerd op te lossen? Zo ja, wat werkte niet?", type: "textarea" },
-];
+// Afgeslankt 2026-07-25: de zes intakevragen zijn vervangen door één
+// berichtveld. Wie nog niet weet waar het vastloopt, gaat naar de configurator.
+const berichtVeld = {
+  entry: "bericht",
+  label: "Waar loopt het bij jullie vast?",
+  placeholder:
+    "Bijvoorbeeld: onze binnendienst is de halve dag bezig met dezelfde vragen beantwoorden.",
+};
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -67,8 +68,8 @@ export default function ContactPage() {
           </AnimateIn>
           <AnimateIn delay={0.1}>
             <p className="max-w-[600px] text-lg text-[#8585A3]">
-              Heb je een concreet probleem of twijfel je nog waar de winst zit?
-              In beide gevallen denk ik graag mee.
+              Weet je al welk werk eraf moet, of weet je alleen dat er tijd
+              verdwijnt? In beide gevallen denk ik graag mee.
             </p>
           </AnimateIn>
 
@@ -85,7 +86,7 @@ export default function ContactPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Send className="h-4 w-4 text-[#4F8EF7]" />
-                <span>~5 minuten</span>
+                <span>~1 minuut</span>
               </div>
             </div>
           </AnimateIn>
@@ -124,10 +125,9 @@ export default function ContactPage() {
               <p className="text-sm leading-relaxed text-[#8585A3]">
                 <span className="font-semibold text-[#EDEDF4]">Hoe werkt het?</span>
                 <br />
-                Na het invullen neem ik binnen 24 uur contact op. Samen kijken
-                we waar de grootste winst zit — ook als je nog niet precies weet
-                welke processen geautomatiseerd kunnen worden. Geen
-                verplichtingen, geen verborgen kosten.
+                Na het versturen neem ik binnen 24 uur contact op. Samen kijken
+                we welk werk bij jullie blijft liggen en of een systeem daar het
+                antwoord op is. Geen verplichtingen, geen verborgen kosten.
               </p>
             </div>
           </AnimateIn>
@@ -143,8 +143,8 @@ export default function ContactPage() {
                   Bedankt voor het invullen!
                 </h3>
                 <p className="max-w-md text-[#8585A3]">
-                  Ik heb je antwoorden ontvangen en neem binnen 24 uur contact
-                  met je op om alles door te nemen.
+                  Ik heb je bericht ontvangen en neem binnen 24 uur contact met
+                  je op.
                 </p>
               </div>
             ) : (
@@ -181,36 +181,31 @@ export default function ContactPage() {
 
                 <div className="mb-8 border-t border-[#2E2E4A]" />
 
-                {/* Intake questions section */}
+                {/* Bericht */}
                 <div>
                   <h3 className="mb-1 font-[family-name:var(--font-heading)] text-lg font-semibold text-white">
                     Over jullie situatie
                   </h3>
                   <p className="mb-5 text-sm text-[#8585A3]">
-                    Weet je het antwoord niet zeker? Geen probleem — vul in wat je weet,
-                    de rest bespreken we samen.
+                    Eén of twee zinnen is genoeg. Weet je nog niet precies waar
+                    het zit?{" "}
+                    <Link
+                      href="/configurator"
+                      className="font-medium text-[#4F8EF7] transition-colors hover:text-[#3A75D8]"
+                    >
+                      Loop dan eerst de configurator langs.
+                    </Link>
                   </p>
-                  <div className="flex flex-col gap-6">
-                    {intakeFields.map(({ entry, label, type }) => (
-                      <div key={entry}>
-                        <label className="mb-1.5 block text-sm font-medium text-[#EDEDF4]">
-                          {label}
-                        </label>
-                        {type === "textarea" ? (
-                          <textarea
-                            name={entry}
-                            rows={3}
-                            className="w-full resize-y rounded-lg border border-[#2E2E4A] bg-[#1E1E30] px-4 py-3 text-[#EDEDF4] placeholder-[#8585A3] transition-colors focus:border-[#4F8EF7] focus:outline-none focus:ring-2 focus:ring-[#4F8EF740]"
-                          />
-                        ) : (
-                          <input
-                            type="text"
-                            name={entry}
-                            className="w-full rounded-lg border border-[#2E2E4A] bg-[#1E1E30] px-4 py-3 text-[#EDEDF4] placeholder-[#8585A3] transition-colors focus:border-[#4F8EF7] focus:outline-none focus:ring-2 focus:ring-[#4F8EF740]"
-                          />
-                        )}
-                      </div>
-                    ))}
+                  <div>
+                    <label className="mb-1.5 block text-sm font-medium text-[#EDEDF4]">
+                      {berichtVeld.label}
+                    </label>
+                    <textarea
+                      name={berichtVeld.entry}
+                      rows={5}
+                      placeholder={berichtVeld.placeholder}
+                      className="w-full resize-y rounded-lg border border-[#2E2E4A] bg-[#1E1E30] px-4 py-3 text-[#EDEDF4] placeholder-[#8585A3] transition-colors focus:border-[#4F8EF7] focus:outline-none focus:ring-2 focus:ring-[#4F8EF740]"
+                    />
                   </div>
                 </div>
 
@@ -238,7 +233,7 @@ export default function ContactPage() {
                   disabled={submitting}
                   className="mt-4 w-full rounded-lg bg-[#4F8EF7] px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-[#3A75D8] hover:shadow-[0_8px_30px_-8px_rgba(79,142,247,0.3)] disabled:opacity-50"
                 >
-                  {submitting ? "Versturen..." : "Verstuur antwoorden"}
+                  {submitting ? "Versturen..." : "Verstuur bericht"}
                 </button>
               </form>
             )}

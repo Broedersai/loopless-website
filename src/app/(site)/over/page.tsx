@@ -9,18 +9,18 @@ import { getBlocksByPage, blockText, blockImage } from "@/lib/supabase/content";
 export const metadata: Metadata = {
   title: "Over Loopless — Wessel Broeders, oprichter",
   description:
-    "Maak kennis met Wessel Broeders — oprichter van Loopless. Bedrijfskunde-achtergrond gecombineerd met AI-expertise. Procesautomatisering voor het MKB vanuit Tiel en Breda.",
+    "Wessel Broeders, oprichter van Loopless. Ik bouw systemen die het uitzoekwerk doen, zodat jouw mensen weer het werk doen waarvoor je ze hebt aangenomen.",
   alternates: { canonical: "/over" },
   openGraph: {
     title: "Over Loopless — Wessel Broeders, oprichter",
     description:
-      "Maak kennis met Wessel Broeders — oprichter van Loopless. Bedrijfskunde-achtergrond gecombineerd met AI-expertise.",
+      "Wessel Broeders, oprichter van Loopless. Ik bouw systemen die het uitzoekwerk doen, zodat jouw mensen weer het werk doen waarvoor je ze hebt aangenomen.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Over Loopless — Wessel Broeders, oprichter",
     description:
-      "Maak kennis met Wessel Broeders — oprichter van Loopless. Bedrijfskunde-achtergrond gecombineerd met AI-expertise.",
+      "Wessel Broeders, oprichter van Loopless. Ik bouw systemen die het uitzoekwerk doen, zodat jouw mensen weer het werk doen waarvoor je ze hebt aangenomen.",
   },
 };
 
@@ -28,16 +28,18 @@ export default async function OverPage() {
   const blocks = await getBlocksByPage("over");
 
   const kicker = blockText(blocks, "over_intro_kicker", "Oprichter Loopless");
-  const introP1 = blockText(blocks, "over_intro_p1", "De meeste automatiseringsbureaus komen met een oplossing voordat ze je bedrijf snappen. Ik begin met begrijpen hoe jij werkt, en bouw daarna pas.");
-  const introP2 = blockText(blocks, "over_intro_p2", "Dat is het verschil tussen een bedrijfskundige die ook kan bouwen, en een developer die ook adviseert.");
+  const introP1 = blockText(blocks, "over_intro_p1", "Je bent geen bedrijf begonnen om de hele dag uit te zoeken en mail door te spitten. En je hebt je mensen niet aangenomen om dat voor je te doen.");
+  const introP2 = blockText(blocks, "over_intro_p2", "Toch gaat het zo bij veel bedrijven. De inkoper is de halve week databeheerder, de binnendienst verzuipt in mail en Excel. Ik bouw de systemen die dat werk overnemen.");
   const photoUrl = blockImage(blocks, "over_photo", "/wessel.jpg");
-  const waaromP1 = blockText(blocks, "over_waarom_p1", "Tijdens mijn studie Bedrijfskunde aan Avans Breda leerde ik processen analyseren, knelpunten blootleggen en oplossingen ontwerpen vanuit de bedrijfsrealiteit. Naast mijn studie leerde ik automatiseren met AI — niet als hobby, maar als gereedschap om processen slimmer in te richten.");
-  const waaromP2 = blockText(blocks, "over_waarom_p2", "Die combinatie is zeldzaam. En voor jou als MKB'er precies wat je nodig hebt: iemand die begrijpt hoe jouw bedrijf werkt, én die de oplossing zelf kan bouwen.");
-  const praktijkP1 = blockText(blocks, "over_praktijk_p1", "Sommige bedrijven komen met een concreet idee: \"we willen dit proces automatiseren.\" Anderen weten dat er tijd verloren gaat, maar weten nog niet precies waar. Beide zijn een goed startpunt.");
-  const praktijkP2 = blockText(blocks, "over_praktijk_p2", "Ik kijk samen met je naar wat je wil bereiken, en bouw een oplossing die daar direct op aansluit.");
-  const resultaatText = blockText(blocks, "over_resultaat_text", "Voor vuljevacature.nl automatiseerde ik de volledige lead qualification. Het team logt 's ochtends in en heeft direct een lijst met gekwalificeerde leads klaarstaan. Uren per week bespaard, structureel.");
-  const ctaHeading = blockText(blocks, "over_cta_heading", "Benieuwd wat er mogelijk is voor jouw bedrijf?");
-  const ctaText = blockText(blocks, "over_cta_text", "Plan een gratis gesprek — ik denk graag mee.");
+  const waaromHeading = blockText(blocks, "over_waarom_heading", "Waarom ik bij het werk begin, niet bij de techniek");
+  const waaromP1 = blockText(blocks, "over_waarom_p1", "Tijdens mijn studie Bedrijfskunde aan Avans Breda leerde ik een bedrijf uit elkaar halen: waar loopt het vast, welke stap kost tijd en levert niets op. Daarnaast leerde ik bouwen. Niet als hobby, maar om die stappen er ook echt uit te kunnen halen.");
+  const waaromP2 = blockText(blocks, "over_waarom_p2", "Daardoor begint het bij mij nooit bij een tool. Het begint bij de vraag welk werk jouw mensen doen waarvoor ze niet zijn aangenomen. Wat daaruit komt, bouw ik zelf.");
+  const praktijkP1 = blockText(blocks, "over_praktijk_p1", "Sommige bedrijven komen met een concreet idee: dit stuk werk moet eraf. Anderen weten alleen dat er tijd verdwijnt, maar niet precies waar. Beide zijn een goed startpunt, want je mensen weten het meestal wel.");
+  const praktijkP2 = blockText(blocks, "over_praktijk_p2", "We kijken samen waar het uitzoekwerk zit en ik bouw daar een systeem omheen. Het systeem zet klaar, jouw mensen controleren en beslissen. Niemand wordt vervangen: dat is geen geruststelling achteraf, zo bouw ik het.");
+  const resultaatHeading = blockText(blocks, "over_resultaat_heading", "Hoe dat uitpakt");
+  const resultaatText = blockText(blocks, "over_resultaat_text", "Bij vuljevacature.nl deed het team het voorwerk zelf: leads zoeken, screenen, gegevens overtypen. Nu staat die lijst er 's ochtends al. Ze beginnen de dag met bellen in plaats van met zoeken, en bepalen zelf wie ze benaderen.");
+  const ctaHeading = blockText(blocks, "over_cta_heading", "Benieuwd welk werk bij jou eraf kan?");
+  const ctaText = blockText(blocks, "over_cta_text", "Weet je waar het blijft hangen, plan dan een gesprek. Weet je het nog niet, loop dan de configurator langs.");
 
   return (
     <>
@@ -76,7 +78,7 @@ export default async function OverPage() {
       <section className="bg-[#1A1A2E] py-24 md:py-32">
         <div className="mx-auto max-w-[700px] px-6">
           <AnimateIn>
-            <h2 className="mb-8 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">Waarom dat werkt</h2>
+            <h2 className="mb-8 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">{waaromHeading}</h2>
             <div className="space-y-4 text-[#EDEDF4] leading-relaxed">
               <p>{waaromP1}</p>
               <p className="text-[#8585A3]">{waaromP2}</p>
@@ -102,7 +104,7 @@ export default async function OverPage() {
       <section className="bg-[#1A1A2E] py-24 md:py-32">
         <div className="mx-auto max-w-[700px] px-6">
           <AnimateIn>
-            <h2 className="mb-8 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">Bewezen resultaat</h2>
+            <h2 className="mb-8 font-[family-name:var(--font-heading)] text-3xl font-bold text-white">{resultaatHeading}</h2>
             <div className="rounded-xl border border-[#2E2E4A] bg-[#161625] p-8">
               <div className="mb-4 flex items-center gap-4">
                 <a href="https://vuljevacature.nl" target="_blank" rel="noopener noreferrer" className="opacity-70 transition-opacity hover:opacity-100">
@@ -136,6 +138,12 @@ export default async function OverPage() {
                 className="inline-block rounded-full bg-[#4F8EF7] px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-[#3A75D8] hover:shadow-[0_8px_30px_-8px_rgba(79,142,247,0.3)]"
               >
                 Plan een gesprek
+              </Link>
+              <Link
+                href="/configurator"
+                className="inline-block rounded-full border border-[#2E2E4A] px-8 py-4 font-semibold text-[#EDEDF4] transition-all duration-300 hover:border-[#4F8EF7]/40 hover:text-white"
+              >
+                Naar de configurator
               </Link>
               <a
                 href="https://www.linkedin.com/in/wessel-broeders-250767221/"
