@@ -25,7 +25,9 @@ export default async function Home() {
   const heroSubtitle = blockText(
     blocks,
     "home_hero_subtitle",
-    "Je inkoper wil inkopen. Je binnendienst wil klanten helpen. Loopless bouwt systemen die het uitzoekwerk op de achtergrond doen, zodat iedereen weer tijd heeft voor het werk dat er echt toe doet.",
+    // Verdieping van de kop, geen uitleg: het mechanisme staat al in de
+    // diensten-kaarten, de uitleg-sectie en het vervangt-blok (besloten 2026-07-25).
+    "Toch gaat de dag op aan uitzoeken, overtypen en mail doorspitten.",
   );
   const problemsHeading = blockText(blocks, "home_problems_heading", "Herken je dit?");
   const problem1Title = blockText(blocks, "home_problem_1_title", "Je beste mensen zijn uren kwijt aan uitzoeken");
