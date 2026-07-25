@@ -12,7 +12,11 @@ const aanpakSteps = [
   { num: "03", title: "Draaien", desc: "Jouw processen lopen automatisch, zonder dat iemand er iets voor hoeft te doen.", color: "#34D399" },
 ];
 
-const caseResults = ["Uren per week bespaard", "24/7 automatisch actief", "Team focust op klantcontact"];
+const caseResults = [
+  "Elke ochtend staat de lijst klaar",
+  "Het systeem draait door, ook als er niemand kijkt",
+  "Het team bepaalt zelf wie er gebeld wordt",
+];
 
 export default async function Home() {
   const blocks = await getBlocksByPage("home");
@@ -206,7 +210,7 @@ export default async function Home() {
           <div className="flex flex-col gap-12 md:flex-row md:items-center md:gap-16">
             <AnimateIn className="md:w-2/5">
               <span className="mb-4 inline-block rounded-full border border-[#E8A04E]/20 bg-[#E8A04E]/10 px-4 py-1 text-xs font-medium text-[#E8A04E]">Case study</span>
-              <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Bewezen resultaat</h2>
+              <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Hoe dat uitpakt</h2>
               <p className="text-[#8585A3]">{caseIntro}</p>
             </AnimateIn>
             <AnimateIn className="md:w-3/5" delay={0.15}>
@@ -232,8 +236,8 @@ export default async function Home() {
                     </div>
                   ))}
                 </div>
-                <Link href="/contact" className="group inline-flex items-center gap-1 text-sm font-medium text-[#4F8EF7] transition-all hover:gap-2">
-                  Ook tijd besparen?
+                <Link href="/cases" className="group inline-flex items-center gap-1 text-sm font-medium text-[#4F8EF7] transition-all hover:gap-2">
+                  Bekijk de cases
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
