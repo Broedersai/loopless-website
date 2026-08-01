@@ -193,7 +193,7 @@ export default function ContactPage() {
                       href="/configurator"
                       className="font-medium text-[#4F8EF7] transition-colors hover:text-[#3A75D8]"
                     >
-                      Loop dan eerst de configurator langs.
+                      Kijk dan eerst wat er bij jou kan.
                     </Link>
                   </p>
                   <div>

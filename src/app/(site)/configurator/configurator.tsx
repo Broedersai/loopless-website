@@ -12,7 +12,11 @@ import Link from "next/link";
 // sinds de review-ronde wordt de uitslag ook per mail naar de lead gestuurd
 // (n8n rendert de blokken uit payload.uitslag, copy leeft alleen hier).
 // "Wessel neemt er één keer contact over op" is een harde belofte: max één
-// opvolg-poging (besluit Wessel 2026-07-23).
+// opvolg-poging (besluit Wessel 2026-07-23). Die belofte staat bewust NIET
+// meer in de copy (besluit 2026-08-01: te veel uitleg, wie zijn mailadres
+// achterlaat verwacht sowieso opvolging) maar geldt nog wel.
+// De uitslag-CTA stuurt geen bezoeker naar een leeg formulier maar hergebruikt
+// de al ingevulde gegevens: tweede POST met gesprek_gevraagd: true.
 
 type CardId = "vragen" | "beslissen" | "benaderen" | "overtypen" | "vacature" | "offertes";
 
@@ -117,6 +121,7 @@ export function Configurator() {
   const [formError, setFormError] = useState("");
   const [sending, setSending] = useState(false);
   const [sendFailed, setSendFailed] = useState(false);
+  const [gesprek, setGesprek] = useState<"idle" | "sending" | "done" | "error">("idle");
 
   const toggle = (id: string) =>
     setGekozen((g) => (g.includes(id) ? g.filter((x) => x !== id) : [...g, id]));
@@ -154,14 +159,8 @@ export function Configurator() {
 
   const naKaarten = () => setStep(sharpenTargets.length > 0 ? "aanscherping" : "gegevens");
 
-  const submit = async () => {
-    if (!naam.trim() || !bedrijf.trim() || !email.trim() || !/.+@.+\..+/.test(email)) {
-      setFormError("Vul in elk geval je naam, bedrijf en een geldig e-mailadres in.");
-      return;
-    }
-    setFormError("");
-    setSending(true);
-    const payload = {
+  const buildPayload = (gesprekGevraagd: boolean) => {
+    return {
       naam: naam.trim(),
       bedrijf: bedrijf.trim(),
       email: email.trim(),
@@ -172,6 +171,9 @@ export function Configurator() {
       pijn_zinnen: gekozenKaarten.map((c) => c.pijn),
       escape: gekozen.includes(ESCAPE_ID),
       modifier_kennis: gekozen.includes(MODIFIER_ID),
+      // Vraagt de bezoeker zélf om een gesprek, dan is dat het sterkste signaal
+      // dat er is. n8n zet daar een aparte badge op in de intake-mail.
+      gesprek_gevraagd: gesprekGevraagd,
       _hp: hp,
       // Render-klare uitslag voor de mail naar de lead: n8n rendert alleen,
       // de copy heeft precies één bron (dit bestand).
@@ -188,13 +190,26 @@ export function Configurator() {
         belofte: BELOFTE,
       },
     };
+  };
+
+  const post = async (gesprekGevraagd: boolean) => {
+    const res = await fetch("/api/configurator", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(buildPayload(gesprekGevraagd)),
+    });
+    return res.ok;
+  };
+
+  const submit = async () => {
+    if (!naam.trim() || !bedrijf.trim() || !email.trim() || !/.+@.+\..+/.test(email)) {
+      setFormError("Vul in elk geval je naam, bedrijf en een geldig e-mailadres in.");
+      return;
+    }
+    setFormError("");
+    setSending(true);
     try {
-      const res = await fetch("/api/configurator", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      setSendFailed(!res.ok);
+      setSendFailed(!(await post(false)));
     } catch {
       // Inzending mag de bezoeker nooit blokkeren: uitslag tonen we sowieso,
       // maar we melden wel dat de gegevens niet zijn aangekomen.
@@ -202,6 +217,17 @@ export function Configurator() {
     }
     setSending(false);
     setStep("uitslag");
+  };
+
+  // Tweede inzending vanaf de uitslag: dezelfde gegevens, nu met de vraag om
+  // een gesprek. De bezoeker hoeft niets opnieuw in te vullen.
+  const vraagGesprek = async () => {
+    setGesprek("sending");
+    try {
+      setGesprek((await post(true)) ? "done" : "error");
+    } catch {
+      setGesprek("error");
+    }
   };
 
   return (
@@ -220,8 +246,7 @@ export function Configurator() {
             Niemand wordt vervangen. Jouw mensen controleren en beslissen.
           </p>
           <p className="mb-8 text-sm text-[#8585A3]">
-            Ongeveer 2 minuten. Je ziet het overzicht direct op je scherm, en je krijgt het ook per
-            mail.
+            Ongeveer 2 minuten.
           </p>
           <PrimaryButton onClick={() => setStep("grootte")}>Start</PrimaryButton>
         </Panel>
@@ -315,9 +340,8 @@ export function Configurator() {
             Bijna klaar. Waar mag het overzicht heen?
           </h2>
           <p className="mb-6 text-[#8585A3]">
-            Je ziet het overzicht direct op je scherm en krijgt het ook per mail. Wessel neemt er
-            daarna één keer contact over op. Je praat direct met degene die het bouwt, geen
-            verkoper.
+            Je ziet het overzicht direct op je scherm en krijgt het ook per mail. Je praat straks
+            direct met degene die het bouwt, geen verkoper.
           </p>
           <div className="mb-3 grid gap-3 md:grid-cols-2">
             <Input label="Naam" placeholder="Jouw naam" value={naam} onChange={setNaam} />
@@ -363,8 +387,7 @@ export function Configurator() {
             <p className="text-[#8585A3]">
               {isEscapeOnly
                 ? "Jouw situatie past niet in een standaardhokje, en dat gaan we ook niet forceren. In een kort gesprek komen we er samen achter waar de tijd bij jullie echt blijft hangen, en of een systeem daar iets kan betekenen."
-                : "Geen offerte, geen verplichting: dit is wat een systeem bij jullie zou kunnen overnemen, op basis van wat je aangaf. Wessel neemt er één keer contact over op."}
-              {!isEscapeOnly && !sendFailed && " Het overzicht staat ook in je mailbox."}
+                : "Geen offerte, geen verplichting: dit is wat een systeem bij jullie zou kunnen overnemen, op basis van wat je aangaf."}
             </p>
             {sendFailed && (
               <p className="mt-4 text-sm text-[#E8A04E]">
@@ -419,23 +442,41 @@ export function Configurator() {
 
           <Panel>
             <h3 className="mb-3 font-[family-name:var(--font-heading)] text-lg font-bold text-white">
-              Zo werkt een pilot
+              Wat je krijgt als je doorgaat
             </h3>
             <p className="mb-6 text-[#EDEDF4]">{BELOFTE}</p>
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <Link
-                href="/contact"
-                className="rounded-full bg-[#4F8EF7] px-8 py-4 text-center font-semibold text-white transition-colors hover:bg-[#3A75D8]"
-              >
-                Plan een gesprek
-              </Link>
-              <Link
-                href="/diensten"
-                className="rounded-full border border-[#3E3E5A] px-8 py-4 text-center font-semibold text-white transition-colors hover:border-[#4F8EF7]/40 hover:text-[#4F8EF7]"
-              >
+
+            {gesprek === "done" ? (
+              <p className="text-[#EDEDF4]">
+                <span className="font-semibold">Genoteerd, {naam.split(" ")[0]}.</span> Wessel mailt
+                je binnen 24 uur om een moment te prikken. Liever meteen zelf?{" "}
+                <a href="mailto:wessel@loopless.nl" className="font-semibold underline">
+                  wessel@loopless.nl
+                </a>
+              </p>
+            ) : (
+              <>
+                <PrimaryButton onClick={vraagGesprek} disabled={gesprek === "sending"}>
+                  {gesprek === "sending" ? "Momentje..." : "Ja, ik wil hier een gesprek over"}
+                </PrimaryButton>
+                {gesprek === "error" && (
+                  <p className="mt-4 text-sm text-[#E8A04E]">
+                    Dat lukte niet door een technisch probleem. Mail even naar{" "}
+                    <a href="mailto:wessel@loopless.nl" className="font-semibold underline">
+                      wessel@loopless.nl
+                    </a>
+                    , dan pakt Wessel het op.
+                  </p>
+                )}
+              </>
+            )}
+
+            <p className="mt-6 text-sm text-[#8585A3]">
+              Eerst zien wat we bouwen?{" "}
+              <Link href="/diensten" className="font-medium text-[#4F8EF7] hover:underline">
                 Bekijk de diensten
               </Link>
-            </div>
+            </p>
           </Panel>
         </div>
       )}

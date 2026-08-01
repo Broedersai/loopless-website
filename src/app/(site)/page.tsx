@@ -40,7 +40,7 @@ export default async function Home() {
   const caseTitle = blockText(blocks, "home_case_title", "Van zoekwerk naar een lijst die 's ochtends klaarstaat");
   const caseDesc = blockText(blocks, "home_case_desc", "Elke ochtend staat de lijst klaar met wie de moeite waard is. Het team begint de dag met bellen in plaats van met zoeken, en bepaalt zelf wie er benaderd wordt.");
   const ctaHeading = blockText(blocks, "home_cta_heading", "Benieuwd welk werk bij jou eraf kan?");
-  const ctaText = blockText(blocks, "home_cta_text", "Weet je waar het blijft hangen, plan dan een gesprek. Weet je het nog niet precies, loop dan de configurator langs.");
+  const ctaText = blockText(blocks, "home_cta_text", "Weet je waar het blijft hangen, plan dan een gesprek. Weet je het nog niet precies, kijk dan eerst wat er bij jou kan.");
   const replaceHeading = blockText(blocks, "home_replace_heading", "Vervangt dit mijn mensen? Nee. Bewust niet.");
   const replaceIntro = blockText(blocks, "home_replace_intro", "Wij automatiseren het uitzoeken, niet het beslissen. Daar zijn drie redenen voor:");
   const replace1Title = blockText(blocks, "home_replace_1_title", "Je mensen zíjn je bedrijf");
@@ -276,7 +276,7 @@ export default async function Home() {
               href="/configurator"
               className="inline-block rounded-full border border-[#2E2E4A] px-8 py-4 font-semibold text-[#EDEDF4] transition-all duration-300 hover:border-[#4F8EF7]/40 hover:text-white"
             >
-              Naar de configurator
+              Kijk wat er bij jou kan
             </Link>
           </div>
         </AnimateIn>

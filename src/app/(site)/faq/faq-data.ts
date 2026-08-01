@@ -17,7 +17,7 @@ export const faqCategories = [
       {
         question: "Welke processen kan ik automatiseren in mijn bedrijf?",
         answer:
-          "Overal waar iemand hetzelfde uitzoekwerk herhaalt. De binnendienst die de hele dag dezelfde vragen beantwoordt. Iemand die meer tijd kwijt is aan uitzoeken dan aan zijn eigenlijke werk. Offertes die steeds opnieuw van nul worden opgebouwd. Gegevens die worden overgetypt tussen mail, Excel en het systeem. Bij elk bedrijf zit het ergens anders. Weet je niet waar het bij jou zit? Loop de configurator langs, dan zie je in een paar vragen wat er bij jou speelt.",
+          "Overal waar iemand hetzelfde uitzoekwerk herhaalt. De binnendienst die de hele dag dezelfde vragen beantwoordt. Iemand die meer tijd kwijt is aan uitzoeken dan aan zijn eigenlijke werk. Offertes die steeds opnieuw van nul worden opgebouwd. Gegevens die worden overgetypt tussen mail, Excel en het systeem. Bij elk bedrijf zit het ergens anders. Weet je niet waar het bij jou zit? In een paar vragen zie je wat er bij jou speelt.",
       },
       {
         question:

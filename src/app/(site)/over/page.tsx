@@ -39,7 +39,7 @@ export default async function OverPage() {
   const resultaatHeading = blockText(blocks, "over_resultaat_heading", "Hoe dat uitpakt");
   const resultaatText = blockText(blocks, "over_resultaat_text", "Bij vuljevacature.nl deed het team het voorwerk zelf: leads zoeken, screenen, gegevens overtypen. Nu staat die lijst er 's ochtends al. Ze beginnen de dag met bellen in plaats van met zoeken, en bepalen zelf wie ze benaderen.");
   const ctaHeading = blockText(blocks, "over_cta_heading", "Benieuwd welk werk bij jou eraf kan?");
-  const ctaText = blockText(blocks, "over_cta_text", "Weet je waar het blijft hangen, plan dan een gesprek. Weet je het nog niet, loop dan de configurator langs.");
+  const ctaText = blockText(blocks, "over_cta_text", "Weet je waar het blijft hangen, plan dan een gesprek. Weet je het nog niet, kijk dan eerst wat er bij jou kan.");
 
   return (
     <>
@@ -143,7 +143,7 @@ export default async function OverPage() {
                 href="/configurator"
                 className="inline-block rounded-full border border-[#2E2E4A] px-8 py-4 font-semibold text-[#EDEDF4] transition-all duration-300 hover:border-[#4F8EF7]/40 hover:text-white"
               >
-                Naar de configurator
+                Kijk wat er bij jou kan
               </Link>
               <a
                 href="https://www.linkedin.com/in/wessel-broeders-250767221/"

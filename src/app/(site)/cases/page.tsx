@@ -144,8 +144,7 @@ export default function CasesPage() {
             </h2>
             <p className="mb-8 text-lg text-[#8585A3]">
               Weet je al waar het bij jou blijft hangen, plan dan een gesprek.
-              Weet je het nog niet precies, loop dan eerst de configurator
-              langs.
+              Weet je het nog niet precies, kijk dan eerst wat er bij jou kan.
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <Link
@@ -158,7 +157,7 @@ export default function CasesPage() {
                 href="/configurator"
                 className="inline-block rounded-full border border-[#2E2E4A] px-8 py-4 font-semibold text-[#EDEDF4] transition-all duration-300 hover:border-[#4F8EF7]/40 hover:text-white"
               >
-                Naar de configurator
+                Kijk wat er bij jou kan
               </Link>
             </div>
           </AnimateIn>
