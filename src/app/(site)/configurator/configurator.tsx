@@ -22,6 +22,9 @@ type CardId = "vragen" | "beslissen" | "benaderen" | "overtypen" | "vacature" | 
 
 type Card = {
   id: CardId;
+  // Kort label boven de pijn-zin: maakt de keuzestap scanbaar in plaats van
+  // acht volzinnen onder elkaar (vereenvoudigings-ronde 2026-08-07).
+  label: string;
   pijn: string;
   kop: string;
   body: string;
@@ -32,6 +35,7 @@ type Card = {
 const CARDS: Card[] = [
   {
     id: "vragen",
+    label: "Steeds dezelfde vragen",
     pijn: "Mijn mensen beantwoorden de hele dag dezelfde vragen",
     kop: "Je binnendienst helpt weer klanten, in plaats van antwoorden op te zoeken.",
     body: "Elke vraag die vaker langskomt, zoekt nu iemand opnieuw op in handleidingen, oude mails en leveranciersdocumenten. Een systeem dat die stukken kent, zet het antwoord klaar op het moment dat de vraag binnenkomt, met erbij waar het vandaan komt.",
@@ -39,6 +43,7 @@ const CARDS: Card[] = [
   },
   {
     id: "beslissen",
+    label: "Uitzoeken voor je kunt bestellen",
     pijn: "Voor elke bestelling zoekt iemand eerst prijzen, voorraad en levertijden bij elkaar",
     kop: "Je inkoper koopt weer in, in plaats van uit te zoeken.",
     body: "Nu struint je inkoper leverancierslijsten, mail en het voorraadscherm af voordat er besteld kan worden. Dat verzamelwerk gaat naar de achtergrond: 's ochtends staat het besteladvies al klaar, met de prijzen, voorraad en levertijden erbij.",
@@ -47,6 +52,7 @@ const CARDS: Card[] = [
   },
   {
     id: "benaderen",
+    label: "Zelf klanten bij elkaar zoeken",
     pijn: "We zoeken met de hand uit welke bedrijven we benaderen",
     kop: "Elke ochtend ligt de lijst klaar. Je sales voert weer gesprekken.",
     body: "Nu kost elke nieuwe klant eerst een middag zoeken en lijstjes maken. Een systeem doet dat zoeken en screenen op de achtergrond en legt er elke ochtend alleen de bedrijven neer die passen bij wat je verkoopt.",
@@ -55,6 +61,7 @@ const CARDS: Card[] = [
   },
   {
     id: "overtypen",
+    label: "Gegevens overtypen",
     pijn: "Gegevens gaan met de hand van de mail naar Excel naar ons systeem",
     kop: "Niemand typt meer over. De fouten die daarbij insluipen, verdwijnen.",
     body: "Een order of bevestiging komt per mail binnen, iemand typt hem over in Excel, en daarna nog een keer in jullie eigen systeem. Een systeem dat die mail en bestanden zelf leest, zet de gegevens in één keer op de juiste plek.",
@@ -62,6 +69,7 @@ const CARDS: Card[] = [
   },
   {
     id: "vacature",
+    label: "Vacature die niet ingevuld raakt",
     pijn: "We zoeken al maanden iemand, maar kunnen niemand vinden",
     kop: "Het werk komt af zonder dat je iemand hoeft te vinden.",
     body: "Vaak staat die vacature open omdat je team verzuipt in uitzoekwerk. Als een systeem dat werk doet, doen de mensen die je al hebt weer hun vak.",
@@ -69,6 +77,7 @@ const CARDS: Card[] = [
   },
   {
     id: "offertes",
+    label: "Offertes en facturen maken",
     pijn: "Offertes of facturen maken kost steeds opnieuw veel tijd",
     kop: "De concept-offerte staat klaar. Jij controleert en verstuurt.",
     body: "Nu begint elke offerte met een leeg document en zoeken naar tarieven en oude offertes. Een systeem dat jullie tarieven, productinfo en eerdere offertes kent, zet het concept alvast klaar. Jij hoeft alleen nog aan te vullen wat deze klant anders maakt.",
@@ -106,10 +115,16 @@ const VAKWERK_PANEL = {
 const BELOFTE =
   "Binnen 4 tot 6 weken draait er één proces dat je nu handmatig doet. Vaste prijs, duidelijke acceptatiecriteria vooraf. Werkt het niet zoals afgesproken, dan betaal je de laatste termijn niet.";
 
-type Step = "intro" | "grootte" | "kaarten" | "aanscherping" | "gegevens" | "uitslag";
+// Het losse intro-scherm is vervallen (2026-08-07): het vroeg niets en kostte
+// een extra klik. De belofte staat nu boven de eerste vraag.
+type Step = "grootte" | "kaarten" | "aanscherping" | "gegevens" | "uitslag";
+
+// Vast totaal in de teller: de aanscherping telt als vervolg op vraag 2, zodat
+// het getal niet halverwege verspringt.
+const TOTAAL_VRAGEN = 3;
 
 export function Configurator() {
-  const [step, setStep] = useState<Step>("intro");
+  const [step, setStep] = useState<Step>("grootte");
   const [grootte, setGrootte] = useState<string>("");
   const [gekozen, setGekozen] = useState<string[]>([]);
   const [aanscherping, setAanscherping] = useState<Record<string, string>>({});
@@ -232,41 +247,32 @@ export function Configurator() {
 
   return (
     <div className="mx-auto max-w-[760px] px-6">
-      {step === "intro" && (
-        <Panel>
-          <h1 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-white md:text-4xl">
-            Welk werk zou een systeem bij jou kunnen overnemen?
-          </h1>
-          <p className="mb-4 text-lg leading-relaxed text-[#8585A3]">
-            Beantwoord een paar vragen over waar de tijd blijft hangen. Geen verkooppraatje, maar
-            een concreet overzicht: wat een systeem kan overnemen, en waar je je mensen juist voor
-            houdt.
-          </p>
-          <p className="mb-4 font-medium text-[#EDEDF4]">
-            Niemand wordt vervangen. Jouw mensen controleren en beslissen.
-          </p>
-          <p className="mb-8 text-sm text-[#8585A3]">
-            Ongeveer 2 minuten.
-          </p>
-          <PrimaryButton onClick={() => setStep("grootte")}>Start</PrimaryButton>
-        </Panel>
-      )}
-
       {step === "grootte" && (
-        <Panel>
-          <StepLabel n={1} />
-          <h2 className="mb-6 font-[family-name:var(--font-heading)] text-2xl font-bold text-white">
-            Hoeveel mensen werken er bij jullie?
-          </h2>
-          <div className="flex flex-col gap-3">
-            {SIZES.map((s) => (
-              <ChoiceButton key={s} active={grootte === s} onClick={() => setGrootte(s)}>
-                {s}
-              </ChoiceButton>
-            ))}
+        <>
+          <div className="mb-8">
+            <h1 className="mb-4 font-[family-name:var(--font-heading)] text-3xl font-bold text-white md:text-4xl">
+              Welk werk zou een systeem bij jou kunnen overnemen?
+            </h1>
+            <p className="text-lg leading-relaxed text-[#8585A3]">
+              Drie vragen, ongeveer 2 minuten. Je krijgt een concreet overzicht, geen
+              verkooppraatje. Niemand wordt vervangen: jouw mensen controleren en beslissen.
+            </p>
           </div>
-          <NavRow terug={() => setStep("intro")} verder={() => setStep("kaarten")} verderDisabled={!grootte} />
-        </Panel>
+          <Panel>
+            <StepLabel n={1} />
+            <h2 className="mb-6 font-[family-name:var(--font-heading)] text-2xl font-bold text-white">
+              Hoeveel mensen werken er bij jullie?
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {SIZES.map((s) => (
+                <ChoiceButton key={s} active={grootte === s} onClick={() => setGrootte(s)}>
+                  {s}
+                </ChoiceButton>
+              ))}
+            </div>
+            <NavRow verder={() => setStep("kaarten")} verderDisabled={!grootte} />
+          </Panel>
+        </>
       )}
 
       {step === "kaarten" && (
@@ -280,18 +286,31 @@ export function Configurator() {
             Wij bouwen systemen die het werk afleveren, niet nog een chatbox. Kies wat herkenbaar
             is, meerdere mag.
           </p>
-          <div className="flex flex-col gap-3">
+          <div className="grid gap-3 sm:grid-cols-2">
             {CARDS.map((c) => (
               <ChoiceButton key={c.id} active={gekozen.includes(c.id)} onClick={() => toggle(c.id)}>
-                &ldquo;{c.pijn}&rdquo;
+                <span className="block font-semibold">{c.label}</span>
+                <span className="mt-1 block text-sm opacity-70">
+                  &ldquo;{c.pijn}&rdquo;
+                </span>
               </ChoiceButton>
             ))}
-            <ChoiceButton active={gekozen.includes(MODIFIER_ID)} onClick={() => toggle(MODIFIER_ID)}>
-              &ldquo;De kennis zit vooral in het hoofd van één of twee mensen&rdquo;
-            </ChoiceButton>
-            <ChoiceButton active={gekozen.includes(ESCAPE_ID)} onClick={() => toggle(ESCAPE_ID)}>
-              Iets anders / ik weet het niet precies
-            </ChoiceButton>
+          </div>
+          <div className="mt-6 border-t border-[#2E2E4A] pt-6">
+            <div className="grid gap-3 sm:grid-cols-2">
+              <ChoiceButton active={gekozen.includes(MODIFIER_ID)} onClick={() => toggle(MODIFIER_ID)}>
+                <span className="block font-semibold">Kennis zit in één hoofd</span>
+                <span className="mt-1 block text-sm opacity-70">
+                  &ldquo;De kennis zit vooral in het hoofd van één of twee mensen&rdquo;
+                </span>
+              </ChoiceButton>
+              <ChoiceButton active={gekozen.includes(ESCAPE_ID)} onClick={() => toggle(ESCAPE_ID)}>
+                <span className="block font-semibold">Iets anders</span>
+                <span className="mt-1 block text-sm opacity-70">
+                  Ik weet het niet precies
+                </span>
+              </ChoiceButton>
+            </div>
           </div>
           <NavRow
             terug={() => setStep("grootte")}
@@ -303,7 +322,7 @@ export function Configurator() {
 
       {step === "aanscherping" && (
         <Panel>
-          <StepLabel n={3} />
+          <StepLabel n={2} />
           {sharpenTargets.map((c) => {
             const s = SHARPEN[c.id]!;
             return (
@@ -336,6 +355,7 @@ export function Configurator() {
 
       {step === "gegevens" && (
         <Panel>
+          <StepLabel n={3} />
           <h2 className="mb-2 font-[family-name:var(--font-heading)] text-2xl font-bold text-white">
             Bijna klaar. Waar mag het overzicht heen?
           </h2>
@@ -401,19 +421,10 @@ export function Configurator() {
             )}
           </Panel>
 
-          {zichtbareKaarten.map((c) => (
-            <Panel key={c.id}>
-              <h3 className="mb-3 font-[family-name:var(--font-heading)] text-xl font-bold text-white">
-                {c.kop}
-              </h3>
-              <p className="mb-3 leading-relaxed text-[#8585A3]">{c.body}</p>
-              <p className="mb-3 font-medium text-[#EDEDF4]">{c.controle}</p>
-              {c.bewijs && (
-                <p className="border-l-2 border-[#4F8EF7] pl-4 text-sm italic text-[#8585A3]">
-                  {c.bewijs}
-                </p>
-              )}
-            </Panel>
+          {/* Alleen de eerste kaart staat open. Wie er drie aanvinkt kreeg
+              anders een lap van honderden woorden voor de CTA in beeld kwam. */}
+          {zichtbareKaarten.map((c, i) => (
+            <UitslagKaart key={c.id} kaart={c} standaardOpen={i === 0} />
           ))}
 
           {vacatureNaarVakwerk && (
@@ -484,17 +495,61 @@ export function Configurator() {
   );
 }
 
+function UitslagKaart({ kaart, standaardOpen }: { kaart: Card; standaardOpen: boolean }) {
+  const [open, setOpen] = useState(standaardOpen);
+  return (
+    <Panel>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="flex w-full items-start justify-between gap-4 text-left"
+      >
+        <h3 className="font-[family-name:var(--font-heading)] text-xl font-bold text-white">
+          {kaart.kop}
+        </h3>
+        <span
+          className={`mt-1 shrink-0 text-[#4F8EF7] transition-transform ${open ? "rotate-180" : ""}`}
+          aria-hidden="true"
+        >
+          &#9662;
+        </span>
+      </button>
+      {open && (
+        <div className="mt-3">
+          <p className="mb-3 leading-relaxed text-[#8585A3]">{kaart.body}</p>
+          <p className="mb-3 font-medium text-[#EDEDF4]">{kaart.controle}</p>
+          {kaart.bewijs && (
+            <p className="border-l-2 border-[#4F8EF7] pl-4 text-sm italic text-[#8585A3]">
+              {kaart.bewijs}
+            </p>
+          )}
+        </div>
+      )}
+    </Panel>
+  );
+}
+
 function Panel({ children }: { children: React.ReactNode }) {
   return (
     <div className="rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-8 md:p-10">{children}</div>
   );
 }
 
+// Teller met balk: de bezoeker ziet hoeveel er nog komt (stond er niet, wat de
+// wizard langer deed lijken dan hij is).
 function StepLabel({ n }: { n: number }) {
   return (
-    <span className="mb-4 block text-xs font-medium uppercase tracking-[0.2em] text-[#4F8EF7]">
-      Vraag {n}
-    </span>
+    <div className="mb-6">
+      <span className="mb-2 block text-xs font-medium uppercase tracking-[0.2em] text-[#4F8EF7]">
+        Vraag {n} van {TOTAAL_VRAGEN}
+      </span>
+      <div className="h-1 w-full overflow-hidden rounded-full bg-[#2E2E4A]">
+        <div
+          className="h-full rounded-full bg-[#4F8EF7] transition-all"
+          style={{ width: `${(n / TOTAAL_VRAGEN) * 100}%` }}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -525,12 +580,16 @@ function ChoiceButton({ children, active, onClick }: { children: React.ReactNode
   );
 }
 
-function NavRow({ terug, verder, verderDisabled, verderLabel }: { terug: () => void; verder: () => void; verderDisabled?: boolean; verderLabel?: string }) {
+function NavRow({ terug, verder, verderDisabled, verderLabel }: { terug?: () => void; verder: () => void; verderDisabled?: boolean; verderLabel?: string }) {
   return (
     <div className="mt-8 flex items-center justify-between">
-      <button onClick={terug} className="text-sm font-medium text-[#8585A3] transition-colors hover:text-white">
-        Terug
-      </button>
+      {terug ? (
+        <button onClick={terug} className="text-sm font-medium text-[#8585A3] transition-colors hover:text-white">
+          Terug
+        </button>
+      ) : (
+        <span />
+      )}
       <PrimaryButton onClick={verder} disabled={verderDisabled}>
         {verderLabel ?? "Verder"}
       </PrimaryButton>

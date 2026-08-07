@@ -27,7 +27,7 @@ export function Footer() {
                 {[
                   { href: "/", label: "Home" },
                   { href: "/diensten", label: "Diensten" },
-                  { href: "/configurator", label: "Wat kan bij jou?" },
+                  { href: "/configurator", label: "Wat kan het overnemen?" },
                   { href: "/cases", label: "Cases" },
                   { href: "/over", label: "Over mij" },
                   { href: "/faq", label: "FAQ" },
