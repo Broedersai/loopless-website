@@ -10,7 +10,7 @@ import { LogoWithText } from "@/components/logo";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/diensten", label: "Diensten" },
-  { href: "/configurator", label: "Wat kan het overnemen?" },
+  { href: "/configurator", label: "Doe de zelfscan" },
   { href: "/over", label: "Over mij" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
