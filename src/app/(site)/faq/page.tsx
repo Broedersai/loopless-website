@@ -6,15 +6,9 @@ import { ChevronDown, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AnimateIn } from "@/components/ui/animate-in";
 import { PageGlow } from "@/components/page-glow";
-import { faqCategories } from "./faq-data";
+import { faqCategories, type FaqEntry } from "./faq-data";
 
-function FaqItem({
-  question,
-  answer,
-}: {
-  question: string;
-  answer: string;
-}) {
+function FaqItem({ question, answer, link }: FaqEntry) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -47,9 +41,19 @@ function FaqItem({
         )}
       >
         <div className="overflow-hidden">
-          <p className="pb-6 text-[#8585A3] leading-relaxed">
+          <p className="text-[#8585A3] leading-relaxed">
             {answer}
           </p>
+          {link && (
+            <Link
+              href={link.href}
+              className="group mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#4F8EF7] transition-colors hover:text-[#7EAEFA]"
+            >
+              {link.label}
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          )}
+          <div className="pb-6" />
         </div>
       </div>
     </div>
@@ -93,7 +97,7 @@ export default function FaqPage() {
                 <div className="md:col-span-8">
                   <div className="rounded-xl border border-[#2E2E4A] bg-[#1E1E30] px-6 transition-colors duration-300 hover:border-[#3E3E5A]">
                     {cat.items.map((faq) => (
-                      <FaqItem key={faq.question} question={faq.question} answer={faq.answer} />
+                      <FaqItem key={faq.question} {...faq} />
                     ))}
                   </div>
                 </div>

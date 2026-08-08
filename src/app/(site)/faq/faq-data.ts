@@ -1,6 +1,13 @@
 // Eén bron voor de FAQ: de pagina rendert hieruit én de FAQPage-JSON-LD wordt
 // hieruit opgebouwd. Antwoorden hier aanpassen werkt dus meteen door in beide.
-export const faqCategories = [
+export type FaqEntry = {
+  question: string;
+  answer: string;
+  /** Optionele verdiepingslink onder het antwoord (bv. naar de privacyverklaring). */
+  link?: { href: string; label: string };
+};
+
+export const faqCategories: { label: string; items: FaqEntry[] }[] = [
   {
     label: "Over het uitzoekwerk",
     items: [
@@ -72,10 +79,26 @@ export const faqCategories = [
         answer:
           "Dat kies je zelf. Standaard draait het systeem op jullie eigen omgeving en staan de accounts op naam van jullie bedrijf; ik log op afstand in om het draaiend te houden. Wil je er helemaal niet naar omkijken, dan neem ik het beheer volledig over. In beide gevallen loopt het onderhoud via een vast maandbedrag.",
       },
+    ],
+  },
+  {
+    label: "Over je data",
+    items: [
       {
-        question: "Is mijn data veilig als ik werk met AI-automatisering?",
+        question: "Hoe zit het met de privacy van mijn bedrijfsdata?",
         answer:
-          "Draait het systeem op jullie eigen omgeving, dan blijft jullie data ook daar en heb ik alleen toegang voor onderhoud. Beheer ik het systeem volledig, dan leggen we in een verwerkersovereenkomst vast welke gegevens ik verwerk en wat ik ermee doe. Jullie data gaat nooit naar andere klanten en wordt niet gebruikt om modellen te trainen.",
+          "Standaard draait het systeem op jullie eigen omgeving, met de accounts op naam van jullie bedrijf. Jullie data blijft dan bij jullie staan en ik heb alleen toegang om het draaiend te houden. Verwerk ik zelf persoonsgegevens, dan leggen we in een verwerkersovereenkomst vast welke dat zijn, waarvoor ze gebruikt worden en hoe lang ze bewaard blijven. Data van de ene klant komt nooit in het systeem van een andere: gescheiden omgevingen, gescheiden sleutels.",
+      },
+      {
+        question: "Tekenen jullie een geheimhoudingsverklaring?",
+        answer:
+          "Die zit er al in. In elk voorstel staat een geheimhoudingsclausule, dus je hoeft er niet apart om te vragen en er hoeft geen los document achteraan. Heeft jullie organisatie een eigen NDA die getekend moet worden, dan teken ik die uiteraard ook.",
+      },
+      {
+        question: "Wordt mijn data gebruikt om AI-modellen te trainen?",
+        answer:
+          "Nee. Bij de AI-diensten die ik inzet staat trainen op klantdata uit, en waar een leverancier dat standaard wél doet, wordt die instelling omgezet voordat er ook maar één document van jullie langskomt. Bewaartermijnen houden we zo kort als de dienst toelaat en leggen we per systeem vast. Eén ding zeg ik er eerlijk bij: zo'n afspraak is precies zo sterk als de leverancier waarmee je hem maakt. Daarom staan de accounts bij voorkeur op jullie naam, zodat jullie zelf zien en bepalen wat er onder de motorkap staat aangevinkt.",
+        link: { href: "/privacy", label: "Lees de privacyverklaring" },
       },
     ],
   },

@@ -34,7 +34,7 @@ export default function PrivacyPage() {
           <h1 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white md:text-5xl">
             Privacyverklaring
           </h1>
-          <p className="mb-2 text-sm text-[#8585A3]">Laatst bijgewerkt: 24 juli 2026</p>
+          <p className="mb-2 text-sm text-[#8585A3]">Laatst bijgewerkt: 8 augustus 2026</p>
           <P>
             Loopless is een handelsnaam van Broeders Digital (eenmanszaak, KVK 42004729). Deze
             pagina legt uit welke gegevens we verwerken als je iets achterlaat op loopless.nl, en
@@ -77,6 +77,25 @@ export default function PrivacyPage() {
           <P>
             Loopless.nl gebruikt geen tracking-cookies en geen analytics. Er kan alleen een
             functionele cookie worden gezet die nodig is om de site te laten werken.
+          </P>
+
+          <H2>Gegevens van opdrachtgevers</H2>
+          <P>
+            Het bovenstaande gaat over de gegevens die je op deze website achterlaat. Voor
+            bedrijven waarvoor we een systeem bouwen, gelden aparte afspraken. Kort samengevat:
+            systemen draaien standaard op de eigen omgeving van de opdrachtgever, met accounts op
+            naam van dat bedrijf. Verwerkt Loopless zelf persoonsgegevens, dan wordt daarvoor een
+            verwerkersovereenkomst gesloten waarin staat welke gegevens dat zijn, waarvoor ze
+            worden gebruikt en hoe lang ze bewaard blijven. Geheimhouding is onderdeel van elke
+            overeenkomst. Gegevens van de ene opdrachtgever komen nooit terecht in het systeem van
+            een andere.
+          </P>
+          <P>
+            Bij de AI-diensten die we inzetten staat het trainen op klantdata uit. Bewaartermijnen
+            worden zo kort gehouden als de betreffende dienst toelaat en per systeem vastgelegd.
+            Draait een systeem op de accounts van de opdrachtgever, dan zijn die diensten
+            subverwerkers van de opdrachtgever zelf, die de instellingen dus ook zelf kan inzien en
+            wijzigen.
           </P>
 
           <H2>Je rechten</H2>
