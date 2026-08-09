@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, DM_Sans } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -115,7 +115,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceJsonLd) }}
         />
         {children}
-        <Analytics />
+        {/* Vercel Web Analytics. Bewust de loader zelf plaatsen: <Analytics /> uit
+            @vercel/analytics 2.0.1 zette op Next 16 wel window.va + de queue klaar,
+            maar injecteerde script.js nooit, waardoor elke pageview in de wachtrij
+            bleef staan (geverifieerd in de browser, 2026-08-09). Dit script handelt
+            pageviews en route-wissels zelf af. */}
+        <Script src="/_vercel/insights/script.js" strategy="afterInteractive" />
       </body>
     </html>
   );
