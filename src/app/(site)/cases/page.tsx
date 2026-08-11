@@ -27,6 +27,7 @@ const cases = [
     naam: "vuljevacature.nl",
     logo: "/clients/vuljevacature.png",
     site: "https://vuljevacature.nl",
+    lichtVlak: false,
     chip: "Recruitment",
     ervoor:
       "Het team deed het voorwerk zelf: bedrijven opzoeken, beoordelen of er iets te halen viel, gegevens overtypen. Werk dat af moest zijn voordat er überhaupt iemand gebeld kon worden.",
@@ -41,7 +42,8 @@ const cases = [
   {
     naam: "Drabor",
     logo: "/clients/drabor.png",
-    site: null,
+    site: "https://www.drabor.nl",
+    lichtVlak: true,
     chip: "Groothandel",
     ervoor:
       "De inkopers liepen hun lijst artikel voor artikel na: voorraad checken, verbruik van eerdere periodes erbij pakken, inschatten wat er besteld moest worden. Uitzoekwerk dat elke keer terugkwam.",
@@ -87,15 +89,15 @@ export default function CasesPage() {
                     href={c.site}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="opacity-70 transition-opacity hover:opacity-100"
+                    className={
+                      c.lichtVlak
+                        ? // Donkerblauw woordmerk op transparant — licht vlak eronder, anders onzichtbaar
+                          "inline-flex items-center rounded-md bg-white/90 px-3 py-1.5 opacity-90 transition-opacity hover:opacity-100"
+                        : "opacity-70 transition-opacity hover:opacity-100"
+                    }
                   >
-                    <Image src={c.logo} alt={c.naam} width={120} height={30} className="h-7 w-auto" />
+                    <Image src={c.logo} alt={c.naam} width={120} height={30} className={c.lichtVlak ? "h-6 w-auto" : "h-7 w-auto"} />
                   </a>
-                ) : c.logo ? (
-                  // Donkerblauw woordmerk op transparant — licht vlak eronder, anders onzichtbaar
-                  <span className="inline-flex items-center rounded-md bg-white/90 px-3 py-1.5">
-                    <Image src={c.logo} alt={c.naam} width={120} height={29} className="h-6 w-auto" />
-                  </span>
                 ) : (
                   <strong className="text-2xl text-white font-[family-name:var(--font-heading)]">
                     {c.naam}

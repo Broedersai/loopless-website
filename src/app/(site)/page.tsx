@@ -252,7 +252,12 @@ export default async function Home() {
               <div className="flex h-full flex-col gap-6 rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-8 transition-colors duration-300 hover:border-[#3E3E5A] md:p-10">
                 <div className="flex items-center gap-4">
                   {/* Donkerblauw woordmerk op transparant — licht vlak eronder, anders onzichtbaar op de donkere kaart */}
-                  <span className="inline-flex items-center rounded-md bg-white/90 px-3 py-1.5">
+                  <a
+                    href="https://www.drabor.nl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center rounded-md bg-white/90 px-3 py-1.5 opacity-90 transition-opacity hover:opacity-100"
+                  >
                     <Image
                       src="/clients/drabor.png"
                       alt="Drabor"
@@ -260,7 +265,7 @@ export default async function Home() {
                       height={29}
                       className="h-5 w-auto"
                     />
-                  </span>
+                  </a>
                   <span className="rounded-full border border-[#4F8EF7]/20 bg-[#4F8EF7]/10 px-3 py-0.5 text-xs font-medium text-[#4F8EF7]">Groothandel</span>
                 </div>
                 <h3 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-white">{caseDraborTitle}</h3>

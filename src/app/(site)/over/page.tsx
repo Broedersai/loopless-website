@@ -124,9 +124,14 @@ export default async function OverPage() {
             <div className="mt-6 rounded-xl border border-[#2E2E4A] bg-[#161625] p-8">
               <div className="mb-4 flex items-center gap-4">
                 {/* Donkerblauw woordmerk op transparant — licht vlak eronder, anders onzichtbaar */}
-                <span className="inline-flex items-center rounded-md bg-white/90 px-3 py-1.5">
+                <a
+                  href="https://www.drabor.nl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-md bg-white/90 px-3 py-1.5 opacity-90 transition-opacity hover:opacity-100"
+                >
                   <Image src="/clients/drabor.png" alt="Drabor" width={120} height={29} className="h-6 w-auto" />
-                </span>
+                </a>
                 <span className="rounded-full border border-[#4F8EF7]/20 bg-[#4F8EF7]/10 px-3 py-0.5 text-xs font-medium text-[#4F8EF7]">Groothandel</span>
               </div>
               <p className="text-[#EDEDF4] leading-relaxed">{resultaatDraborText}</p>
