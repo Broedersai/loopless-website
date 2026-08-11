@@ -18,6 +18,12 @@ const caseResults = [
   "Het team bepaalt zelf wie er gebeld wordt",
 ];
 
+const caseDraborResults = [
+  "Besteladvies staat klaar met één knop",
+  "Het systeem stelt voor, de inkopers beslissen",
+  "De cijfers komen uit hun eigen systeem, niet uit een schatting",
+];
+
 export default async function Home() {
   const blocks = await getBlocksByPage("home");
 
@@ -39,6 +45,8 @@ export default async function Home() {
   const caseIntro = blockText(blocks, "home_case_intro", "Niet alleen mooie woorden: dit is wat we al hebben opgeleverd.");
   const caseTitle = blockText(blocks, "home_case_title", "Van zoekwerk naar een lijst die 's ochtends klaarstaat");
   const caseDesc = blockText(blocks, "home_case_desc", "Elke ochtend staat de lijst klaar met wie de moeite waard is. Het team begint de dag met bellen in plaats van met zoeken, en bepaalt zelf wie er benaderd wordt.");
+  const caseDraborTitle = blockText(blocks, "home_case_drabor_title", "Van lijsten nalopen naar een besteladvies met één knop");
+  const caseDraborDesc = blockText(blocks, "home_case_drabor_desc", "De inkopers liepen hun voorraadlijst artikel voor artikel na. Nu vragen ze met één knop het inkooprapport op: wat urgent is, wat er ligt, wat eruit gaat. Ze kijken het na, passen aan waar ze het beter weten, en bestellen.");
   const ctaHeading = blockText(blocks, "home_cta_heading", "Benieuwd welk werk bij jou eraf kan?");
   const ctaText = blockText(blocks, "home_cta_text", "Weet je waar het blijft hangen, plan dan een gesprek. Weet je het nog niet precies, kijk dan eerst wat er bij jou kan.");
   const replaceHeading = blockText(blocks, "home_replace_heading", "Vervangt dit mijn mensen? Nee. Bewust niet.");
@@ -48,7 +56,7 @@ export default async function Home() {
   const replace2Title = blockText(blocks, "home_replace_2_title", "Ook een slim systeem maakt fouten");
   const replace2Desc = blockText(blocks, "home_replace_2_desc", "Daarom gaat er bij ons niets ongecontroleerd de deur uit. Jouw mensen controleren, het systeem bereidt voor.");
   const replace3Title = blockText(blocks, "home_replace_3_title", "Het werkt beter");
-  const replace3Desc = blockText(blocks, "home_replace_3_desc", "Een team dat sneller wordt, werkt mee. Bij onze klanten beslist de inkoper nog steeds zelf. Ze doen alleen het werk eromheen niet meer.");
+  const replace3Desc = blockText(blocks, "home_replace_3_desc", "Een team dat sneller wordt, werkt mee. Bij onze klanten beslissen de inkopers nog steeds zelf. Ze doen alleen het werk eromheen niet meer.");
   const promiseHeading = blockText(blocks, "home_promise_heading", "Binnen 4 tot 6 weken draait er één proces dat je nu handmatig doet.");
   const promiseText = blockText(blocks, "home_promise_text", "Vaste prijs, duidelijke acceptatiecriteria vooraf. Werkt het niet zoals afgesproken, dan betaal je de laatste termijn niet.");
 
@@ -206,17 +214,17 @@ export default async function Home() {
         <div className="h-px bg-gradient-to-r from-transparent via-[#2E2E4A] to-transparent" />
       </div>
 
-      {/* Resultaat */}
+      {/* Resultaat — twee cases uit verschillende hoeken (positionering: nooit één niche-voorbeeld alleen) */}
       <section className="overflow-hidden py-24 md:py-32">
         <div className="mx-auto max-w-[1200px] px-6">
-          <div className="flex flex-col gap-12 md:flex-row md:items-center md:gap-16">
-            <AnimateIn className="md:w-2/5">
-              <span className="mb-4 inline-block rounded-full border border-[#E8A04E]/20 bg-[#E8A04E]/10 px-4 py-1 text-xs font-medium text-[#E8A04E]">Case study</span>
-              <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Hoe dat uitpakt</h2>
-              <p className="text-[#8585A3]">{caseIntro}</p>
-            </AnimateIn>
-            <AnimateIn className="md:w-3/5" delay={0.15}>
-              <div className="flex flex-col gap-6 rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-8 transition-colors duration-300 hover:border-[#3E3E5A] md:p-10">
+          <AnimateIn className="mb-14 max-w-[560px]">
+            <span className="mb-4 inline-block rounded-full border border-[#E8A04E]/20 bg-[#E8A04E]/10 px-4 py-1 text-xs font-medium text-[#E8A04E]">Case studies</span>
+            <h2 className="mb-4 font-[family-name:var(--font-heading)] text-4xl font-bold text-white">Hoe dat uitpakt</h2>
+            <p className="text-[#8585A3]">{caseIntro}</p>
+          </AnimateIn>
+          <StaggerContainer className="grid gap-6 md:grid-cols-2" staggerDelay={0.15}>
+            <StaggerItem>
+              <div className="flex h-full flex-col gap-6 rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-8 transition-colors duration-300 hover:border-[#3E3E5A] md:p-10">
                 <div className="flex items-center gap-4">
                   <a href="https://vuljevacature.nl" target="_blank" rel="noopener noreferrer" className="opacity-70 transition-opacity hover:opacity-100">
                     <Image
@@ -238,13 +246,41 @@ export default async function Home() {
                     </div>
                   ))}
                 </div>
-                <Link href="/cases" className="group inline-flex items-center gap-1 text-sm font-medium text-[#4F8EF7] transition-all hover:gap-2">
-                  Bekijk de cases
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                </Link>
               </div>
-            </AnimateIn>
-          </div>
+            </StaggerItem>
+            <StaggerItem>
+              <div className="flex h-full flex-col gap-6 rounded-xl border border-[#2E2E4A] bg-[#1E1E30] p-8 transition-colors duration-300 hover:border-[#3E3E5A] md:p-10">
+                <div className="flex items-center gap-4">
+                  {/* Donkerblauw woordmerk op transparant — licht vlak eronder, anders onzichtbaar op de donkere kaart */}
+                  <span className="inline-flex items-center rounded-md bg-white/90 px-3 py-1.5">
+                    <Image
+                      src="/clients/drabor.png"
+                      alt="Drabor"
+                      width={120}
+                      height={29}
+                      className="h-5 w-auto"
+                    />
+                  </span>
+                  <span className="rounded-full border border-[#4F8EF7]/20 bg-[#4F8EF7]/10 px-3 py-0.5 text-xs font-medium text-[#4F8EF7]">Groothandel</span>
+                </div>
+                <h3 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-white">{caseDraborTitle}</h3>
+                <p className="text-[#8585A3]">{caseDraborDesc}</p>
+                <div className="flex flex-col gap-2">
+                  {caseDraborResults.map((s) => (
+                    <div key={s} className="flex items-center gap-2 text-[#EDEDF4]">
+                      <span className="font-bold text-[#E8A04E]">✓</span> {s}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </StaggerItem>
+          </StaggerContainer>
+          <AnimateIn delay={0.2}>
+            <Link href="/cases" className="group mt-8 inline-flex items-center gap-1 text-sm font-medium text-[#4F8EF7] transition-all hover:gap-2">
+              Bekijk de cases
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          </AnimateIn>
         </div>
       </section>
 

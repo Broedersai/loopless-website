@@ -40,16 +40,16 @@ const cases = [
   },
   {
     naam: "Drabor",
-    logo: null,
+    logo: "/clients/drabor.png",
     site: null,
     chip: "Groothandel",
     ervoor:
-      "De inkoper liep zijn lijst artikel voor artikel na: voorraad checken, verbruik van eerdere periodes erbij pakken, inschatten wat er besteld moest worden. Uitzoekwerk dat elke keer terugkwam, en dat grotendeels in één hoofd zat.",
+      "De inkopers liepen hun lijst artikel voor artikel na: voorraad checken, verbruik van eerdere periodes erbij pakken, inschatten wat er besteld moest worden. Uitzoekwerk dat elke keer terugkwam.",
     erna:
-      "Met één knop staat het besteladvies klaar: wat urgent is, wat er in voorraad ligt, wat eruit gaat. De inkoper kijkt het na, past aan waar hij het beter weet, en bestelt. Hij koopt weer in in plaats van te zoeken.",
+      "Met één knop staat het besteladvies klaar: wat urgent is, wat er in voorraad ligt, wat eruit gaat. De inkopers kijken het na, passen aan waar ze het beter weten, en bestellen. Ze kopen weer in in plaats van uit te zoeken.",
     punten: [
       "Besteladvies staat klaar met één knop",
-      "Het systeem stelt voor, de inkoper beslist",
+      "Het systeem stelt voor, de inkopers beslissen",
       "De cijfers komen uit hun eigen systeem, niet uit een schatting",
     ],
   },
@@ -91,6 +91,11 @@ export default function CasesPage() {
                   >
                     <Image src={c.logo} alt={c.naam} width={120} height={30} className="h-7 w-auto" />
                   </a>
+                ) : c.logo ? (
+                  // Donkerblauw woordmerk op transparant — licht vlak eronder, anders onzichtbaar
+                  <span className="inline-flex items-center rounded-md bg-white/90 px-3 py-1.5">
+                    <Image src={c.logo} alt={c.naam} width={120} height={29} className="h-6 w-auto" />
+                  </span>
                 ) : (
                   <strong className="text-2xl text-white font-[family-name:var(--font-heading)]">
                     {c.naam}
