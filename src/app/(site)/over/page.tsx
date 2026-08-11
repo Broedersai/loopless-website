@@ -38,6 +38,7 @@ export default async function OverPage() {
   const praktijkP2 = blockText(blocks, "over_praktijk_p2", "We kijken samen waar het uitzoekwerk zit en ik bouw daar een systeem omheen. Het systeem zet klaar, jouw mensen controleren en beslissen. Niemand wordt vervangen: dat is geen geruststelling achteraf, zo bouw ik het.");
   const resultaatHeading = blockText(blocks, "over_resultaat_heading", "Hoe dat uitpakt");
   const resultaatText = blockText(blocks, "over_resultaat_text", "Bij vuljevacature.nl deed het team het voorwerk zelf: leads zoeken, screenen, gegevens overtypen. Nu staat die lijst er 's ochtends al. Ze beginnen de dag met bellen in plaats van met zoeken, en bepalen zelf wie ze benaderen.");
+  const resultaatDraborText = blockText(blocks, "over_resultaat_drabor_text", "Bij Drabor liepen de inkopers hun voorraadlijst artikel voor artikel na. Nu vragen ze met één knop het inkooprapport op, kijken het na, passen aan waar ze het beter weten, en bestellen. Ze kopen weer in in plaats van uit te zoeken.");
   const ctaHeading = blockText(blocks, "over_cta_heading", "Benieuwd welk werk bij jou eraf kan?");
   const ctaText = blockText(blocks, "over_cta_text", "Weet je waar het blijft hangen, plan dan een gesprek. Weet je het nog niet, kijk dan eerst wat er bij jou kan.");
 
@@ -119,6 +120,16 @@ export default async function OverPage() {
                 <span className="rounded-full border border-[#4F8EF7]/20 bg-[#4F8EF7]/10 px-3 py-0.5 text-xs font-medium text-[#4F8EF7]">Recruitment</span>
               </div>
               <p className="text-[#EDEDF4] leading-relaxed">{resultaatText}</p>
+            </div>
+            <div className="mt-6 rounded-xl border border-[#2E2E4A] bg-[#161625] p-8">
+              <div className="mb-4 flex items-center gap-4">
+                {/* Donkerblauw woordmerk op transparant — licht vlak eronder, anders onzichtbaar */}
+                <span className="inline-flex items-center rounded-md bg-white/90 px-3 py-1.5">
+                  <Image src="/clients/drabor.png" alt="Drabor" width={120} height={29} className="h-6 w-auto" />
+                </span>
+                <span className="rounded-full border border-[#4F8EF7]/20 bg-[#4F8EF7]/10 px-3 py-0.5 text-xs font-medium text-[#4F8EF7]">Groothandel</span>
+              </div>
+              <p className="text-[#EDEDF4] leading-relaxed">{resultaatDraborText}</p>
             </div>
           </AnimateIn>
         </div>
