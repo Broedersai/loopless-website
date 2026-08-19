@@ -31,6 +31,16 @@ import { draftMode } from "next/headers";
 // de root-layout), dus een spacer kan bóven de content belanden. Een body-class zou een
 // afspraak met de klantlayout vereisen en de engine niet langer dependency-vrij maken.
 //
+// KLEUREN STAAN IN DIE STYLE-TAG, NIET IN TAILWIND-KLASSEN (gemeten 29-03). Bushido's
+// globals.css heeft `a { color: inherit }` ZONDER cascade layer; Tailwind-utilities zitten
+// in `@layer utilities`, en ongelaagde CSS wint altijd van gelaagde — ongeacht
+// specificiteit. `text-amber-50` verloor daardoor van `inherit`, en "Preview verlaten"
+// werd donkere tekst op een donkere knop: gemeten kleur == achtergrondkleur, dus de
+// uitweg uit de preview was onleesbaar. Elke klantsite met eigen ongelaagde link-CSS
+// heeft dat probleem. De style-tag hierboven is zelf ook ongelaagd en gebruikt een
+// id-selector, dus hij wint van zulke regels. Layout blijft wel gewoon Tailwind — alleen
+// de kleuren zijn kritiek genoeg om af te schermen.
+//
 // De hoogte is daarom VAST (min-h-11 = 2.75rem) en gelijk aan de gereserveerde ruimte —
 // niet impliciet uit de tekstlengte. De uitleg-zin staat achter `hidden sm:inline` omdat
 // hij op 375px naar drie regels brak (gemeten box 60px); mobiel houdt "Voorbeeldmodus"
@@ -46,10 +56,16 @@ export async function PreviewBanner() {
 
   return (
     <>
-      <style>{`body { padding-bottom: 2.75rem; }`}</style>
+      <style>{`
+body { padding-bottom: 2.75rem; }
+#su-preview-banner { background: #fbbf24; color: #451a03; }
+#su-preview-banner a { background: #451a03; color: #fffbeb; }
+#su-preview-banner a:hover { background: #78350f; }
+`}</style>
       <div
+        id="su-preview-banner"
         role="status"
-        className="fixed bottom-0 left-0 right-0 z-[1100] flex min-h-11 items-center justify-between gap-4 bg-amber-400 px-4 py-2 text-sm text-amber-950 shadow-md"
+        className="fixed bottom-0 left-0 right-0 z-[1100] flex min-h-11 items-center justify-between gap-4 px-4 py-2 text-sm shadow-md"
       >
         <span className="font-medium">
           Voorbeeldmodus
@@ -60,7 +76,7 @@ export async function PreviewBanner() {
         </span>
         <a
           href="/api/draft/disable"
-          className="shrink-0 rounded-md bg-amber-950 px-3 py-1 font-semibold text-amber-50 hover:bg-amber-900"
+          className="shrink-0 rounded-md px-3 py-1 font-semibold"
         >
           Preview verlaten
         </a>
